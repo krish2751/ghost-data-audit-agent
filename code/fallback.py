@@ -23,12 +23,14 @@ WINDOW_MIN = 120  # generic search window around reported_at for activity-based 
 
 
 class Context:
-    def __init__(self, use_png=True, intent_mode="model", conditions_mode="model", link_mode="off", min_link_conf="high"):
+    def __init__(self, use_png=True, intent_mode="model", conditions_mode="model", link_mode="off", min_link_conf="high", joint_mode=True):
         self.intent_mode = intent_mode
         self.conditions_mode = conditions_mode
         self.link_mode = link_mode
+        self.joint_mode = joint_mode
         self.min_link_conf = min_link_conf
         self._pdf = {}
+        self._joint = None
         self.intent_cache = {}
         self.ids = IdentityStore()
         self.ix = EvidenceIndex(use_png=use_png)
@@ -39,6 +41,20 @@ class Context:
         for a in self.act:
             self.act_by_res.setdefault(a["resource_id"], []).append(a)
         self._claims = None
+
+    def joint_account(self, case_id):
+        """Account assigned by joint constraint propagation across all requests, or None."""
+        if self._joint is None:
+            import threading
+            with self.__dict__.setdefault("_jlock", threading.Lock()):
+                if self._joint is None:
+                    import joint
+                    self._joint, self._joint_info = joint.compute(self)
+        return self._joint["account"].get(case_id)
+
+    def joint_analytics(self, case_id):
+        self.joint_account(case_id)
+        return self._joint["analytics"].get(case_id)
 
     def pdf_text(self, fid):
         if fid not in self._pdf:
@@ -131,9 +147,18 @@ def solve(ctx, req, heuristics=True):
     cand = {r: w for r, w in cand.items() if prefix_of(r) in PREFIX_INFO and seen_before(r)}
 
     if heuristics and not any(prefix_of(r) == "account" for r in cand):
-        acc = _discover_account(ctx, req, uid, audit_at)
+        acc = ctx.joint_account(req["case_id"]) if ctx.joint_mode else None
         if acc:
-            cand[acc[0]] = acc[1]
+            cand[acc[0]] = "activity:" + acc[1]
+        else:
+            acc = _discover_account(ctx, req, uid, audit_at)
+            if acc:
+                cand[acc[0]] = acc[1]
+
+    if heuristics and ctx.joint_mode:
+        an = ctx.joint_analytics(req["case_id"])
+        if an and not any(prefix_of(r) == "analytics" for r in cand):
+            cand[an[0]] = "activity:" + an[1]
 
     if heuristics and ctx.link_mode == "model":
         from readers.link_reader import read_links

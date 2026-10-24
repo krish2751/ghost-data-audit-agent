@@ -1,0 +1,19 @@
+{
+ "key": "3b3df077c37de4dde5ddbd24900f4a848f74459f1c60b109574f4ad6d9e49bdc",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_010\", \"belongs\": \"yes\", \"confidence\": \"high\", \"basis\": \"time_cluster\", \"reason\": \"Account delete lands in the same minute as the subject's only linked record; result fits COMPLETE.\"}, {\"resource_id\": \"account_3136\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Delete result does not fit the reported status.\"}, {\"resource_id\": \"account_4842\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_7225\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_1895\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4566\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"account_010\", \"belongs\": \"yes\", \"confidence\": \"high\", \"basis\": \"time_cluster\", \"reason\": \"Account delete lands in the same minute as the subject's only linked record; result fits COMPLETE.\"}, {\"resource_id\": \"account_3136\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Delete result does not fit the reported status.\"}, {\"resource_id\": \"account_4842\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_7225\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_1895\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4566\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}

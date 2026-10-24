@@ -1,0 +1,19 @@
+{
+ "key": "42bdcf8f5efbfae04c5917d81bdaa7090a80b5571b4c7671277427c7b73dbfac",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"analytics_1805\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"audit_record_7203\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an audit record.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"analytics_1805\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"audit_record_7203\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an audit record.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}

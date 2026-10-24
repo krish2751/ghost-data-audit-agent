@@ -16,6 +16,20 @@ ROOT = CODE_DIR.parent
 CACHE_DIR = CODE_DIR / "cache"
 PROMPT_DIR = CODE_DIR / "prompts"
 USAGE_LOG = CACHE_DIR / "usage_log.jsonl"
+SESSION_DIR = CODE_DIR / "cache_session"   # answers written by the Claude Code session itself (no API tokens)
+
+
+class PendingAnswer(RuntimeError):
+    """The request is not cached and API calls are disabled; it was queued under cache_session/pending/."""
+
+
+def backend():
+    """'session' (default): cache only, uncached requests are queued for the session. 'api': real API calls."""
+    return os.environ.get("LLM_BACKEND", "session")
+
+
+def _ignore_api_cache(tag):
+    return backend() == "session" and tag in os.environ.get("LLM_SESSION_TAGS", "").split(",")
 MEDIA_TYPES = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
 
 
@@ -52,6 +66,8 @@ def call(model, prompt, image_paths=(), max_tokens=4096, tag=""):
     if entry.exists():
         d = json.loads(entry.read_text(encoding="utf-8"))
         return {"text": d["text"], "usage": d["usage"], "cached": True, "key": key}
+    if backend() != "api":
+        raise RuntimeError("model calls are disabled (LLM_BACKEND != api) and this request is not cached")
     content = []
     for p in image_paths:
         content.append({"type": "image", "source": {"type": "base64",
@@ -118,10 +134,21 @@ def chat(model, system, messages, tools=None, max_tokens=1024, effort=None, sche
         req["output_config"] = out_cfg
     key = _request_key(req)
     entry = CACHE_DIR / f"{key}.json"
-    if entry.exists():
+    sess = SESSION_DIR / f"{key}.json"
+    if backend() == "session" and sess.exists():
+        d = json.loads(sess.read_text(encoding="utf-8"))
+        return {"content": d["content"], "text": d["text"], "usage": d["usage"], "stop_reason": d["stop_reason"],
+                "cached": True, "key": key, "backend": "session"}
+    if entry.exists() and not _ignore_api_cache(tag):
         d = json.loads(entry.read_text(encoding="utf-8"))
         return {"content": d["content"], "text": d["text"], "usage": d["usage"], "stop_reason": d["stop_reason"],
                 "cached": True, "key": key}
+    if backend() != "api":
+        (SESSION_DIR / "pending").mkdir(parents=True, exist_ok=True)
+        (SESSION_DIR / "pending" / f"{key}.json").write_text(json.dumps(
+            {"key": key, "tag": tag, "model": model, "system": system, "messages": messages,
+             "tools": [t["name"] for t in (tools or [])], "schema": bool(schema)}, ensure_ascii=False, indent=1), encoding="utf-8")
+        raise PendingAnswer(key)
     resp = _client().messages.create(**req)
     content = [b.model_dump(exclude_none=True) for b in resp.content]
     text = "".join(b.get("text", "") for b in content if b.get("type") == "text")

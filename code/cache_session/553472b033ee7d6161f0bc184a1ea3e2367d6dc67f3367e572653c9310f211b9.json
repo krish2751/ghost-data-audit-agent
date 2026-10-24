@@ -1,0 +1,19 @@
+{
+ "key": "553472b033ee7d6161f0bc184a1ea3e2367d6dc67f3367e572653c9310f211b9",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_294\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Delete result does not fit the reported status.\"}, {\"resource_id\": \"account_410\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_6440\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Delete result does not fit the reported status.\"}, {\"resource_id\": \"account_7015\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_8832\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Delete result does not fit the reported status.\"}, {\"resource_id\": \"account_9155\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4492\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_5335\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"account_294\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Delete result does not fit the reported status.\"}, {\"resource_id\": \"account_410\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_6440\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Delete result does not fit the reported status.\"}, {\"resource_id\": \"account_7015\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_8832\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Delete result does not fit the reported status.\"}, {\"resource_id\": \"account_9155\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4492\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_5335\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}

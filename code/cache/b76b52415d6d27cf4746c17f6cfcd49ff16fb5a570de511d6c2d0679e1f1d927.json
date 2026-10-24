@@ -1,0 +1,25 @@
+{
+ "key": "b76b52415d6d27cf4746c17f6cfcd49ff16fb5a570de511d6c2d0679e1f1d927",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1938,
+  "output_tokens": 126,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"audit_record_003\", \"answer\": \"yes\", \"retain_until\": \"2027-08-25T04:03:00Z\", \"evidence_id\": \"evidence_55\", \"reason\": \"The journal entry for audit_record_003 says to retain it until 25 Aug 2027 04:03 UTC. That is after the audit time of 2026-09-06.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"audit_record_003\", \"answer\": \"yes\", \"retain_until\": \"2027-08-25T04:03:00Z\", \"evidence_id\": \"evidence_55\", \"reason\": \"The journal entry for audit_record_003 says to retain it until 25 Aug 2027 04:03 UTC. That is after the audit time of 2026-09-06.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:44:42Z"
+}

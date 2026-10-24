@@ -1,0 +1,19 @@
+{
+ "key": "4f80d672ce4d8d3cc620cefd49778fbf67090b90e493b371f41f3947d97493d1",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_010\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"account_3136\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"account_4842\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"account_7225\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"analytics_1895\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4566\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"account_010\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"account_3136\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"account_4842\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"account_7225\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"analytics_1895\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4566\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}

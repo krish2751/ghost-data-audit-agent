@@ -1,0 +1,19 @@
+{
+ "key": "9c743b026cd89829aece1b144bb3d0190deaf83730804f43d0c2406198e22db6",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"analytics_5589\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_9406\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"analytics_5589\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_9406\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}

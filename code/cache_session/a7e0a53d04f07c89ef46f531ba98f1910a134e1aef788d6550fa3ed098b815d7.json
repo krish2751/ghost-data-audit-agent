@@ -1,0 +1,19 @@
+{
+ "key": "a7e0a53d04f07c89ef46f531ba98f1910a134e1aef788d6550fa3ed098b815d7",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_5482\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_7012\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4430\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_454\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_4574\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an analytics record.\"}, {\"resource_id\": \"analytics_6077\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an analytics record.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"account_5482\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_7012\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4430\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_454\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_4574\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an analytics record.\"}, {\"resource_id\": \"analytics_6077\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an analytics record.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}

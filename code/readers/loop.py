@@ -24,8 +24,11 @@ def run_reader(model, system, user_text, schema, tools=None, case_tools=None, ef
     calls, tool_calls = [], 0
     for rnd in range(1, max_rounds + 1):
         last = rnd == max_rounds
-        r = llm_client.chat(model, system, messages, tools=tools or None, max_tokens=max_tokens,
-                            effort=effort, schema=schema if not tools else None, tag=tag)
+        try:
+            r = llm_client.chat(model, system, messages, tools=tools or None, max_tokens=max_tokens,
+                                effort=effort, schema=schema if not tools else None, tag=tag)
+        except llm_client.PendingAnswer as e:
+            return {"facts": None, "rounds": rnd, "calls": calls, "tool_calls": tool_calls, "error": f"pending:{e}"}
         calls.append({"usage": r["usage"], "cached": r["cached"]})
         uses = [b for b in r["content"] if b.get("type") == "tool_use"]
         if r["stop_reason"] == "tool_use" and uses and not last:

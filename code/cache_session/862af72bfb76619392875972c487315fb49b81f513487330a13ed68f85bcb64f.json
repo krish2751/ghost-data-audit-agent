@@ -1,0 +1,19 @@
+{
+ "key": "862af72bfb76619392875972c487315fb49b81f513487330a13ed68f85bcb64f",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_5521\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"analytics_1696\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_2265\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"account_5521\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}, {\"resource_id\": \"analytics_1696\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_2265\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}

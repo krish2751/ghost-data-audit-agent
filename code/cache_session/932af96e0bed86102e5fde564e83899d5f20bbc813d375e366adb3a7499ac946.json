@@ -1,0 +1,19 @@
+{
+ "key": "932af96e0bed86102e5fde564e83899d5f20bbc813d375e366adb3a7499ac946",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_5482\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_7012\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4430\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_454\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_4574\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_6077\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"account_5482\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"account_7012\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_4430\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_454\", \"belongs\": \"no\", \"confidence\": \"medium\", \"basis\": \"other\", \"reason\": \"Sync activity, not part of a deletion run.\"}, {\"resource_id\": \"analytics_4574\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}, {\"resource_id\": \"analytics_6077\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several candidates fit equally or the pattern does not match.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}

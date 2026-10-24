@@ -1161,3 +1161,5 @@
 {"key": "179a6e2739720b001a0ec0c56ecfabc91a45b4ceaf4ef531903a1ac54d9a8529", "model": "claude-sonnet-5-5", "tag": "links", "input_tokens": 3020, "output_tokens": 784, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}
 {"key": "9c04a616b591de48e79d39e7ab8930b46288256c8df030b20d6bf6fa0dd12c6c", "model": "claude-sonnet-5-5", "tag": "links", "input_tokens": 2164, "output_tokens": 148, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}
 {"key": "0f5c170e0a0ce6659d653c54dd2e42f149ff13d9134e8176c0a33b7eece96f24", "model": "claude-sonnet-5-5", "tag": "links", "input_tokens": 3138, "output_tokens": 100, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}
+{"key": "19f0b0dd075966d5e2aaf77a459b8183208eb1e6ab30d666555f343ff855e81c", "model": "claude-sonnet-5-5", "tag": "conditions", "input_tokens": 1594, "output_tokens": 86, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}
+{"key": "b76b52415d6d27cf4746c17f6cfcd49ff16fb5a570de511d6c2d0679e1f1d927", "model": "claude-sonnet-5-5", "tag": "conditions", "input_tokens": 1938, "output_tokens": 126, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}

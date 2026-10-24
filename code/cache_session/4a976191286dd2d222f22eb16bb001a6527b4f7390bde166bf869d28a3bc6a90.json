@@ -1,0 +1,19 @@
+{
+ "key": "4a976191286dd2d222f22eb16bb001a6527b4f7390bde166bf869d28a3bc6a90",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "backend": "claude_code_session",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 0,
+  "output_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_4857\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}]}",
+ "content": [
+  {
+   "type": "text",
+   "text": "{\"links\": [{\"resource_id\": \"account_4857\", \"belongs\": \"no\", \"confidence\": \"high\", \"basis\": \"exclusion\", \"reason\": \"Subject already has an account; this delete belongs to another run.\"}]}"
+  }
+ ],
+ "created": "2026-10-24T19:51:15Z"
+}
