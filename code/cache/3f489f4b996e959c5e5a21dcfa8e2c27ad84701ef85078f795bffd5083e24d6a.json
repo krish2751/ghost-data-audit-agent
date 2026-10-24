@@ -1,0 +1,25 @@
+{
+ "key": "3f489f4b996e959c5e5a21dcfa8e2c27ad84701ef85078f795bffd5083e24d6a",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1575,
+  "output_tokens": 88,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_7691\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message says a customer contacted support about account access. That is a customer-support exchange, even though it is a one-line summary.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_7691\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message says a customer contacted support about account access. That is a customer-support exchange, even though it is a one-line summary.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:01:55Z"
+}

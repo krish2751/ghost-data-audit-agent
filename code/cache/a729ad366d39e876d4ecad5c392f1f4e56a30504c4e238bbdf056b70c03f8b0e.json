@@ -1,0 +1,25 @@
+{
+ "key": "a729ad366d39e876d4ecad5c392f1f4e56a30504c4e238bbdf056b70c03f8b0e",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1580,
+  "output_tokens": 81,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_6477\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message summary describes a customer supplying contact details for a delivery query. That is support and order context.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_6477\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message summary describes a customer supplying contact details for a delivery query. That is support and order context.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:25Z"
+}

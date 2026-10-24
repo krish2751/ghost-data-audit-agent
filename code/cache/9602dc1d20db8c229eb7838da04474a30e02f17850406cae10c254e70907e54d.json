@@ -1,0 +1,25 @@
+{
+ "key": "9602dc1d20db8c229eb7838da04474a30e02f17850406cae10c254e70907e54d",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1475,
+  "output_tokens": 95,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_3964\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Only a one-line summary mentions contact details for a delivery query. No conversation text, order contents, or agent replies are available to judge.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_3964\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Only a one-line summary mentions contact details for a delivery query. No conversation text, order contents, or agent replies are available to judge.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T18:59:20Z"
+}

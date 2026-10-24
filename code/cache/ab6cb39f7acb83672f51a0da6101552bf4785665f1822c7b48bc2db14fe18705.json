@@ -1,0 +1,25 @@
+{
+ "key": "ab6cb39f7acb83672f51a0da6101552bf4785665f1822c7b48bc2db14fe18705",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1508,
+  "output_tokens": 91,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_8765\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message includes order context (delivery update request, affected order containing a Smart desk lamp) beyond the subject's personal email.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_8765\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message includes order context (delivery update request, affected order containing a Smart desk lamp) beyond the subject's personal email.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:33Z"
+}

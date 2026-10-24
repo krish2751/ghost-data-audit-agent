@@ -1,0 +1,25 @@
+{
+ "key": "8d710b94d577a1ee359df35b77d27aac38c003990bdb8372a1965d6fbe8d7e7f",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1508,
+  "output_tokens": 93,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_2406\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message includes order context: delivery update request and the affected order item (Cotton bedsheet set), beyond the subject's personal details.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_2406\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message includes order context: delivery update request and the affected order item (Cotton bedsheet set), beyond the subject's personal details.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:22Z"
+}

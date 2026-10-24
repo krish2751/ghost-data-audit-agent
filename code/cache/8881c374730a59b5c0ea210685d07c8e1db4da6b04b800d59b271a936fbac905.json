@@ -1,0 +1,25 @@
+{
+ "key": "8881c374730a59b5c0ea210685d07c8e1db4da6b04b800d59b271a936fbac905",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 4639,
+  "output_tokens": 112,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_4665\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"evidence_45\", \"reason\": \"The uploader email (yaw-osei@proton.me) can't be linked to user_477. The attachment's contents aren't available, so I can't tell whether it involves other people.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_4665\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"evidence_45\", \"reason\": \"The uploader email (yaw-osei@proton.me) can't be linked to user_477. The attachment's contents aren't available, so I can't tell whether it involves other people.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:54Z"
+}

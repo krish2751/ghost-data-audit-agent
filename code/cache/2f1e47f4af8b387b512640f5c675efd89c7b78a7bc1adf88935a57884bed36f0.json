@@ -1,0 +1,21 @@
+{
+ "key": "2f1e47f4af8b387b512640f5c675efd89c7b78a7bc1adf88935a57884bed36f0",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 2744,
+  "output_tokens": 136,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "```json\n{\"results\": [{\"item_id\": \"audit_record_1797\", \"answer\": \"yes\", \"retain_until\": \"2033-05-14T23:59:59Z\", \"evidence_id\": \"evidence_27\", \"reason\": \"Register row for user_17 (ORD-20264319 chargeback) says retain until 14 May 2033, which is after the audit time. The row is matched by subject, not by record ID.\"}]}\n```",
+ "content": [
+  {
+   "text": "```json\n{\"results\": [{\"item_id\": \"audit_record_1797\", \"answer\": \"yes\", \"retain_until\": \"2033-05-14T23:59:59Z\", \"evidence_id\": \"evidence_27\", \"reason\": \"Register row for user_17 (ORD-20264319 chargeback) says retain until 14 May 2033, which is after the audit time. The row is matched by subject, not by record ID.\"}]}\n```",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:58:43Z"
+}

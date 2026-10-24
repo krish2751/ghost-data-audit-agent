@@ -1,0 +1,25 @@
+{
+ "key": "e201c6d7cd8ee4eb4c5c8c0e6fb47fe623d98c48979d164d104cc67956abecaf",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1510,
+  "output_tokens": 95,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_835\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message names the affected order item (Mechanical keyboard) and asks for a delivery update. That is order and delivery context, not only personal details.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_835\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message names the affected order item (Mechanical keyboard) and asks for a delivery update. That is order and delivery context, not only personal details.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:33Z"
+}

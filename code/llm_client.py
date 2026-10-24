@@ -73,10 +73,24 @@ def call(model, prompt, image_paths=(), max_tokens=4096, tag=""):
 
 
 def parse_json(text):
+    """Parse a JSON object from model text; tolerates code fences and prose around the object."""
     t = text.strip()
     if t.startswith("```"):
         t = t.split("\n", 1)[1].rsplit("```", 1)[0]
-    return json.loads(t)
+    try:
+        return json.loads(t)
+    except ValueError:
+        pass
+    dec = json.JSONDecoder()
+    for i, ch in enumerate(t):
+        if ch == "{":
+            try:
+                obj, _ = dec.raw_decode(t[i:])
+            except ValueError:
+                continue
+            if isinstance(obj, dict) and obj:
+                return obj
+    raise ValueError("no JSON object found")
 
 
 # ---------------------------------------------------------------------------------------------

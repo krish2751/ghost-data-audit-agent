@@ -1,0 +1,25 @@
+{
+ "key": "85ce6fb045529276bf4c5fab2a6934874da98dba15107beda80eb73d101588bb",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1470,
+  "output_tokens": 82,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_6560\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Only a one-line summary about account access; no order, agent reply or other business context is present to judge.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_6560\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Only a one-line summary about account access; no order, agent reply or other business context is present to judge.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T18:58:32Z"
+}

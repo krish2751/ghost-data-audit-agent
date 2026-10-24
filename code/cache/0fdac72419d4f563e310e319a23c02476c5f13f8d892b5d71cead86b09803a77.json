@@ -1,0 +1,36 @@
+{
+ "key": "0fdac72419d4f563e310e319a23c02476c5f13f8d892b5d71cead86b09803a77",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "tool_use",
+ "usage": {
+  "input_tokens": 4913,
+  "output_tokens": 65,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "Let me look at the record itself.",
+ "content": [
+  {
+   "text": "Let me look at the record itself.",
+   "type": "text"
+  },
+  {
+   "id": "toolu_017T4g2SM7aXNQ9arDoqxLzt",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "resource_id": "support_2295"
+   },
+   "name": "get_resource",
+   "type": "tool_use"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:50Z"
+}

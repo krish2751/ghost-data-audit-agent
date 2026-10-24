@@ -1,0 +1,32 @@
+{
+ "key": "12d54cdf724c1c1ec00c48a848fc1229a780d53988ae51cad595214068e7946e",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "tool_use",
+ "usage": {
+  "input_tokens": 5574,
+  "output_tokens": 54,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "",
+ "content": [
+  {
+   "id": "toolu_01TnR2YNFMBDAbWgWqpv6JSZ",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "resource_id": "support_2537"
+   },
+   "name": "get_resource",
+   "type": "tool_use"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:41Z"
+}

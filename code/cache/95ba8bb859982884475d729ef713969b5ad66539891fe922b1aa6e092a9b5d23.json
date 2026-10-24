@@ -1,0 +1,25 @@
+{
+ "key": "95ba8bb859982884475d729ef713969b5ad66539891fe922b1aa6e092a9b5d23",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1507,
+  "output_tokens": 95,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_9648\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message includes order context (noise-cancelling headphones) and a delivery update request, which is shared business context beyond the subject's personal details.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_9648\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message includes order context (noise-cancelling headphones) and a delivery update request, which is shared business context beyond the subject's personal details.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:46Z"
+}

@@ -14,3 +14,7 @@ Result (after cleanup):
 - **Intent regex:** the earlier patch copied phrasing from specific requests. It was replaced by a generic fallback (deletion stems in several languages, a negation window before each cue, verification wording). The model reader is the primary path; the fallback disagrees with it on 1 of 550 requests (a "marketing lists only" request). Re-running the 518 after the change: 0 status changes, 0 step changes.
 
 Remaining sample-derived heuristics (generic rules inferred from the samples, not case-specific; listed in `rule_condition_heuristics.md`): resource-prefix to system/category mapping, `contact_lookup`/legacy-contact-index category overrides, the activity time-window account discovery (`WINDOW_MIN`), and the reading rules in `data/states.py`. These can still overfit the 32 samples, so a holdout split is planned.
+
+## Rule-condition reader result
+
+`code/evaluation/conditions_eval.py`: 123 reader items in 114 of 550 cases (101 support-message context, 13 attachment ownership, 9 retention window), average 1.09 rounds per run, 16 tool calls, 0 errors. Answers: support context yes 101/101; attachment yes 5, unclear 8; retention yes 4, unclear 5. No treatment, status or step changed versus the rule defaults. The first prompt version flipped three sample cases (it treated an attachment with the subject's own order as "shared", and one-line support summaries as "no context"); the prompt was corrected on that evidence, so these samples are no longer an independent test of it.

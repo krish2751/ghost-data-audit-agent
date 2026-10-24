@@ -1,0 +1,25 @@
+{
+ "key": "86556b273b9a93cbb54fffac1704aa98bfd0e117f614ef6bb6ff79221bf0ae6e",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1505,
+  "output_tokens": 88,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_4267\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message includes order context (delivery update, affected order with a mechanical keyboard) beyond the subject's email address.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_4267\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message includes order context (delivery update, affected order with a mechanical keyboard) beyond the subject's email address.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T18:58:21Z"
+}

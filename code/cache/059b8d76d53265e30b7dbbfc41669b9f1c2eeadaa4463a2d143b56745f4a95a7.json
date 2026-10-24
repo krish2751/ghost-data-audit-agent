@@ -1,0 +1,25 @@
+{
+ "key": "059b8d76d53265e30b7dbbfc41669b9f1c2eeadaa4463a2d143b56745f4a95a7",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1743,
+  "output_tokens": 147,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_5750\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message says a customer contacted support about account access. That is a customer-support exchange.\"}, {\"item_id\": \"support_7311\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message says a customer asked support to correct delivery details. That is support and delivery context.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_5750\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message says a customer contacted support about account access. That is a customer-support exchange.\"}, {\"item_id\": \"support_7311\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message says a customer asked support to correct delivery details. That is support and delivery context.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:01:59Z"
+}

@@ -1,0 +1,25 @@
+{
+ "key": "f6cf4570e2bcc90007860a2f4eb9e97dac9b513e5a502c12771283606092b3eb",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 2086,
+  "output_tokens": 107,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_001\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_58\", \"reason\": \"Customer-uploaded address correction contains only Priya Raman's own contact, order and delivery details; no other people appear. The file name differs slightly from the record's.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_001\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_58\", \"reason\": \"Customer-uploaded address correction contains only Priya Raman's own contact, order and delivery details; no other people appear. The file name differs slightly from the record's.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:20Z"
+}

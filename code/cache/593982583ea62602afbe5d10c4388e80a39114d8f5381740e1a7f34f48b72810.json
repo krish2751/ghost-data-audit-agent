@@ -1,0 +1,25 @@
+{
+ "key": "593982583ea62602afbe5d10c4388e80a39114d8f5381740e1a7f34f48b72810",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1612,
+  "output_tokens": 90,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_8999\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message is a support ticket (CS-7999) about a delivery update and an affected order for a stainless steel water bottle.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_8999\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message is a support ticket (CS-7999) about a delivery update and an affected order for a stainless steel water bottle.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:04Z"
+}

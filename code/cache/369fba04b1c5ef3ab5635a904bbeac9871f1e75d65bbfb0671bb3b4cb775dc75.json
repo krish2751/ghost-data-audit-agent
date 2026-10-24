@@ -1,0 +1,25 @@
+{
+ "key": "369fba04b1c5ef3ab5635a904bbeac9871f1e75d65bbfb0671bb3b4cb775dc75",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1981,
+  "output_tokens": 110,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_001\", \"answer\": \"no\", \"retain_until\": null, \"evidence_id\": \"evidence_58\", \"reason\": \"The attachment is uploaded by the customer but also holds shared business records: order ORD-20264827, product details, carrier and delivery correction request, not just the subject's personal details.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_001\", \"answer\": \"no\", \"retain_until\": null, \"evidence_id\": \"evidence_58\", \"reason\": \"The attachment is uploaded by the customer but also holds shared business records: order ORD-20264827, product details, carrier and delivery correction request, not just the subject's personal details.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T18:58:17Z"
+}

@@ -1,0 +1,25 @@
+{
+ "key": "1fb7fa9798e0e414d8c4fd0ed6fde7d38be90fbaf1266f18320c71bb85d7fb76",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1612,
+  "output_tokens": 90,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_9648\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Ticket CS-8648 is a customer-support message about a delivery update and an order for noise-cancelling headphones.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_9648\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Ticket CS-8648 is a customer-support message about a delivery update and an order for noise-cancelling headphones.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:18Z"
+}

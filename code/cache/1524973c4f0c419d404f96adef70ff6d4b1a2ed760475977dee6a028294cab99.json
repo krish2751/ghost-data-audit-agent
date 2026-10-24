@@ -1,0 +1,30 @@
+{
+ "key": "1524973c4f0c419d404f96adef70ff6d4b1a2ed760475977dee6a028294cab99",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 3549,
+  "output_tokens": 226,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\":[{\"item_id\":\"support_3802\",\"answer\":\"unclear\",\"retain_until\":null,\"evidence_id\":\"evidence_38\",\"reason\":\"The record only has metadata: uploader email and file name. It doesn't show the file's content or link the uploader to user_405. A delivery confirmation may be a shared record.\"},{\"item_id\":\"support_6569\",\"answer\":\"yes\",\"retain_until\":null,\"evidence_id\":\"\",\"reason\":\"The message includes order context (affected order with running shoes) and a delivery update request, which is business context beyond personal details.\"}]}",
+ "content": [
+  {
+   "signature": "CAQS5wUKEAgTGAI4AUIIdGhpbmtpbmcSDCZoafXrg0msgzSwkhoMVSFj/xPW3IwDf7tjIjC/Vig2vJ61pssbCEJs2IAyeWztFr8KBusfywaICCDM7i8SK8mPzqNCAq0GcwHrWsEqhAWtCa1KTjgoC9UqefHIHlK1IfI1/Jg62HV+F36EQfNWcm9MknVre+YNU4/wZ5yqmDHVK0iNrEs+cBWdc4ICXZIq2HZiiVOkasnP2phgWO6b5No01pLJ4nOV05wg/fu+3dOKiixRAENM3wJL+swBrgkD+J2s0+jpaqgtSGRlPdi17//m/lrzjLqKjgM5HCb6a+PqjF7WFZ/fdHHmqrDdz1oRVjbtg37VVIdih45VUo6k1bsbiyrXaaGNO5wi/lQER6aa1BL3gV2RmQpBKbm2GHStR74eh5Gc+7O3bz80dDCGU/Vi6y3IRRYQv/EjqJyA9J+GDTN4LuoZM8D+x64Y/kD5lwucXlWpZYxKSmhnAkWq06KYH4uz7GwZjcOlUfxZLk61WwUjDtFskz76b1nJSzVxujnn7c517aJAz7xBR49+RkQUSXVERFk1q3zVtEzcQMZoFpd/Cu8NWLyhi9mNlj7jo5M2IvcAK0UeP+MzngGiBQUjDWUas444muuUbQnJaCMZdgrvz3B3Xmg8AGrWFg9pFFR3JerQiGzaBUFKOz+mede03d00rEAibzbGj+pR+ucD/T7x34CLbMTBaFHNQkS161oObbO/iBPsUixezsVcxByqeK5tqHYjlCpOhI7Ndf8aYTSTz979BafjSNavCWQJTreisEH7AdNeDBthGBdwGIoxftGg8ICW18VrlA9e0/bHAZsMeBM4+8avfSlsBb3ZcdcWDvgn6d+zV+q+L3JwidEJ7/IGL6Oul1sVPpifEpcUczfa7AlInl0wARlc6CEoZki/mdXR7CujKIs3xQ2a3NdCNxJWmU1Onpg1j4RHCZqAqEQB53iJ3zpGI3/+OsoU9MYrsBgB",
+   "thinking": "",
+   "type": "thinking"
+  },
+  {
+   "text": "{\"results\":[{\"item_id\":\"support_3802\",\"answer\":\"unclear\",\"retain_until\":null,\"evidence_id\":\"evidence_38\",\"reason\":\"The record only has metadata: uploader email and file name. It doesn't show the file's content or link the uploader to user_405. A delivery confirmation may be a shared record.\"},{\"item_id\":\"support_6569\",\"answer\":\"yes\",\"retain_until\":null,\"evidence_id\":\"\",\"reason\":\"The message includes order context (affected order with running shoes) and a delivery update request, which is business context beyond personal details.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:44Z"
+}

@@ -100,10 +100,10 @@ def reading(o):
     return "UNKNOWN"
 
 
-def violation(cat, rd):
-    """Policy verdict for a category/reading: REMAINING, EXPOSED, FLOW, RESTORE or None."""
-    t = TREATMENT.get(cat)
-    if t == "DELETE" and rd in ("FOUND", "IDENTIFIABLE"):
+def violation(cat, rd, treatment=None):
+    """Policy verdict for a category/reading under a treatment: REMAINING, EXPOSED, FLOW, RESTORE or None."""
+    t = treatment or TREATMENT.get(cat)
+    if t == "DELETE" and rd in ("FOUND", "IDENTIFIABLE") or (t == "DELETE" and treatment and rd in ("REDACTED", "ANONYMIZED", "RETAINED")):
         return "REMAINING"
     if t in ("REDACT", "ANONYMIZE") and rd == "IDENTIFIABLE":
         return "EXPOSED"

@@ -1,0 +1,16 @@
+{
+ "key": "5aa3bdcbe8bcfcd6f0e64fee8ac603f84673c2ffb73acc8cc49ea6ab38823ec9",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 3956,
+  "output_tokens": 1,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "",
+ "content": [],
+ "request_tools": [],
+ "created": "2026-10-24T19:00:49Z"
+}

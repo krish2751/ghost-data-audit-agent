@@ -1,0 +1,25 @@
+{
+ "key": "ced2eefe964ffe31103cd5e879b2ec6c3d73a242c959543aedba72b024cafea2",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1470,
+  "output_tokens": 95,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_3980\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Only a vague one-line summary exists, with no order contents, delivery details, agent replies or product names. The full conversation text is missing.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_3980\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Only a vague one-line summary exists, with no order contents, delivery details, agent replies or product names. The full conversation text is missing.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:20Z"
+}

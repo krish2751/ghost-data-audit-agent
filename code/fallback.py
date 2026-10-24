@@ -21,8 +21,10 @@ WINDOW_MIN = 120  # generic search window around reported_at for activity-based 
 
 
 class Context:
-    def __init__(self, use_png=True, intent_mode="model"):
+    def __init__(self, use_png=True, intent_mode="model", conditions_mode="model"):
         self.intent_mode = intent_mode
+        self.conditions_mode = conditions_mode
+        self._pdf = {}
         self.intent_cache = {}
         self.ids = IdentityStore()
         self.ix = EvidenceIndex(use_png=use_png)
@@ -33,6 +35,12 @@ class Context:
         for a in self.act:
             self.act_by_res.setdefault(a["resource_id"], []).append(a)
         self._claims = None
+
+    def pdf_text(self, fid):
+        if fid not in self._pdf:
+            from pypdf import PdfReader
+            self._pdf[fid] = "\n".join((p.extract_text() or "") for p in PdfReader(str(loader.DS / self.man[fid]["file_path"])).pages)
+        return self._pdf[fid]
 
     def classify_nondeletion(self, uid, audit_at):
         """True if an intake CLASSIFY_REQUEST (non-deletion) row at or before audit_at belongs to a resource linked to the user."""
@@ -125,6 +133,8 @@ def solve(ctx, req, heuristics=True):
     for rid, why in sorted(cand.items()):
         decisions.append(_decide(ctx, rid, why, audit_at))
     decisions = [d for d in decisions if d]
+    if ctx.conditions_mode == "model":
+        out["conditions"] = _apply_conditions(ctx, uid, decisions, audit_at)
     anchor = _anchor(ctx, decisions, audit_at)
     for d in decisions:
         if not d["verify_evidence"]:
@@ -157,7 +167,7 @@ def _decide(ctx, rid, why, audit_at):
         if pre != "account":
             return None
         return {"resource_id": rid, "system_id": sysid, "category": "USER_PROFILE", "reading": "NOT_FOUND",
-                "violation": None, "finding_evidence": None, "verify_evidence": None, "why": why}
+                "treatment": "DELETE", "violation": None, "finding_evidence": None, "verify_evidence": None, "why": why}
     key = lambda o: (o.captured_at, o.snap_time)
     top = max(key(o) for o in obs)
     group = [o for o in obs if key(o) == top]
@@ -167,8 +177,8 @@ def _decide(ctx, rid, why, audit_at):
     cat = category(o)
     if cat not in TREATMENT or rd == "UNKNOWN":
         return None
-    return {"resource_id": rid, "system_id": sysid, "category": cat, "reading": rd, "violation": violation(cat, rd),
-            "finding_evidence": o.file_id, "verify_evidence": o.file_id, "why": why}
+    return {"resource_id": rid, "system_id": sysid, "category": cat, "reading": rd, "treatment": TREATMENT[cat],
+            "violation": violation(cat, rd), "finding_evidence": o.file_id, "verify_evidence": o.file_id, "why": why}
 
 
 def _anchor(ctx, decisions, audit_at):
@@ -183,3 +193,43 @@ def build_row(ctx, req, heuristics=True):
     res = solve(ctx, req, heuristics)
     steps = plan(res["status"], res["resources"])
     return res, steps
+
+
+def _apply_conditions(ctx, uid, decisions, audit_at):
+    """Ask the condition reader about text-dependent rule conditions, then set each record's treatment in code."""
+    from readers.condition_reader import build_item, read_conditions
+    items = [it for d in decisions for it in [build_item(ctx, d, uid, audit_at)] if it]
+    results, run = read_conditions(ctx, items, uid, audit_at)
+    log = {"items": len(items), "rounds": run["rounds"], "tool_calls": run["tool_calls"], "error": run["error"], "applied": []}
+    by_id = {d["resource_id"]: d for d in decisions}
+    for it in items:
+        d, res = by_id[it["item_id"]], results.get(it["item_id"])
+        if not res:
+            continue
+        ans, cat, new = res.get("answer"), d["category"], None
+        if cat == "SUPPORT_MESSAGE" and ans == "no":
+            new = "DELETE"
+        elif cat == "SUPPORT_ATTACHMENT" and ans == "no":
+            new = "REDACT"
+        elif cat in ("SECURITY_AUDIT_LOG", "LEGAL_HOLD_RECORD"):
+            ru = res.get("retain_until")
+            if ru and ru <= audit_at:
+                new = "DELETE"
+        d["condition"] = {"type": it["type"], "answer": ans, "reason": res.get("reason"), "retain_until": res.get("retain_until")}
+        if new and new != d["treatment"]:
+            d["treatment"] = new
+            d["violation"] = violation(cat, d["reading"], new)
+            log["applied"].append((d["resource_id"], new))
+    return log
+
+
+def solve_all(ctx, reqs, heuristics=True, workers=8):
+    """Solve many requests concurrently (model reads are I/O bound). Returns {case_id: (result, steps)}."""
+    from concurrent.futures import ThreadPoolExecutor
+    ctx.claims()  # build shared lazy state before threads start
+
+    def one(req):
+        res = solve(ctx, req, heuristics)
+        return req["case_id"], (res, plan(res["status"], res["resources"]))
+    with ThreadPoolExecutor(workers) as ex:
+        return dict(ex.map(one, reqs))

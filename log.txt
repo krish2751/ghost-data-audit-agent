@@ -328,3 +328,30 @@ branch=main
 repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-24T21:40:00Z] No-hardcoding audit, generic intent fallback, commit, rule-condition reader
+
+User Prompt (verbatim, secrets redacted):
+The rules forbid hardcoded cases, so audit the code for it before we go further:
+1. Search all of code/ (excluding cache/ and evaluation test fixtures) for case ids, specific resource ids (account_, search_, audit_record_ etc. with numbers), evidence file names or file ids, specific emails or user ids, and phrases copied from specific request texts. Report every hit and why it's there.
+2. The intent regex was patched with phrases from the 518 request texts. Make the model reader the primary path; the regex should only be a generic fallback with common negation patterns, not phrases copied from specific requests. Re-run and confirm the 518 statuses don't change.
+3. Confirm nothing in the solver reads sample_output.csv or sample answers; only code/evaluation/ may.
+4. Add a short "No hardcoding" section to data_findings.md describing this check and its result.
+
+Then commit, and continue with the rule-condition fixes.
+
+Agent Response Summary:
+Wrote code/evaluation/hardcoding_audit.py (solver 0 hits after removing 4 harmless ones), replaced the intent regex with a generic negation-window fallback (disagrees with the model on 1 of 550), confirmed 0 status and step changes on the 518, confirmed only evaluation/analysis read sample answers, created analysis/data_findings.md, and committed. Then built the rule-condition reader (support shared context, attachment ownership, retention window) with parallel solving; it changes nothing on the data after prompt correction.
+
+Actions:
+* Wrote evaluation/hardcoding_audit.py, analysis/data_findings.md; rewrote intent.py; committed (191a91f)
+* Wrote prompts/condition_reader.md, readers/condition_reader.py, evaluation/conditions_eval.py; extended fallback.py, planner.py, states.py, main.py, llm_client.parse_json, readers/loop.py
+* Edited CLAUDE.md
+
+Context:
+tool=Claude Code
+model=claude-sonnet-5-5
+branch=main
+repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

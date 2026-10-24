@@ -1,0 +1,25 @@
+{
+ "key": "4ad11baeebae578050ac7cfb1f37ff4c4f8ca47cb37233bb54689d1771379572",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 2159,
+  "output_tokens": 128,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"audit_record_3737\", \"answer\": \"yes\", \"retain_until\": \"2034-09-30T23:59:59Z\", \"evidence_id\": \"evidence_27\", \"reason\": \"The structured retention date for this record is 2034-09-30, which is after the audit time. The register's 2033 date for user_21's order is a different record's date, so I did not use it.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"audit_record_3737\", \"answer\": \"yes\", \"retain_until\": \"2034-09-30T23:59:59Z\", \"evidence_id\": \"evidence_27\", \"reason\": \"The structured retention date for this record is 2034-09-30, which is after the audit time. The register's 2033 date for user_21's order is a different record's date, so I did not use it.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:20Z"
+}

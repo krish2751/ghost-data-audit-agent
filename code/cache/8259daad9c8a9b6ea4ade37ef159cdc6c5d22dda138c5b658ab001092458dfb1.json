@@ -1,0 +1,25 @@
+{
+ "key": "8259daad9c8a9b6ea4ade37ef159cdc6c5d22dda138c5b658ab001092458dfb1",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1470,
+  "output_tokens": 96,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_5049\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message only says the customer followed up about an order update. It gives no order contents, agent replies or delivery details, so shared context can't be judged.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_5049\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Message only says the customer followed up about an order update. It gives no order contents, agent replies or delivery details, so shared context can't be judged.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T18:58:55Z"
+}

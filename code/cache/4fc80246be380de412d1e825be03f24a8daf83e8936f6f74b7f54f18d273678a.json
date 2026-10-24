@@ -1,0 +1,25 @@
+{
+ "key": "4fc80246be380de412d1e825be03f24a8daf83e8936f6f74b7f54f18d273678a",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 6094,
+  "output_tokens": 136,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "Uploaded by the subject's own email (matches user_309), a delivery confirmation; no other parties shown.\n\n{\"results\": [{\"item_id\": \"support_4952\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_29\", \"reason\": \"Uploaded by the subject's own email (user_309 per search index); delivery confirmation on their ticket, with no other parties indicated.\"}]}",
+ "content": [
+  {
+   "text": "Uploaded by the subject's own email (matches user_309), a delivery confirmation; no other parties shown.\n\n{\"results\": [{\"item_id\": \"support_4952\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_29\", \"reason\": \"Uploaded by the subject's own email (user_309 per search index); delivery confirmation on their ticket, with no other parties indicated.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:12Z"
+}

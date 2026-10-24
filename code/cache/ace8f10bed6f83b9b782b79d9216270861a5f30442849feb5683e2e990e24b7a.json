@@ -1,0 +1,25 @@
+{
+ "key": "ace8f10bed6f83b9b782b79d9216270861a5f30442849feb5683e2e990e24b7a",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 4139,
+  "output_tokens": 121,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_8903\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_20\", \"reason\": \"The subject (user_201) is Ana Varga, ana-varga@proton.me, and she uploaded this delivery confirmation. Nothing shows other people's data, though the file's contents weren't available.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_8903\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_20\", \"reason\": \"The subject (user_201) is Ana Varga, ana-varga@proton.me, and she uploaded this delivery confirmation. Nothing shows other people's data, though the file's contents weren't available.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:07Z"
+}

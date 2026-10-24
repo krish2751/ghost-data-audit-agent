@@ -30,7 +30,7 @@ def plan(status, resources):
         return []
     steps = []
     for r in resources:
-        treat = TREATMENT[r["category"]]
+        treat = r.get("treatment") or TREATMENT[r["category"]]
         vop, vstate = VERIFY_OP[treat]
         if status == "COMPLETE":
             steps.append(_step("VERIFICATION", r, vop, vstate, r.get("verify_evidence")))

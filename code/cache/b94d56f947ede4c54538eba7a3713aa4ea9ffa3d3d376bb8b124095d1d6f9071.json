@@ -1,0 +1,25 @@
+{
+ "key": "b94d56f947ede4c54538eba7a3713aa4ea9ffa3d3d376bb8b124095d1d6f9071",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1594,
+  "output_tokens": 80,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_2944\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The record has no attachment details, uploader, or document text, so ownership can't be judged.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_2944\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The record has no attachment details, uploader, or document text, so ownership can't be judged.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:13Z"
+}

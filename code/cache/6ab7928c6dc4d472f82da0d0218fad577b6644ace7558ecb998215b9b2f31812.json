@@ -1,0 +1,25 @@
+{
+ "key": "6ab7928c6dc4d472f82da0d0218fad577b6644ace7558ecb998215b9b2f31812",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1489,
+  "output_tokens": 87,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_4218\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The record has no file name, uploader, ticket or documents, so I can't tell who the attachment belongs to.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_4218\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The record has no file name, uploader, ticket or documents, so I can't tell who the attachment belongs to.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T18:58:27Z"
+}

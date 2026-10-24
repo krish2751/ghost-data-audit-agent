@@ -24,7 +24,7 @@ def run_reader(model, system, user_text, schema, tools=None, case_tools=None, ef
     calls, tool_calls = [], 0
     for rnd in range(1, max_rounds + 1):
         last = rnd == max_rounds
-        r = llm_client.chat(model, system, messages, tools=None if (last or not tools) else tools, max_tokens=max_tokens,
+        r = llm_client.chat(model, system, messages, tools=tools or None, max_tokens=max_tokens,
                             effort=effort, schema=schema if not tools else None, tag=tag)
         calls.append({"usage": r["usage"], "cached": r["cached"]})
         uses = [b for b in r["content"] if b.get("type") == "tool_use"]
@@ -35,6 +35,8 @@ def run_reader(model, system, user_text, schema, tools=None, case_tools=None, ef
                 tool_calls += 1
                 res = case_tools.call(u["name"], u["input"])
                 results.append({"type": "tool_result", "tool_use_id": u["id"], "content": json.dumps(res, default=str)[:12000]})
+            if rnd + 1 == max_rounds:  # keep the same tools (thinking blocks are bound to them) but ask for the final answer
+                results.append({"type": "text", "text": "This was the last round that allows tool calls. Reply now with the final JSON only; do not call any tool."})
             messages.append({"role": "user", "content": results})
             continue
         try:

@@ -1,0 +1,25 @@
+{
+ "key": "da7e30058bb6e587db46584af2f60c307fa16c2512ef25de3db4c8cce04f8617",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1828,
+  "output_tokens": 185,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_3802\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"No document text is available. The uploader is lucia-garcia@proton.me, and the link to subject user_405 is unconfirmed. I can't tell whether the attachment concerns only the subject.\"}, {\"item_id\": \"support_6569\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message is a customer-support exchange about a delivery update and an order (running shoes).\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_3802\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"No document text is available. The uploader is lucia-garcia@proton.me, and the link to subject user_405 is unconfirmed. I can't tell whether the attachment concerns only the subject.\"}, {\"item_id\": \"support_6569\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message is a customer-support exchange about a delivery update and an order (running shoes).\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:14Z"
+}

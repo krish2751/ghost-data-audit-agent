@@ -1,0 +1,25 @@
+{
+ "key": "be7b47cd7cd2abf140d91fef1a0ebd26f6f09c38f75fb1ed4616336289f611f0",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1470,
+  "output_tokens": 82,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_9474\", \"answer\": \"no\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message only says the customer contacted support about account access. It has no order details, agent replies, or other business context.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_9474\", \"answer\": \"no\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message only says the customer contacted support about account access. It has no order details, agent replies, or other business context.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:15Z"
+}

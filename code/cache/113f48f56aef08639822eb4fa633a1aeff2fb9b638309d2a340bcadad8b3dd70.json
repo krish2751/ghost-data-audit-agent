@@ -1,0 +1,26 @@
+{
+ "key": "113f48f56aef08639822eb4fa633a1aeff2fb9b638309d2a340bcadad8b3dd70",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 5902,
+  "output_tokens": 161,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_4952\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"evidence_29\", \"reason\": \"Only metadata is available: uploader is naledi-mahlangu79@proton.me, with no link to user_309 and no file content. A delivery confirmation may be a shared business record.\"}]}",
+ "content": [
+  {
+   "signature": "CAQSigYKEAgTGAI4AUIIdGhpbmtpbmcSDJDiA2+Xyz9zBcMwLhoMEgkZY5sZeegHnVimIjBfpRr7At5KhEmSX4HeJOWHaa8Nrxq4exnXWL6lknEBva6xNjYIOsO5hnqfQnCZfosqpwX1NHsqnQV7Xi3kjGYO2IILgoj/SMYIDCG0dxPnwnVecRml11CEaq6EQBfcM7FsrQ1yzeykcSwgCNt+8qxGSmfYjqcx4DKCDpey/J9dDYgDDgPMklWyPi8GZ1BRyS2XgrVCraFbthrQ84Q7YNm//9I7uJVBDz85E3GybYK/XJUSZgAv5wLxNkG/s0rPxtkN3/UFcJnRvVdKNrX9GtBkSIMz+YYO5Hel3FYcVLiW+Lr8UPRuwRHAMQM1UN9w8EYWWy9e8kZbcR2FxY47JMWfusWT4UxPmLPehIAeSl01fDXO/kPydpEN437THVp5sQ8t56+pZa+mnSHlE3uXAadsXFDHR7CiUaZmdsNe5DPUMmcQb8cJ1D80wbz1jc0a5Y3BSCnyrWPEYDLp2x5kquBESEzFRT1S3MLr88Gv9hwvQh1zX/uFDW3pYsFlFOOQ6LxcVrHNozqFAFLTap8S9pPm7Qs9brGMb93jakgWTJa6q/Eelmjatq4fN4NYPlrUc9Zd986Tm6U0VkLq/gf/3ZblLXARdf+Tvj0hTAmU1JjihtDmFsd1sl3oehrDNRKm9m9HC1dqzHfVtlgCRNWp27Cy8N3eFkCsCZJTeU8jW/zSMcSx8krqCbwXSIl3sSyNoMp5VvZL1Ti2vCWAPS4BSd8D0dCdWzgK8ZARXFqtUmZpDjC11CP1aBYMCKQ0wdwhQzqIF9r6AR+0lmi6+vUjwJHXPvs2QOYf1gSlRMrx6vmr6NNW+1Yw9MbHIVmdHS6+Nf1CzT//Esexdvno0sw9LAcoWrF6+YvYJgGL+x/2mvohwl7SwlDBLXFpRG0gJxJ5E1IKtwx1+2KxXbbnPKeJSwVGFvaxY+8eGlq98xgMrS0AWXo5Fc9nDGtoc+J1S7c8NnQD+jzB/5Kgaj75GAE=",
+   "thinking": "",
+   "type": "thinking"
+  },
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_4952\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"evidence_29\", \"reason\": \"Only metadata is available: uploader is naledi-mahlangu79@proton.me, with no link to user_309 and no file content. A delivery confirmation may be a shared business record.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T19:00:05Z"
+}

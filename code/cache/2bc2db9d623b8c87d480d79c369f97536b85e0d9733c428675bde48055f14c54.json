@@ -1,0 +1,32 @@
+{
+ "key": "2bc2db9d623b8c87d480d79c369f97536b85e0d9733c428675bde48055f14c54",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "tool_use",
+ "usage": {
+  "input_tokens": 2434,
+  "output_tokens": 57,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "",
+ "content": [
+  {
+   "id": "toolu_01GLHyeVp5YK8PJJttMq9hgj",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "resource_id": "audit_record_1797"
+   },
+   "name": "get_resource",
+   "type": "tool_use"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T18:58:40Z"
+}

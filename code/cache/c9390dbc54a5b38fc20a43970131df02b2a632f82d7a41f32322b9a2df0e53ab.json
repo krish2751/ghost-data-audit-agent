@@ -1,0 +1,43 @@
+{
+ "key": "c9390dbc54a5b38fc20a43970131df02b2a632f82d7a41f32322b9a2df0e53ab",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "tool_use",
+ "usage": {
+  "input_tokens": 1723,
+  "output_tokens": 112,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "",
+ "content": [
+  {
+   "id": "toolu_012gMAHFoosNvd8Sepn5Wd8q",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "token": "delivery_confirmation_19.pdf"
+   },
+   "name": "search_evidence",
+   "type": "tool_use"
+  },
+  {
+   "id": "toolu_01X5AmYkeTyMGsziXML1ZACE",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "token": "CS-7802"
+   },
+   "name": "search_evidence",
+   "type": "tool_use"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:41Z"
+}

@@ -1,0 +1,25 @@
+{
+ "key": "959c86999e5a8f8120fcbac2ff01249a8f0ebfa4ccd945d94c04319de50943b3",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1610,
+  "output_tokens": 93,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_2691\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Ticket CS-6691 is a support exchange. It asks for a delivery update on an order containing a mechanical keyboard.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_2691\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"Ticket CS-6691 is a support exchange. It asks for a delivery update on an order containing a mechanical keyboard.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:02:18Z"
+}

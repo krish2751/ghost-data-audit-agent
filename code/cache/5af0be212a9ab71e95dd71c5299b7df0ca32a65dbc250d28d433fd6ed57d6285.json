@@ -1,0 +1,25 @@
+{
+ "key": "5af0be212a9ab71e95dd71c5299b7df0ca32a65dbc250d28d433fd6ed57d6285",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1473,
+  "output_tokens": 90,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_4249\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message says the customer asked support to correct delivery details. That is shared order and delivery context, not only the subject's personal details.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_4249\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message says the customer asked support to correct delivery details. That is shared order and delivery context, not only the subject's personal details.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-24T19:00:34Z"
+}
