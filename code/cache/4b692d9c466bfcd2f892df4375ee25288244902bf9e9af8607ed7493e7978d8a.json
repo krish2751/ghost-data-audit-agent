@@ -1,0 +1,21 @@
+{
+ "key": "4b692d9c466bfcd2f892df4375ee25288244902bf9e9af8607ed7493e7978d8a",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1248,
+  "output_tokens": 112,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks for permanent account deletion and confirmation after checks; these are directed at the company, not at the assistant.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks for permanent account deletion and confirmation after checks; these are directed at the company, not at the assistant.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:06Z"
+}

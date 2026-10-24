@@ -1,0 +1,21 @@
+{
+ "key": "c05d1e675536afeb3a9cfa0fb02bffc6e6c5cd09acf8dc670c2609af9fe406df",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1161,
+  "output_tokens": 122,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks to delete the account and personal data, with normal identity review and a confirmation afterward. These are process requests, not attempts to manipulate.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks to delete the account and personal data, with normal identity review and a confirmation afterward. These are process requests, not attempts to manipulate.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:45:15Z"
+}

@@ -1,0 +1,21 @@
+{
+ "key": "8efd5d04f7650506d31dbdecb9624e5b5d6564f636a75dcf6d6add1c6a8406c6",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1160,
+  "output_tokens": 107,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks to permanently delete the account tied to their email and requests confirmation once the review is complete.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks to permanently delete the account tied to their email and requests confirmation once the review is complete.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:45:40Z"
+}

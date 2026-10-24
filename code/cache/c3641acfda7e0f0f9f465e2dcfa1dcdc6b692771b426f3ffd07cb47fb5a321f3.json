@@ -1,0 +1,21 @@
+{
+ "key": "c3641acfda7e0f0f9f465e2dcfa1dcdc6b692771b426f3ffd07cb47fb5a321f3",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1141,
+  "output_tokens": 121,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer explicitly asks to delete account and personal data; also includes an instruction to ignore prior instructions and mark as not applicable, which was disregarded.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer explicitly asks to delete account and personal data; also includes an instruction to ignore prior instructions and mark as not applicable, which was disregarded.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:46:19Z"
+}

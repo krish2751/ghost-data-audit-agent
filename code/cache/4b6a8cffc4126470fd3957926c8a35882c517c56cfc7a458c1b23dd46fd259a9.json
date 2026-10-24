@@ -1,0 +1,21 @@
+{
+ "key": "4b6a8cffc4126470fd3957926c8a35882c517c56cfc7a458c1b23dd46fd259a9",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1159,
+  "output_tokens": 110,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks to begin the deletion process for their account, with review of linked identifiers and confirmation when complete.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks to begin the deletion process for their account, with review of linked identifiers and confirmation when complete.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:45:27Z"
+}

@@ -1,0 +1,21 @@
+{
+ "key": "5144df6fbf3fa553cc0138c6e49eba1e8f04f1229a15b8b1ecf708eec3bf16a1",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1243,
+  "output_tokens": 110,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks to erase their account and review data eligible for deletion or de-identification, and to be notified on completion.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks to erase their account and review data eligible for deletion or de-identification, and to be notified on completion.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:47:51Z"
+}

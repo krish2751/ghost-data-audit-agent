@@ -1,0 +1,21 @@
+{
+ "key": "0ce6280428e19e156efd3c37a343e3101ce9ea98e3e32f0d3259c7189233d8e8",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1249,
+  "output_tokens": 125,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks for permanent account deletion under the standard personal-data deletion procedure and wants confirmation; this is addressed to the company, not the assistant.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly asks for permanent account deletion under the standard personal-data deletion procedure and wants confirmation; this is addressed to the company, not the assistant.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:11Z"
+}

@@ -1,0 +1,21 @@
+{
+ "key": "aeea13ec6a8235069da6630d55a8e251b301b4ed6a0d92617ec3541de9710f33",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1163,
+  "output_tokens": 113,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer states they no longer use the account and asks for it to be permanently deleted, with review of linked identifiers and a notification afterward.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer states they no longer use the account and asks for it to be permanently deleted, with review of linked identifiers and a notification afterward.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:45:00Z"
+}

@@ -1,0 +1,15 @@
+{
+ "key": "42b657db19b629d3f9bf6937a3fedffe5740dbb424ec78dfc7fbe60d7bbbbe01",
+ "model": "claude-sonnet-5-5",
+ "tag": "evidence_19",
+ "stop_reason": "end_turn",
+ "images": [
+  "analytics_profile_view_20260713.png"
+ ],
+ "usage": {
+  "input_tokens": 3467,
+  "output_tokens": 891
+ },
+ "text": "{\"screen_title\":\"Omar Darwish\",\"system\":\"Pulse Analytics (Northstar Shop)\",\"screen_timestamp\":null,\"filters_or_query\":\"Selected tab: Event timeline; date range badge: Last 90 days; search box empty (placeholder: 'Search users, products, orders or events...')\",\"records\":[{\"resource_id\":\"analytics_7438\",\"identifiers\":{\"name\":\"Omar Darwish\",\"email\":\"darwish.omar@icloud.com\",\"phone\":null,\"email_hash\":null,\"user_id\":\"user_20\",\"customer_reference\":null,\"subject_reference\":null},\"status_fields\":{},\"timestamps\":{\"Last activity\":\"13 Jul 2026 14:22 UTC\",\"First seen\":\"21 Apr 2026 09:14 UTC\"},\"other_fields\":{\"Sessions\":\"12\",\"Products viewed\":\"19\",\"Completed orders\":\"2\",\"Revenue\":\"USD 167.42\",\"Mobile / Desktop\":\"67% / 33%\",\"Acquisition\":\"Organic search\",\"Market\":\"AE\",\"Audience\":\"Returning shopper\",\"Interest\":\"Coffee & dining\",\"Tabs\":\"Event timeline, Sessions (12), Orders (2), Products viewed (19)\",\"Activity\":\"13 Jul - 6 events in active session; 08 Jul - Order completed \u00b7 USD 83.21; 30 Jun - Product search \u00b7 coffee set; 22 Jun - Campaign opened\",\"Event timeline (Updated moments ago \u00b7 5 records)\":\"1) 14:22 | Order completed | Ceramic coffee set | USD 84.21 | Mobile; 2) 14:20 | Checkout started | 2 items | USD 84.21 | Mobile; 3) 14:17 | Product viewed | Ceramic coffee set | \u2014 | Mobile; 4) 14:16 | Added to cart | Ceramic coffee set | USD 42.00 | Mobile; 5) 14:12 | Product viewed | Stoneware mug | USD 18.00 | Desktop\"}}],\"empty_state_text\":null,\"notes\":\"Breadcrumb: Northstar Shop / Pulse Analytics / Users. Sidebar: Overview, Real-time, Users (selected), Products, Funnels, Journeys, Audiences, Reports. Footer: Pulse Analytics, Production workspace, build 2026.10.4. Top right: Production, Help, avatar PA. Buttons: Filter, Export, Actions. Timeline table columns: Time, Event, Product / detail, Value, Device. Profile attributes panel present. The only resource id shown is analytics_7438 (shown with user_20); no screen capture timestamp is displayed.\"}",
+ "created": "2026-10-24T18:13:39Z"
+}

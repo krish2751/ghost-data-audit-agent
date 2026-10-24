@@ -1,0 +1,21 @@
+{
+ "key": "116f052ff028ed8e3199cc0bd036e3c2f1a71ef205f6425c4c1a5c86ec248bef",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1231,
+  "output_tokens": 114,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants the account closed permanently and personal profile not restorable from backups; this is a deletion request, not a refusal of deletion.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants the account closed permanently and personal profile not restorable from backups; this is a deletion request, not a refusal of deletion.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:47:22Z"
+}

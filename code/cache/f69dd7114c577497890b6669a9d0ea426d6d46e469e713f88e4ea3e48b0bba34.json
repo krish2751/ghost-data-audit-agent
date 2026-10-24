@@ -1,0 +1,21 @@
+{
+ "key": "f69dd7114c577497890b6669a9d0ea426d6d46e469e713f88e4ea3e48b0bba34",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1242,
+  "output_tokens": 116,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"medium\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks the company to check systems and confirm whether account and identifiable analytics data were removed, a follow-up verifying a deletion.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"medium\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks the company to check systems and confirm whether account and identifiable analytics data were removed, a follow-up verifying a deletion.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:13Z"
+}

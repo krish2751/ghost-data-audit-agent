@@ -1,0 +1,21 @@
+{
+ "key": "695533b694cd70a67885d608937578a40d3d8fbcd82010e47f3b7a3491496a74",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1240,
+  "output_tokens": 107,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"Italian\",\"request_type\":\"account_help\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer forgot password and cannot log in; explicitly says they do not want the account deleted, only recovered.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"Italian\",\"request_type\":\"account_help\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer forgot password and cannot log in; explicitly says they do not want the account deleted, only recovered.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:27Z"
+}

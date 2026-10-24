@@ -1,0 +1,21 @@
+{
+ "key": "3335e679dee58cf76a84d76a273f8cf5adc96e6e8b76477b5bb05c8fad601218",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1153,
+  "output_tokens": 100,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"Arabic\",\"request_type\":\"correction\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants to update their phone number and explicitly asks that the account not be deleted.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"Arabic\",\"request_type\":\"correction\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants to update their phone number and explicitly asks that the account not be deleted.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:46:11Z"
+}

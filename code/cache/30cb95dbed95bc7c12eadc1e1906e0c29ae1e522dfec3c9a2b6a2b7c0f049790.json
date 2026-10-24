@@ -1,0 +1,21 @@
+{
+ "key": "30cb95dbed95bc7c12eadc1e1906e0c29ae1e522dfec3c9a2b6a2b7c0f049790",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1243,
+  "output_tokens": 99,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"French\",\"request_type\":\"access\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks what personal data the company holds about them and explicitly states this is not a deletion request.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"French\",\"request_type\":\"access\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks what personal data the company holds about them and explicitly states this is not a deletion request.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:21Z"
+}

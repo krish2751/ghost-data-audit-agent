@@ -1,0 +1,21 @@
+{
+ "key": "04aec07fedcde42fe7be3fcdc3ba3ccab703ffc43e0bf1aa6317ccac38c6df9a",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1272,
+  "output_tokens": 123,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"Spanish\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly requests permanent deletion of the account tied to their email and asks for confirmation of the outcome after reviewing current and past identifiers.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"Spanish\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly requests permanent deletion of the account tied to their email and asks for confirmation of the outcome after reviewing current and past identifiers.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:13Z"
+}

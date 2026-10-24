@@ -1,0 +1,21 @@
+{
+ "key": "e75b2c9bde54936a2d18fda27a0eda5fa8eb09ca9c7cfb99c2ddd60200c2028b",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1229,
+  "output_tokens": 118,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"marketing_opt_out\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer only wants promotional emails stopped, wants to keep the account and order history, and explicitly says they are not asking for deletion.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"marketing_opt_out\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer only wants promotional emails stopped, wants to keep the account and order history, and explicitly says they are not asking for deletion.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:05Z"
+}

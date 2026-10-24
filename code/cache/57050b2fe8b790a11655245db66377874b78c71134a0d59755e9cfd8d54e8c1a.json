@@ -1,0 +1,21 @@
+{
+ "key": "57050b2fe8b790a11655245db66377874b78c71134a0d59755e9cfd8d54e8c1a",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1164,
+  "output_tokens": 116,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks to begin account deletion, including in-scope copies, and requests confirmation of the result afterward. No negation or exclusion present.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks to begin account deletion, including in-scope copies, and requests confirmation of the result afterward. No negation or exclusion present.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:45:24Z"
+}

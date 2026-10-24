@@ -1,0 +1,21 @@
+{
+ "key": "2d78698a47fa47e38e7bf349b4624d525c2ccb3475c54a8478285a16705ea0f8",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1155,
+  "output_tokens": 122,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"medium\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer reports an old report showing the account existed and asks to confirm the profile is gone and remaining records cannot identify them, implying remaining data should be removed.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"medium\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer reports an old report showing the account existed and asks to confirm the profile is gone and remaining records cannot identify them, implying remaining data should be removed.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:44:55Z"
+}

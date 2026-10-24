@@ -1,0 +1,21 @@
+{
+ "key": "df0a1dd19d6c3353f2c492b54730e18dee1047e505afd3fe1f0541a4bf5caf0c",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1224,
+  "output_tokens": 114,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"marketing_opt_out\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks only to be removed from marketing lists while keeping receipts and service messages for the account; no deletion requested.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"marketing_opt_out\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks only to be removed from marketing lists while keeping receipts and service messages for the account; no deletion requested.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:05Z"
+}

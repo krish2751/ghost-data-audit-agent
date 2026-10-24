@@ -1,0 +1,21 @@
+{
+ "key": "8bc93c520047f2a0ab7b06727dc87861767218e8011b1f0ec5ad1a6fd9892ab8",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1136,
+  "output_tokens": 107,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"export\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants account data in a portable format and explicitly asks to keep the account unchanged, so no deletion is requested.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"export\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants account data in a portable format and explicitly asks to keep the account unchanged, so no deletion is requested.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:45:21Z"
+}

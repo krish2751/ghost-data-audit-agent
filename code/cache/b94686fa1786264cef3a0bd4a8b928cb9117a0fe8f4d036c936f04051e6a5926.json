@@ -1,0 +1,21 @@
+{
+ "key": "b94686fa1786264cef3a0bd4a8b928cb9117a0fe8f4d036c936f04051e6a5926",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1250,
+  "output_tokens": 112,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"Portuguese\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer says they deleted their account but the email is still recognized, and asks the company to remove any remaining copies of their data.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"Portuguese\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer says they deleted their account but the email is still recognized, and asks the company to remove any remaining copies of their data.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:38Z"
+}

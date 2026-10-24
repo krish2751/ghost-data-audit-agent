@@ -1,0 +1,21 @@
+{
+ "key": "6ae258100efdeb6dffda5b3fb57f930fa5ae1df89547460be4fff82694eac313",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1233,
+  "output_tokens": 111,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"Korean\",\"request_type\":\"marketing_opt_out\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants to keep the account and only withdraw consent to marketing communications; no deletion is requested.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"Korean\",\"request_type\":\"marketing_opt_out\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants to keep the account and only withdraw consent to marketing communications; no deletion is requested.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:24Z"
+}

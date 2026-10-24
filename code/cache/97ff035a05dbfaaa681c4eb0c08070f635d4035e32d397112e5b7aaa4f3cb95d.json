@@ -1,0 +1,21 @@
+{
+ "key": "97ff035a05dbfaaa681c4eb0c08070f635d4035e32d397112e5b7aaa4f3cb95d",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1230,
+  "output_tokens": 98,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"Japanese\",\"request_type\":\"correction\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks to change their registered email address and explicitly says not to delete the account.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"Japanese\",\"request_type\":\"correction\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks to change their registered email address and explicitly says not to delete the account.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:18Z"
+}

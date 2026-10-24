@@ -1,0 +1,15 @@
+{
+ "key": "984ee5283bce90aa9f4d332a2de0818cf6c38b2b0b00d371208d7dfde0380a2a",
+ "model": "claude-sonnet-5-5",
+ "tag": "evidence_04",
+ "stop_reason": "end_turn",
+ "images": [
+  "account_admin_console_20260926.png"
+ ],
+ "usage": {
+  "input_tokens": 3532,
+  "output_tokens": 1107
+ },
+ "text": "{\"screen_title\":\"Customer Operations\",\"system\":\"Northstar Shop\",\"screen_timestamp\":null,\"filters_or_query\":\"Selected tab: Overview (other tabs: Orders, Addresses, Support history); sidebar section: Customers; search box empty (placeholder 'Search customers, orders, tickets...')\",\"records\":[{\"resource_id\":\"account_5762\",\"identifiers\":{\"name\":\"Haruka Sato\",\"email\":\"haruka.s1838@zoho.com\",\"phone\":\"+81 90 7610 2507\",\"email_hash\":null,\"user_id\":\"user_11\",\"customer_reference\":null,\"subject_reference\":null},\"status_fields\":{\"Loyalty tier\":\"Silver\",\"Badge\":\"Silver\"},\"timestamps\":{\"Last contact\":\"24 Sep 2026 09:14 JST\",\"Member since\":\"12 Jan 2024\"},\"other_fields\":{\"Signup channel\":\"mobile_app\",\"Market\":\"JP\",\"Preferred language\":\"Japanese\",\"Default address\":\"2-18-4 Kichijoji, Musashino, Tokyo 180-0004\",\"Support\":\"CS-8538 \u00b7 support_9538\",\"Breadcrumb\":\"Northstar Shop / Customer Operations / Customers\",\"Activity\":\"24 Sep: Customer replied to CS-8538; 22 Sep: Support agent responded; 18 Sep: Order ORD-20265762 delivered; 03 Sep: Order ORD-20265518 returned; 28 Aug: support_9538 created\"}},{\"resource_id\":\"support_9538\",\"identifiers\":{\"name\":null,\"email\":null,\"phone\":null,\"email_hash\":null,\"user_id\":null,\"customer_reference\":\"CS-8538\",\"subject_reference\":null},\"status_fields\":{},\"timestamps\":{\"Activity 28 Aug\":\"support_9538 created\"},\"other_fields\":{}},{\"resource_id\":\"ORD-20265762\",\"identifiers\":{\"name\":null,\"email\":null,\"phone\":null,\"email_hash\":null,\"user_id\":null,\"customer_reference\":null,\"subject_reference\":null},\"status_fields\":{\"Status\":\"Delivered \u00b7 18 Sep\"},\"timestamps\":{\"Date\":\"12 Sep 2026\"},\"other_fields\":{\"Row\":\"1\",\"Item\":\"Ceramic coffee set\",\"Qty\":\"1\",\"Total\":\"JPY 8,900\"}},{\"resource_id\":\"ORD-20265518\",\"identifiers\":{\"name\":null,\"email\":null,\"phone\":null,\"email_hash\":null,\"user_id\":null,\"customer_reference\":null,\"subject_reference\":null},\"status_fields\":{\"Status\":\"Returned \u00b7 03 Sep\"},\"timestamps\":{\"Date\":\"28 Aug 2026\"},\"other_fields\":{\"Row\":\"2\",\"Item\":\"Travel backpack\",\"Qty\":\"1\",\"Total\":\"JPY 12,400\"}}],\"empty_state_text\":null,\"notes\":\"Overview table header says 'Updated moments ago \u00b7 2 records'. Order status in the 18 Sep activity item says delivered; the 03 Sep entry says returned. Top bar shows 'Production', 'Help', avatar 'CO'. Footer: 'Customer Operations Production workspace build 2026.10.4'. Buttons: Filter, Export, Actions. No absolute capture timestamp shown. The Activity dates carry no year.\"}",
+ "created": "2026-10-24T18:13:13Z"
+}

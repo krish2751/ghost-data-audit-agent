@@ -1,0 +1,21 @@
+{
+ "key": "7a25cfb14ec7bf236c36eb511f57b9fd252ac9a5a70cd080c78092b0343f2e45",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1264,
+  "output_tokens": 110,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"Spanish\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer tried to delete their account, hit an error, and asks the company to check for remaining data and complete the deletion.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"Spanish\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer tried to delete their account, hit an error, and asks the company to check for remaining data and complete the deletion.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:47:36Z"
+}

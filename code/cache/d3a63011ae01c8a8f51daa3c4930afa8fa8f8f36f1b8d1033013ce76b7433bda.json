@@ -1,0 +1,21 @@
+{
+ "key": "d3a63011ae01c8a8f51daa3c4930afa8fa8f8f36f1b8d1033013ce76b7433bda",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1229,
+  "output_tokens": 98,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"access\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer requests a copy of data held on their account and explicitly says not to delete or change anything.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"access\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer requests a copy of data held on their account and explicitly says not to delete or change anything.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:46:56Z"
+}

@@ -1,0 +1,21 @@
+{
+ "key": "c7f0cd51e79c1cd91db5f55af5c1bee2c25f6f2b0a992ebfba9047d27035db79",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1218,
+  "output_tokens": 96,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"Japanese\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"The customer explicitly asks to delete this account and all associated personal data.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"Japanese\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"The customer explicitly asks to delete this account and all associated personal data.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:48:33Z"
+}

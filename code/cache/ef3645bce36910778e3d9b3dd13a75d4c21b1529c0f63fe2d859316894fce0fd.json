@@ -1,0 +1,21 @@
+{
+ "key": "ef3645bce36910778e3d9b3dd13a75d4c21b1529c0f63fe2d859316894fce0fd",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1228,
+  "output_tokens": 117,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"medium\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer reports leftover profile still visible in search after account removal and asks for it to be removed, a deletion follow-up about remaining personal data.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"medium\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer reports leftover profile still visible in search after account removal and asks for it to be removed, a deletion follow-up about remaining personal data.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:47:36Z"
+}

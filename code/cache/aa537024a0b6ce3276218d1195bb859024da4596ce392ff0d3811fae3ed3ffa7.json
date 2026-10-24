@@ -1,0 +1,15 @@
+{
+ "key": "aa537024a0b6ce3276218d1195bb859024da4596ce392ff0d3811fae3ed3ffa7",
+ "model": "claude-sonnet-5-5",
+ "tag": "evidence_28",
+ "stop_reason": "end_turn",
+ "images": [
+  "support_ticket_console_20260524.png"
+ ],
+ "usage": {
+  "input_tokens": 3549,
+  "output_tokens": 981
+ },
+ "text": "{\"screen_title\":\"CS-5034 \u00b7 Where is my delivery?\",\"system\":\"Northstar Shop Helpline Console\",\"screen_timestamp\":null,\"filters_or_query\":\"Selected tab: Conversation; search box empty (placeholder: 'Search tickets, customers, orders...'); sidebar selected: Inbox\",\"records\":[{\"resource_id\":\"support_1034\",\"identifiers\":{\"name\":\"Kofi Ageyman\",\"email\":\"kagyeman8947@fastmail.com\",\"phone\":null,\"email_hash\":null,\"user_id\":null,\"customer_reference\":null,\"subject_reference\":null},\"status_fields\":{\"SLA\":\"01:42\",\"Priority\":\"Normal priority\"},\"timestamps\":{},\"other_fields\":{\"Ticket\":\"CS-5034\",\"Customer\":\"Kofi Ageyman\",\"Email\":\"kagyeman8947@fastmail.com\",\"Assigned\":\"Maya Chen\",\"Tags\":\"Delivery \u00b7 Tracking \u00b7 Order update\",\"Breadcrumb\":\"Northstar Shop / Helpline Console / Inbox\",\"Conversation header\":\"Updated moments ago \u00b7 4 records\",\"Message 1\":\"09:12 | Kofi Ageyman | Could you let me know where my order is and when it is expected to arrive?\",\"Message 2\":\"09:13 | Northstar Bot | We received your message and are checking the order details.\",\"Message 3\":\"09:28 | Maya Chen | The parcel reached the regional hub and is on track for delivery on 26 May.\",\"Message 4\":\"09:35 | Kofi Ageyman | Thanks for the update.\"}},{\"resource_id\":\"ORD-20265034\",\"identifiers\":{\"name\":null,\"email\":null,\"phone\":null,\"email_hash\":null,\"user_id\":null,\"customer_reference\":null,\"subject_reference\":null},\"status_fields\":{\"Status\":\"In transit\"},\"timestamps\":{\"Expected\":\"26 May 2026\",\"Activity 22 May\":\"Order confirmed\",\"Activity 23 May\":\"Dispatched\",\"Activity 24 May 07:46\":\"Reached regional hub\",\"Activity 24 May 08:15\":\"In transit\",\"Activity 26 May\":\"Delivery expected\"},\"other_fields\":{\"Panel title\":\"Order ORD-20265034\",\"Product\":\"Running shoes\",\"Carrier\":\"SwiftShip\",\"Tracking\":\"SWF-884103\",\"Assigned agent\":\"Maya Chen\"}}],\"empty_state_text\":null,\"notes\":\"Header shows 'Production' and 'Help' links and user avatar 'HC'. Top buttons: Filter, Export, Actions. Other tabs: Internal notes, Activity. Sidebar items: Inbox, My tickets, Assigned to me, Mentions, Customer search, Knowledge base, Reports. Footer: 'Helpline Console, Production workspace, build 2026.10.4'. Ticket subtitle: 'support_1034 \u00b7 Kofi Ageyman \u00b7 Normal priority'.\"}",
+ "created": "2026-10-24T18:54:26Z"
+}

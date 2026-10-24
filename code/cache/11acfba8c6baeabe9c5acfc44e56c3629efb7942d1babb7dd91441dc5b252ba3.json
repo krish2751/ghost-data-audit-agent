@@ -1,0 +1,21 @@
+{
+ "key": "11acfba8c6baeabe9c5acfc44e56c3629efb7942d1babb7dd91441dc5b252ba3",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1217,
+  "output_tokens": 100,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"correction\",\"asks_for_deletion\":false,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks to change the account's email address and keep using the service; this is a correction, not deletion.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"correction\",\"asks_for_deletion\":false,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks to change the account's email address and keep using the service; this is a correction, not deletion.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:47:40Z"
+}

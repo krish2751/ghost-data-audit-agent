@@ -1,0 +1,21 @@
+{
+ "key": "ee7d4f71674e4687539e16396a710de43f03c816145a97ac7f46a2c0cdf3d383",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1141,
+  "output_tokens": 105,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"correction\",\"asks_for_deletion\":false,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants the outdated mobile number replaced and the account kept active; this is a data correction, not deletion.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"correction\",\"asks_for_deletion\":false,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer wants the outdated mobile number replaced and the account kept active; this is a data correction, not deletion.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:45:59Z"
+}

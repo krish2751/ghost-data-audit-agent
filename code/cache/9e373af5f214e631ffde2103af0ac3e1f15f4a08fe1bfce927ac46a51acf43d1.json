@@ -1,0 +1,15 @@
+{
+ "key": "9e373af5f214e631ffde2103af0ac3e1f15f4a08fe1bfce927ac46a51acf43d1",
+ "model": "claude-sonnet-5-5",
+ "tag": "evidence_60",
+ "stop_reason": "end_turn",
+ "images": [
+  "marketing_profile_console.png"
+ ],
+ "usage": {
+  "input_tokens": 2519,
+  "output_tokens": 841
+ },
+ "text": "{\"screen_title\":\"Audience Operations\",\"system\":\"Northstar Shop\",\"screen_timestamp\":\"2026-09-15T23:40:00Z\",\"filters_or_query\":\"Selected tab: Profile; search box empty (placeholder: 'Search customers, audiences, campaigns...'); environment: Production\",\"records\":[{\"resource_id\":\"marketing_001\",\"identifiers\":{\"name\":\"Soo-jin Park\",\"email\":\"sj.park@naver.com\",\"phone\":\"+82 10-5837-9451\",\"email_hash\":null,\"user_id\":null,\"customer_reference\":null,\"subject_reference\":null},\"status_fields\":{\"Status\":\"Live\",\"Email opt-in\":\"Yes\",\"SMS opt-in\":\"No\"},\"timestamps\":{\"Last refreshed\":\"15 Sep 2026 23:40 UTC\"},\"other_fields\":{\"Market\":\"South Korea\",\"Language\":\"Korean\",\"Audience\":\"Returning customers \u2014 East Asia\",\"Segments\":\"Repeat customer \u00b7 Home & lifestyle \u00b7 Mobile shopper\",\"Preferred categories\":\"Desk accessories \u00b7 Drinkware\",\"Last campaign\":\"Autumn offers\",\"Open rate\":\"32.4%\",\"Click rate\":\"6.8%\",\"Profile table header\":\"Updated moments ago \u00b7 4 records\",\"Profile row 1\":\"23:40 | Product-category update | Desk accessories \u00b7 Drinkware\",\"Profile row 2\":\"23:38 | Campaign eligibility check | Autumn offers \u00b7 Eligible\",\"Profile row 3\":\"23:35 | Profile refresh | Live profile fields updated\",\"Profile row 4\":\"23:32 | Audience evaluation | Returning customers \u2014 East Asia\",\"Activity 1\":\"Autumn offers - 32.4% open rate\",\"Activity 2\":\"Home & Lifestyle Picks - 28.7% open rate\",\"Activity 3\":\"Profile refreshed from live data - Recorded\"}}],\"empty_state_text\":null,\"notes\":\"Breadcrumb: Northstar Shop / Audience Operations / Audience Operations. 'marketing_001' appears in the subtitle line before the email and may be a username or record identifier. Tabs: Profile, Attributes, Memberships, Activity. Buttons: Filter, Export, Actions. Sidebar: Home, Audience Operations, Campaigns, Journeys, Products, Analytics, Data, Settings. Footer: Audience Operations, Production workspace, build 2026.10.4. Top right: Production, Help, AO avatar. Audience membership panel has a '...' menu.\"}",
+ "created": "2026-10-24T18:14:33Z"
+}

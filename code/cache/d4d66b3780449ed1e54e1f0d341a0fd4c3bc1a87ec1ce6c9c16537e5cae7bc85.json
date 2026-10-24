@@ -1,0 +1,21 @@
+{
+ "key": "d4d66b3780449ed1e54e1f0d341a0fd4c3bc1a87ec1ce6c9c16537e5cae7bc85",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1232,
+  "output_tokens": 106,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"medium\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks to remove records linked to both their old Yahoo address and current email address, which is a data removal request.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"medium\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks to remove records linked to both their old Yahoo address and current email address, which is a data removal request.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:47:17Z"
+}

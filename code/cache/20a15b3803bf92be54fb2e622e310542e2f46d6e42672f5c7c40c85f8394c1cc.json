@@ -1,0 +1,21 @@
+{
+ "key": "20a15b3803bf92be54fb2e622e310542e2f46d6e42672f5c7c40c85f8394c1cc",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1147,
+  "output_tokens": 119,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer states they are deleting their account and wants analytics data no longer linked to them; anonymous statistics may remain, which is not a negation of deletion.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer states they are deleting their account and wants analytics data no longer linked to them; anonymous statistics may remain, which is not a negation of deletion.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-24T18:45:21Z"
+}
