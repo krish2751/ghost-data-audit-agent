@@ -19,7 +19,6 @@ from schema import PREFIX_INFO, TREATMENT
 P = lambda s: datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ")
 LATE_OK = {"audit_record", "legal_hold"}  # retained-record kinds whose existence may come from a later export snapshot
 CONF = {"low": 0, "medium": 1, "high": 2}
-WINDOW_MIN = 120  # generic search window around reported_at for activity-based account discovery
 
 
 class Context:
@@ -51,6 +50,11 @@ class Context:
                     import joint
                     self._joint, self._joint_info = joint.compute(self)
         return self._joint["account"].get(case_id)
+
+    def account_bounds(self):
+        """(lo, hi) minutes of an account DELETE event relative to reported_at, learned from identifier-linked pairs."""
+        self.joint_account(None)
+        return self._joint_info["bounds"]["account"]
 
     def joint_analytics(self, case_id):
         self.joint_account(case_id)
@@ -187,11 +191,12 @@ def solve(ctx, req, heuristics=True):
 def _discover_account(ctx, req, uid, audit_at):
     """Accounts are often tied to a user only through activity. Generic, unit-free signals."""
     rep = P(req["reported_at"])
+    lo, hi = ctx.account_bounds()
     claims = ctx.claims()
     cands = []
     for a in ctx.act:
         if a["event_type"] == "DELETE_RECORD" and a["target_system"] == "account_service" and a["event_time"] <= audit_at:
-            if abs((P(a["event_time"]) - rep).total_seconds()) <= WINDOW_MIN * 60:
+            if lo <= (P(a["event_time"]) - rep).total_seconds() / 60 <= hi:
                 others = claims.get(a["resource_id"], set()) - {uid}
                 if not others:
                     cands.append(a["resource_id"])

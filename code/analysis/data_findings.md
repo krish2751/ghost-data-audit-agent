@@ -44,3 +44,48 @@ Scripts: `q9_relation_signals.py`, `q10_joint_accounts.py`; engine: `code/joint.
 `LLM_BACKEND` defaults to `session`: only cached answers are used; an uncached request is queued under `code/cache_session/pending/` and answered by the Claude Code session through `code/session_answers.py` (stored in `code/cache_session/`, usage 0). Real API calls need `LLM_BACKEND=api`. `LLM_SESSION_TAGS=links` makes a reader ignore its API-cache entries so session answers can be tested alone.
 
 Link reader answered in-session (30 dossiers, tools unused): 3 "yes", all correct (1 account, 2 analytics); every other candidate no/unclear. Sample exact sequence 19 -> 21 of 32, F1 96.0 -> 96.8, status 32/32. Caveat: the session model had seen the sample answers during development, so this is likely optimistic; the API reader on the same dossiers earlier had 33-40% precision on its "yes" answers.
+
+
+## Label-free hold-out for account discovery (answers "is the +-120 window grounded?")
+
+The problem statement gives no time window. The window is an empirical regularity, so it is now learned (`joint.learn_bounds`) and
+validated without using `sample_output.csv`:
+
+- **Ground truth without labels:** 254 requests have an account that an identifier (email, hash, user id inside the account record) ties
+  to the user and that has an account DELETE event. Their accounts are hidden fold by fold (5 folds grouped by user, so a user's other
+  requests cannot leak the answer), and the joint rules must recover them from activity alone.
+- **Offsets (`q14_window_evidence.py`):** account DELETE minus `reported_at` is -75..+8 min in 252 of 262 identifier-linked pairs (median
+  -59, 5th percentile -74); the other 10 are days or months away (unrelated events on the same account).
+- **Hold-out (`q16_holdout_accounts.py`):**
+
+  | window | correct | wrong | unresolved | precision | recall |
+  |---|---|---|---|---|---|
+  | +-30 | 1 | 33 | 220 | 3% | 0% |
+  | +-60 | 105 | 17 | 132 | 86% | 41% |
+  | +-90 | 211 | 1 | 42 | 99.5% | 83.1% |
+  | +-120 (old constant) | 177 | 1 | 76 | 99.4% | 69.7% |
+  | +-180 | 144 | 1 | 109 | 99.3% | 56.7% |
+  | learned from the non-hidden pairs (about -83..+16) | 213 | 1 | 40 | 99.5% | 83.9% |
+
+  Too narrow a window loses the true event; too wide a window adds same-status neighbours and creates ties. Learning the bounds removes the
+  magic constant and beats +-120. Samples: exact sequence 19/32 -> 20/32, F1 96.0 -> 96.3, 27 of 518 outputs gained steps, no status changed.
+- **Caveat:** the upper bound is learned from very few events above -45 min, so it is the weakest part of the window.
+
+## Multi-email users (case_10 and the 100 evaluation requests with a historical email)
+
+- 105 of 850 users have more than one email over time; no email belongs to two users. 103 of 550 requests use a historical email
+  (case_10 has three: ionescu -> petrescu -> n.petrescu). `IdentityStore` resolves the request email through current and audit-log emails and matches evidence on all of them,
+  their hashes, phone and user id (`q11_multi_email.py`).
+- Ablation (`q12_email_ablation.py`): current-only identifiers link fewer resources for 84 of 550 requests (169 links) and drop the samples
+  to status 30/32, exact 17/32 (case_10 and case_12 wrongly COMPLETE). Full identifiers: status 32/32, exact 19/32.
+- Records that carry only a name: 5 matches, all decoys (similar names of other people), so names are not link tokens (`q13_name_only.py`).
+- No request's user changed email after `audit_at`.
+
+## Link reader: what it does and what the evidence says
+
+- It receives a dossier (subject timeline, records already linked with activity times, candidate unlinked records with their events as
+  minutes from `reported_at`) and returns per-candidate yes/no/unclear with a basis. Code accepts only high/medium "yes" and a record that exists by `audit_at`.
+- Blind hold-out (`q17_link_holdout.py`): the 40 hidden cases the deterministic rules could not resolve (2-5 candidates each), with opaque labels,
+  shuffled, evidence lists removed. Answers: 28 picks, 19 correct (68%); high confidence 4 of 6; abstained on 12. Random pick: 40%. A deterministic rule
+  "result-compatible candidate closest to the learned median offset" gets 25 of 38 (66%). The reader's signal is the same offset statistic, so it is not an independent source.
+- The 21/32 earlier measured with the same reader is not evidence: the answerer had seen the sample answers.
