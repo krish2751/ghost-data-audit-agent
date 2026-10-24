@@ -1,0 +1,56 @@
+{
+ "key": "6c457660d7e27eb87ef693e15665fad8e6459c999c49ec5ca2ad4aa645f85854",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "tool_use",
+ "usage": {
+  "input_tokens": 2239,
+  "output_tokens": 197,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "",
+ "content": [
+  {
+   "id": "toolu_01LgQvxQR31HF2nGJ9DbXJYV",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "resource_id": "account_4990"
+   },
+   "name": "get_resource",
+   "type": "tool_use"
+  },
+  {
+   "id": "toolu_01QgpgXTHFdmGExBAP5Je9np",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "resource_id": "account_6829"
+   },
+   "name": "get_resource",
+   "type": "tool_use"
+  },
+  {
+   "id": "toolu_01FEMf1nFMR8FsqRpoBxwZfS",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "start": "2026-09-01T08:30:00Z",
+    "end": "2026-09-01T12:00:00Z"
+   },
+   "name": "list_activity",
+   "type": "tool_use"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:31Z"
+}

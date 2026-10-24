@@ -1,0 +1,26 @@
+{
+ "key": "112b970bb947c2751356ca1f337ee45ec9fd6205598a8928cb052419025c1d04",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 2463,
+  "output_tokens": 194,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_4857\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"A single DELETE_RECORD at -74 min. It is near the linked account's -49 min, but it has no evidence and could be another run.\"}, {\"resource_id\": \"account_8858\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"A single PARTIAL DELETE_RECORD at -55 min. It is close in time but has no evidence, and another run could fit equally well.\"}]}",
+ "content": [
+  {
+   "text": "{\"links\": [{\"resource_id\": \"account_4857\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"A single DELETE_RECORD at -74 min. It is near the linked account's -49 min, but it has no evidence and could be another run.\"}, {\"resource_id\": \"account_8858\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"A single PARTIAL DELETE_RECORD at -55 min. It is close in time but has no evidence, and another run could fit equally well.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:29Z"
+}

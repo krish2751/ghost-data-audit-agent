@@ -355,3 +355,23 @@ branch=main
 repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-24T22:30:00Z] Model-assisted evidence linking and sample status comparison
+
+User Prompt (verbatim, secrets redacted):
+(the earlier hardcoding-audit request, repeated, plus:) We need to find the evidence linked to the user accounts in order to determine if the ghost data exists. Doing through the help of LLM model and then compare the sample delete request with sample_output.csv. Report how many of the sample delete request status where correct by comparing the sample_output.csv
+
+Agent Response Summary:
+Noted that the audit items were already done. Built a link reader (facts only) with code-side acceptance, measured it on the samples (it does not beat the timing signal; off by default), added a late-snapshot existence rule for retained records, and compared statuses with sample_output.csv: 32 of 32 correct (22 INCOMPLETE, 10 COMPLETE, no errors).
+
+Actions:
+* Wrote prompts/link_reader.md, readers/link_reader.py, evaluation/link_eval.py; extended fallback.py, main.py
+* Ran sample ablations; regenerated output.csv; updated data_findings.md and CLAUDE.md
+
+Context:
+tool=Claude Code
+model=claude-sonnet-5-5
+branch=main
+repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

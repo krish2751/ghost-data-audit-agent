@@ -1,0 +1,26 @@
+{
+ "key": "42bdcf8f5efbfae04c5917d81bdaa7090a80b5571b4c7671277427c7b73dbfac",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 2462,
+  "output_tokens": 198,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"links\":[{\"resource_id\":\"analytics_1805\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"SYNC_RECORD at -147 min is somewhat earlier than the linked cluster. It has no evidence, and the sequence is not clearly matched.\"},{\"resource_id\":\"audit_record_7203\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"RETAIN_RECORD at -23 min falls inside the subject's time window. It has no evidence, and nothing else ties it to the subject.\"}]}",
+ "content": [
+  {
+   "text": "{\"links\":[{\"resource_id\":\"analytics_1805\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"SYNC_RECORD at -147 min is somewhat earlier than the linked cluster. It has no evidence, and the sequence is not clearly matched.\"},{\"resource_id\":\"audit_record_7203\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"RETAIN_RECORD at -23 min falls inside the subject's time window. It has no evidence, and nothing else ties it to the subject.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:35Z"
+}

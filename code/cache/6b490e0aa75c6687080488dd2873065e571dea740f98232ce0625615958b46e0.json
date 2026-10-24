@@ -1,0 +1,26 @@
+{
+ "key": "6b490e0aa75c6687080488dd2873065e571dea740f98232ce0625615958b46e0",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 2579,
+  "output_tokens": 316,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"links\":[{\"resource_id\":\"account_5037\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"Failed delete 45 minutes before report. It has no evidence, and other runs happen at nearby times.\"},{\"resource_id\":\"account_5521\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"Successful delete 68 minutes before report. It has no evidence and fits no better than account_5037.\"},{\"resource_id\":\"analytics_1696\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"Sync event at +171 minutes. It has no evidence and doesn't match the linked pattern.\"},{\"resource_id\":\"analytics_2265\",\"belongs\":\"yes\",\"confidence\":\"medium\",\"basis\":\"shared_evidence\",\"reason\":\"It shares evidence_94 with the linked records and has an analytics profile read, like analytics_037.\"}]}",
+ "content": [
+  {
+   "text": "{\"links\":[{\"resource_id\":\"account_5037\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"Failed delete 45 minutes before report. It has no evidence, and other runs happen at nearby times.\"},{\"resource_id\":\"account_5521\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"Successful delete 68 minutes before report. It has no evidence and fits no better than account_5037.\"},{\"resource_id\":\"analytics_1696\",\"belongs\":\"unclear\",\"confidence\":\"low\",\"basis\":\"time_cluster\",\"reason\":\"Sync event at +171 minutes. It has no evidence and doesn't match the linked pattern.\"},{\"resource_id\":\"analytics_2265\",\"belongs\":\"yes\",\"confidence\":\"medium\",\"basis\":\"shared_evidence\",\"reason\":\"It shares evidence_94 with the linked records and has an analytics profile read, like analytics_037.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:30Z"
+}

@@ -1,0 +1,26 @@
+{
+ "key": "2b40315b1b37d98a732380a40e269e51d4bfd1a19110418b53a3f4d7c80c741c",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 3090,
+  "output_tokens": 566,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_034\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Account DELETE_RECORD before report; several account candidates fit equally, no evidence to separate them.\"}, {\"resource_id\": \"account_483\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Same kind as other account candidates; PARTIAL delete, no distinguishing evidence.\"}, {\"resource_id\": \"account_617\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several account deletes at nearby times; cannot pick one.\"}, {\"resource_id\": \"account_7119\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Earliest account delete, further from subject's -55 minute event; ambiguous.\"}, {\"resource_id\": \"analytics_655\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"SYNC_RECORD at +113 near the subject's cluster, but no evidence and another sync candidate fits.\"}, {\"resource_id\": \"analytics_8235\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"SYNC_RECORD at +51 in the cluster; competing sync candidate, no shared evidence.\"}, {\"resource_id\": \"analytics_9447\", \"belongs\": \"yes\", \"confidence\": \"high\", \"basis\": \"shared_evidence\", \"reason\": \"Shares evidence_03 text ledger with all linked records; ANONYMIZE event in the cluster.\"}]}",
+ "content": [
+  {
+   "text": "{\"links\": [{\"resource_id\": \"account_034\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Account DELETE_RECORD before report; several account candidates fit equally, no evidence to separate them.\"}, {\"resource_id\": \"account_483\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Same kind as other account candidates; PARTIAL delete, no distinguishing evidence.\"}, {\"resource_id\": \"account_617\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Several account deletes at nearby times; cannot pick one.\"}, {\"resource_id\": \"account_7119\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Earliest account delete, further from subject's -55 minute event; ambiguous.\"}, {\"resource_id\": \"analytics_655\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"SYNC_RECORD at +113 near the subject's cluster, but no evidence and another sync candidate fits.\"}, {\"resource_id\": \"analytics_8235\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"SYNC_RECORD at +51 in the cluster; competing sync candidate, no shared evidence.\"}, {\"resource_id\": \"analytics_9447\", \"belongs\": \"yes\", \"confidence\": \"high\", \"basis\": \"shared_evidence\", \"reason\": \"Shares evidence_03 text ledger with all linked records; ANONYMIZE event in the cluster.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:28Z"
+}

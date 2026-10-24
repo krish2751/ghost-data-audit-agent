@@ -1,0 +1,26 @@
+{
+ "key": "50404674a80ab9a758ef7e9f87902b8babc027c325ef688da5392ae1ef048150",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 2321,
+  "output_tokens": 180,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"account_4857\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Delete event 74 minutes before report. Fits the cluster about as well as account_8858, and it has no evidence.\"}, {\"resource_id\": \"account_8858\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Delete event 55 minutes before report. Fits the cluster about as well as account_4857, and it has no evidence.\"}]}",
+ "content": [
+  {
+   "text": "{\"links\": [{\"resource_id\": \"account_4857\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Delete event 74 minutes before report. Fits the cluster about as well as account_8858, and it has no evidence.\"}, {\"resource_id\": \"account_8858\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Delete event 55 minutes before report. Fits the cluster about as well as account_4857, and it has no evidence.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:39Z"
+}

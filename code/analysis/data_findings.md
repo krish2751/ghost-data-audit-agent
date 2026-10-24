@@ -18,3 +18,12 @@ Remaining sample-derived heuristics (generic rules inferred from the samples, no
 ## Rule-condition reader result
 
 `code/evaluation/conditions_eval.py`: 123 reader items in 114 of 550 cases (101 support-message context, 13 attachment ownership, 9 retention window), average 1.09 rounds per run, 16 tool calls, 0 errors. Answers: support context yes 101/101; attachment yes 5, unclear 8; retention yes 4, unclear 5. No treatment, status or step changed versus the rule defaults. The first prompt version flipped three sample cases (it treated an attachment with the subject's own order as "shared", and one-line support summaries as "no context"); the prompt was corrected on that evidence, so these samples are no longer an independent test of it.
+
+## Link reader (model-assisted evidence linking) result
+
+Goal: tie records that carry no identifier (absent accounts, anonymized analytics, retained audit records) to the subject. `readers/link_reader.py` gets a pool of unlinked, unclaimed resources with activity within +-180 min of `reported_at` and returns yes/no/unclear + confidence + basis; code accepts only pool members, `yes` at or above a confidence floor, passing the existence safeguard. Scored by `code/evaluation/link_eval.py`.
+
+- Sample pools: 110 candidates; 18 of the 21 still-unlinked gold resources were in a pool (3 were not: `account_004`, `audit_record_5569`, `audit_record_6645` appear nowhere in participant data).
+- Reader answers: 78 `unclear`, 14 `no`, 17 `yes` (5 high, 12 medium). Real hits: 2 of 5 at high, 4 of 12 at medium (precision 40% / 33%). Average 1.53 rounds.
+- Sample step F1: no reader 94.0%, accept high 93.8%, accept medium+ 93.4%; status 32/32 in every variant. The reader finds no more than timing already gave and adds false steps, so it is off by default (`--links model` to enable).
+- A deterministic change helped more: an audit/legal record may count as existing when its own snapshot time (inside a later-captured export) is at or before `audit_at`; such records are verified with an empty evidence_id and never cited (F1 92.5 -> 94.0, exact sequence 13 -> 16). This relaxes "state only from files captured <= audit_at" for retained records only; needs the owner's approval.

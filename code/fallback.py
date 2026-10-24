@@ -17,13 +17,17 @@ from planner import plan
 from schema import PREFIX_INFO, TREATMENT
 
 P = lambda s: datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ")
+LATE_OK = {"audit_record", "legal_hold"}  # retained-record kinds whose existence may come from a later export snapshot
+CONF = {"low": 0, "medium": 1, "high": 2}
 WINDOW_MIN = 120  # generic search window around reported_at for activity-based account discovery
 
 
 class Context:
-    def __init__(self, use_png=True, intent_mode="model", conditions_mode="model"):
+    def __init__(self, use_png=True, intent_mode="model", conditions_mode="model", link_mode="off", min_link_conf="high"):
         self.intent_mode = intent_mode
         self.conditions_mode = conditions_mode
+        self.link_mode = link_mode
+        self.min_link_conf = min_link_conf
         self._pdf = {}
         self.intent_cache = {}
         self.ids = IdentityStore()
@@ -119,7 +123,9 @@ def solve(ctx, req, heuristics=True):
             cand.setdefault(rid, "link_row")
 
     def seen_before(rid):
-        return (any(o.captured_at <= audit_at for o in ctx.ix.by_resource.get(rid, []))
+        # existence evidence: a file captured by audit_at, an activity row by audit_at, or a retained-record row whose
+        # own snapshot time is by audit_at inside a later-captured export
+        return (any(o.captured_at <= audit_at or (o.snap_time <= audit_at and prefix_of(rid) in LATE_OK) for o in ctx.ix.by_resource.get(rid, []))
                 or any(a["event_time"] <= audit_at for a in ctx.act_by_res.get(rid, [])))
 
     cand = {r: w for r, w in cand.items() if prefix_of(r) in PREFIX_INFO and seen_before(r)}
@@ -128,6 +134,15 @@ def solve(ctx, req, heuristics=True):
         acc = _discover_account(ctx, req, uid, audit_at)
         if acc:
             cand[acc[0]] = acc[1]
+
+    if heuristics and ctx.link_mode == "model":
+        from readers.link_reader import read_links
+        res, run, pool = read_links(ctx, req, uid, cand)
+        out["links"] = {"pool": len(pool), "rounds": run["rounds"], "tool_calls": run["tool_calls"], "error": run["error"], "accepted": []}
+        for rid, x in res.items():
+            if x.get("belongs") == "yes" and CONF.get(x.get("confidence"), 0) >= CONF[ctx.min_link_conf] and seen_before(rid):
+                cand[rid] = "link_reader:" + str(x.get("basis"))
+                out["links"]["accepted"].append((rid, x.get("confidence"), x.get("basis")))
 
     decisions = []
     for rid, why in sorted(cand.items()):
@@ -160,8 +175,12 @@ def _discover_account(ctx, req, uid, audit_at):
 
 
 def _decide(ctx, rid, why, audit_at):
-    obs = [o for o in ctx.ix.by_resource.get(rid, []) if o.captured_at <= audit_at]
     pre = prefix_of(rid)
+    obs = [o for o in ctx.ix.by_resource.get(rid, []) if o.captured_at <= audit_at]
+    late = False
+    if not obs and pre in LATE_OK:
+        obs = [o for o in ctx.ix.by_resource.get(rid, []) if o.snap_time <= audit_at]
+        late = True
     sysid, default_cat = PREFIX_INFO[pre]
     if not obs:
         if pre != "account":
@@ -178,7 +197,7 @@ def _decide(ctx, rid, why, audit_at):
     if cat not in TREATMENT or rd == "UNKNOWN":
         return None
     return {"resource_id": rid, "system_id": sysid, "category": cat, "reading": rd, "treatment": TREATMENT[cat],
-            "violation": violation(cat, rd), "finding_evidence": o.file_id, "verify_evidence": o.file_id, "why": why}
+            "violation": violation(cat, rd), "finding_evidence": None if late else o.file_id, "verify_evidence": None if late else o.file_id, "why": why}
 
 
 def _anchor(ctx, decisions, audit_at):

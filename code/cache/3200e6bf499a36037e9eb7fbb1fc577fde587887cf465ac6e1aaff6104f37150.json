@@ -1,0 +1,26 @@
+{
+ "key": "3200e6bf499a36037e9eb7fbb1fc577fde587887cf465ac6e1aaff6104f37150",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 2290,
+  "output_tokens": 113,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"links\": [{\"resource_id\": \"audit_record_5729\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Single RETAIN_RECORD event 121 minutes before the report. No evidence ties it to the subject, and the linked records show only DELETE_RECORD events.\"}]}",
+ "content": [
+  {
+   "text": "{\"links\": [{\"resource_id\": \"audit_record_5729\", \"belongs\": \"unclear\", \"confidence\": \"low\", \"basis\": \"time_cluster\", \"reason\": \"Single RETAIN_RECORD event 121 minutes before the report. No evidence ties it to the subject, and the linked records show only DELETE_RECORD events.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:27Z"
+}

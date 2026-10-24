@@ -26,6 +26,8 @@ def main():
     ap.add_argument("--out")
     ap.add_argument("--cases")
     ap.add_argument("--no-heuristics", action="store_true")
+    ap.add_argument("--links", choices=["model", "off"], default="off", help="model link reader for unlinked records")
+    ap.add_argument("--min-link-conf", choices=["low", "medium", "high"], default="high", help="lowest link-reader confidence accepted")
     ap.add_argument("--conditions", choices=["model", "default"], default="model", help="rule-condition source")
     ap.add_argument("--intent", choices=["model", "regex"], default="model", help="intent source (model reads are cached)")
     args = ap.parse_args()
@@ -37,7 +39,7 @@ def main():
     out_path = Path(args.out) if args.out else (ROOT / "code" / "runs" / "sample_pred.csv" if args.sample else ROOT / "output.csv")
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    ctx = Context(intent_mode=args.intent, conditions_mode=args.conditions)
+    ctx = Context(intent_mode=args.intent, conditions_mode=args.conditions, link_mode=args.links, min_link_conf=args.min_link_conf)
     if args.intent == "model":
         prefetch_intents(ctx, reqs)
     act_times = {a["activity_id"]: a["event_time"] for a in ctx.act}

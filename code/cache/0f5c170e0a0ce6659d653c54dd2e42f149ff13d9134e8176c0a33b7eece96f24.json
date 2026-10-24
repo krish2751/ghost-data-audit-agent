@@ -1,0 +1,26 @@
+{
+ "key": "0f5c170e0a0ce6659d653c54dd2e42f149ff13d9134e8176c0a33b7eece96f24",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 3138,
+  "output_tokens": 100,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"links\":[{\"resource_id\":\"analytics_3260\",\"belongs\":\"yes\",\"confidence\":\"medium\",\"basis\":\"sequence_pattern\",\"reason\":\"Its activity IDs are consecutive with the subject's run (3383, 3384, 3385). It is the only sync event in the cluster.\"}]}",
+ "content": [
+  {
+   "text": "{\"links\":[{\"resource_id\":\"analytics_3260\",\"belongs\":\"yes\",\"confidence\":\"medium\",\"basis\":\"sequence_pattern\",\"reason\":\"Its activity IDs are consecutive with the subject's run (3383, 3384, 3385). It is the only sync event in the cluster.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:55Z"
+}

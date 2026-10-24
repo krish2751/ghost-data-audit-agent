@@ -1,0 +1,44 @@
+{
+ "key": "9293e6b350d066fbeef649394e2b3f48fe211abc2f02f493395e3736be877538",
+ "model": "claude-sonnet-5-5",
+ "tag": "links",
+ "stop_reason": "tool_use",
+ "usage": {
+  "input_tokens": 2433,
+  "output_tokens": 109,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "",
+ "content": [
+  {
+   "id": "toolu_01AD7iLbGiY4JhzpUzNn5btz",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "resource_id": "analytics_1895"
+   },
+   "name": "get_resource",
+   "type": "tool_use"
+  },
+  {
+   "id": "toolu_013FBJTeTz5cZHrb5VKD6Nkr",
+   "caller": {
+    "type": "direct"
+   },
+   "input": {
+    "resource_id": "analytics_4566"
+   },
+   "name": "get_resource",
+   "type": "tool_use"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "list_activity",
+  "identity_links"
+ ],
+ "created": "2026-10-24T19:33:33Z"
+}
