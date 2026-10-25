@@ -1,7 +1,8 @@
 # Evaluation report
 
-All numbers below were produced by running the code at the frozen commit used for the final run (`059a58c` plus this
-report). Model answers come from the final API run (see `usage_report.md`). Re-run any number with the command shown.
+All numbers below were produced by running the code. Model answers come from the final API run (see `usage_report.md`);
+one evidence rule was added after it (step 8 below) and re-run from those cached answers with no new model calls.
+Re-run any number with the command shown.
 
 ## 1. Public samples (32 cases)
 
@@ -51,8 +52,12 @@ data basis is documented in `code/analysis/data_findings.md`.
 .venv/bin/python code/main.py        # writes output.csv
 ```
 
-518 rows, 0 validator problems: 356 INCOMPLETE, 152 COMPLETE, 10 NOT_APPLICABLE. The final API run's output is
-byte-identical to the earlier run from cached answers, so the model reads were stable.
+518 rows, 0 validator problems: 355 INCOMPLETE, 153 COMPLETE, 10 NOT_APPLICABLE.
+
+- **Model reads were stable.** The final API run's output was byte-identical to the earlier run from cached answers.
+- **One row changed after the run.** The contradicted-link rule (step 8 in section 5) changed exactly 1 row: case_63 went
+  from INCOMPLETE (3 steps on `marketing_001`) to COMPLETE `[]`. Nothing else in the data belongs to its subject, so
+  there is no record to verify. case_39 and case_61 were already COMPLETE `[]` for the same reason.
 
 ## 3. Label-free checks (truth from evidence, no answers needed)
 
@@ -116,6 +121,7 @@ Scores are on the 32 samples, recorded when each change was made (`log.txt`, git
 | 5 | one account per case when several are identifier-linked | 32 of 32 samples have one account; removed case_17's extra account | 32/32 | 21/32 | 100 / 93.26 / 96.51 |
 | 6 | unlinked analytics: window and status/result pairs learned per outcome from all non-account kinds | the analytics-only window was learned from violations only, so it missed every anonymized record | 32/32 | 21/32 | 100 / 93.78 / 96.79 |
 | 7 | COMPLETE-evidence tie-break: an ambiguous COMPLETE case keeps only account candidates it can cite | problem statement: COMPLETE verification must cite the evidence; hold-out 213 -> 224 correct, 0 wrong | 32/32 | **22/32** | **100 / 94.82 / 97.34** |
+| 8 | a link-row claim is dropped when the record's observed identifiers exist and none was ever the claimed user's | activity rows are claims, evidence wins; 1 of 11 link rows is contradicted (`marketing_001`: evidence_60 shows another person's email and phone, never user_09's) | 32/32 | 22/32 | 100 / 94.82 / 97.34 (unchanged) |
 
 Failures that were found and fixed or rejected along the way:
 - **Regex intent missed negations** ("do not delete my account"). The model intent reader is now primary; the regex is

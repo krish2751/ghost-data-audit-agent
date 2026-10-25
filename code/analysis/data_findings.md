@@ -51,6 +51,17 @@ Survey of the activity stream and evidence formats: `data_overview.md` (`survey_
   ledger `ACTIVE`; clean when it reads disabled/blocked. In every sample case the activity agrees (a `CHECK_*` row for
   risks, a `DISABLE_DATA_FLOW` / `BLOCK_RESTORE` SUCCESS row for clean ones).
 
+### Link rows contradicted by evidence (`fallback.Context.link_contradicted`)
+- `LINK_RESOURCE_IDENTITY` activity rows (data catalog) claim that a record belongs to a user. Activity rows are claims
+  (problem statement), so a claim is dropped from linking and from claims when the record's observed identifiers
+  (emails, user ids, email hashes, phones, from any file) exist and none was ever the claimed user's (current or audit-log
+  value).
+- 11 link rows are parsed: 8 are confirmed by the record's own identifiers, 2 records have no observation (kept), and 1
+  is contradicted: `marketing_001` (activity_4008 -> user_09). evidence_60 shows the record holding Soo-jin Park's name,
+  email and phone, none of which user_09 ever held.
+- Effect: 1 of 518 rows changes (case_63 INCOMPLETE -> COMPLETE `[]`, since no other record belongs to user_09); samples
+  unchanged (32/32, exact 22/32, F1 97.34).
+
 ### Category overrides in `data/states.py` (`q18_rule_evidence.py` part 4)
 Observations without a `record_type` field whose category differs from the resource prefix default:
 

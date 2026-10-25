@@ -583,3 +583,27 @@ branch=main
 repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-25T09:40:00Z] Drop link-row claims contradicted by evidence (marketing_001)
+
+User Prompt (verbatim, secrets redacted):
+there's No misreads.
+
+One issue though: marketing_001. activity_4008 (a catalog link, which is a claim) ties it to user_09, but evidence_60 shows the record holding Soo-jin Park's name, email and phone, none of which belong to user_09. That's the only catalog link out of 12 whose screenshot contradicts it. Per the rules, evidence beats claims. Show me what case_63 currently outputs for marketing_001. Then add a general rule: when a catalog/link activity claims a record belongs to a user, but the record's observed identifiers belong to someone else and none of them match the user, the record is not linked to that user. Apply it across all 550, report which rows change, re-run the samples to confirm nothing breaks, regenerate output.csv, and update the evaluation report and usage note if anything changes.
+
+Agent Response Summary:
+Showed case_63's output before the change (INCOMPLETE: REPORT_REMAINING_RECORD citing evidence_60, DELETE_RECORD, VERIFY_RECORD_ABSENT, all on marketing_001). Added Context.link_contradicted in fallback.py: a link row is dropped from linking and from claims when the record's observed identifiers (emails, user ids, hashes, phones, any file) exist and none was ever the claimed user's. Of 11 parsed link rows, 8 are confirmed, 2 have no observation (kept), 1 is contradicted (marketing_001). Across 550: 1 row changes (case_63 INCOMPLETE -> COMPLETE [], no other record belongs to user_09); samples unchanged (32/32, 22/32, F1 97.34); 0 new model calls. Regenerated output.csv and extraction_review.md; updated evaluation_report.md, usage_report.md, data_findings.md, CLAUDE.md.
+
+Actions:
+* Edited code/fallback.py (link_contradicted; used in claims() and solve())
+* Regenerated output.csv, code/runs/sample_pred.csv, code/evaluation/extraction_review.md
+* Updated code/evaluation/evaluation_report.md, usage_report.md, code/analysis/data_findings.md, CLAUDE.md
+* Committed
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=main
+repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
