@@ -73,7 +73,8 @@ code/readers/             intent and rule-condition readers, reader loop
 code/tools/registry.py    time-gated tools for the condition reader
 code/prompts/             reader prompts
 code/planner.py, code/validator.py, code/schema.py, code/intent.py, code/llm_client.py, code/screenshots.py
-code/evaluation/          scorer, intent and condition evaluations, custom intent cases, hardcoding audit
+code/evaluation/          scorer, intent and condition evaluations, custom intent cases, hardcoding audit,
+                          failure diff and the generated mismatch review (mismatch_review.py -> mismatch_review.md)
 code/analysis/            measurement scripts; data_findings.md lists the data pattern behind every rule
 code/cache/               cached model answers
 ```
