@@ -29,7 +29,7 @@ Keep the Decisions and Open questions lists current whenever something is settle
   - Records with no identifier: joint assignment (one account per case, other users' claims excluded, status/result agreement, window learned from identifier-linked pairs; analytics use a window and pairs learned per outcome from all non-account kinds). Ties stay unresolved.
   - One account per case: when several accounts are identifier-linked, keep those deleted inside the learned window.
   - COMPLETE-evidence tie-break: after the plain passes, an ambiguous case that is COMPLETE without the account keeps only candidates with a compliant pre-audit observation (not a hard filter: case_01/02/31 verify unobserved accounts).
-  - Verification lists the full end state; INCOMPLETE remediation/verification use empty `evidence_id`. Rows sorted by `case_id` as strings.
+  - Verification lists the full end state; INCOMPLETE remediation/verification use empty `evidence_id`. Rows follow `deletion_requests.csv` order (numeric, official clarification); COMPLETE with [] is a validator warning, not an error (official clarification); `code/validator.py` checks the whole file.
   - Link reader and session backend removed (no code-produced evidence of value).
 - **Open questions:**
   - Which source wins when two pre-audit sources disagree (7 of 1,361 decisions have disagreeing older observations).

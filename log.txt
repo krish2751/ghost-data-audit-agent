@@ -638,3 +638,32 @@ branch=main
 repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-25T11:10:00Z] Official clarifications: COMPLETE [] warning, contract validator, input row order
+
+User Prompt (verbatim, secrets redacted):
+Three official clarifications. Apply them with no change to pipeline decisions:
+
+1. COMPLETE with empty steps is allowed. For an authorized request with no observed violation and no check backed by evidence, COMPLETE with steps_json=[] is acceptable. Change the validator so COMPLETE with [] is a warning, not an error: report those cases but don't reject or change them.
+2. The upload page validates output.csv. It reports errors on upload, so make sure our validator covers the contract checks: the exact header; one row per request; deletion_status in COMPLETE, INCOMPLETE or NOT_APPLICABLE; NOT_APPLICABLE only with []; valid JSON arrays; consecutive step_no from 1; the allowed phases, operations and states; phase order and within-phase sort order; empty evidence_id on remediation and INCOMPLETE verification steps; and every cited evidence ID existing and captured at or before its case's audit_at.
+3. Row order must match dataset/deletion_requests.csv (numeric: case_33, case_34 … case_550), not lexicographic. Confirm the case_id column matches the input file row for row, with no missing or extra cases. If it doesn't, fix the writer to follow the input file's order and regenerate output.csv from the cache with 0 model calls.
+
+Then run the validator on output.csv and the samples and report errors (should be 0) and warnings. Update the README and evaluation_report.md where they describe the validator or the sort order. Rebuild code.zip, re-run the clean unzip check (byte-identical output.csv, samples 32/32 status and 22/32 exact), log the turn, and commit. Finally, report the first five and last five case_ids in output.csv.
+
+Agent Response Summary:
+COMPLETE with [] is now a warning (validator.row_warnings), not an error. Added validator.validate_file and a CLI (code/validator.py [PATH] [--sample]) covering the full upload contract; main.py runs it after writing. The output was in lexicographic order (case_100 first) with the same 518 case_ids as the input; the writer now follows the request file's order, and output.csv was regenerated from the cache (0 model calls, row contents unchanged). The scorer's row-order check now expects numeric order. Validator: output.csv and samples 0 errors, 0 warnings; sample_output.csv 0 errors; 16 broken copies each raise the expected error (COMPLETE [] only a warning). Samples 32/32, 22/32, F1 97.34. Rebuilt code.zip (622 files); clean unzip reproduces output.csv byte for byte offline. Updated README, evaluation_report.md, CLAUDE.md.
+
+Actions:
+* Edited code/validator.py, code/main.py, code/evaluation/main.py
+* Regenerated output.csv and code/runs/sample_pred.csv from the cache
+* Validator self-test on sample_output.csv and broken copies (scratchpad)
+* Updated README.md, code/evaluation/evaluation_report.md, CLAUDE.md
+* Rebuilt code.zip; clean unzip check; committed
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=main
+repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

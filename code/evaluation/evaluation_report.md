@@ -19,6 +19,7 @@ Re-run any number with the command shown.
 | step recall | 94.82% (183/193) |
 | step F1 | 97.34% |
 | format checks (header, ordering, JSON, step_no, phases, operations, states) | all pass |
+| contract validator (`code/validator.py --sample`) | 0 errors, 0 warnings |
 
 Field-level accuracy (gold steps aligned to predicted steps; an unmatched gold step counts as wrong in every field):
 
@@ -52,11 +53,33 @@ data basis is documented in `code/analysis/data_findings.md`.
 .venv/bin/python code/main.py        # writes output.csv
 ```
 
-518 rows, 0 validator problems: 358 INCOMPLETE, 150 COMPLETE, 10 NOT_APPLICABLE.
+518 rows in the request file's order (case_33 … case_550): 358 INCOMPLETE, 150 COMPLETE, 10 NOT_APPLICABLE.
+`.venv/bin/python code/validator.py` reports **0 errors, 0 warnings**.
+
+**The validator checks the upload contract.** Errors:
+- the exact header;
+- one row per request in the request file's order, with no missing, extra or duplicate cases;
+- a valid status, and NOT_APPLICABLE only with `[]`;
+- valid JSON arrays with exactly the seven step fields;
+- `step_no` consecutive from 1;
+- allowed phases, operations and states, each state matching its operation;
+- phase order and within-phase sort order;
+- `evidence_id` required on findings and COMPLETE verifications, empty on remediation and INCOMPLETE verifications;
+- every cited ID existing and captured at or before its own case's `audit_at`.
+
+COMPLETE with `[]` is a warning (allowed by the official clarification).
+
+**Self-test.** The official `sample_output.csv` passes with 0 errors. Broken copies of `output.csv` each raise the
+expected error: wrong header, lexicographic row order, a missing row, a duplicate row, a bad status, NOT_APPLICABLE with
+steps, invalid JSON, a non-array, a step_no gap, an unknown operation, a wrong state, reversed phase order, evidence on a
+remediation step, an unknown evidence ID, and a citation captured after `audit_at`. A COMPLETE row set to `[]` raises a
+warning only.
 
 - **Model reads were stable.** The final API run's output was byte-identical to the earlier run from cached answers.
-- **New validator check.** COMPLETE with an empty `steps_json` is now invalid, because COMPLETE requires evidence-backed
-  verification. Before step 8 it failed for exactly 2 cases, case_39 and case_61. It now fails for none.
+- **COMPLETE with empty `steps_json`.** I first added it as an error. It flagged exactly 2 cases, case_39 and case_61,
+  which led to step 8. After the official clarification it is a warning, and no row triggers it now.
+- **Row order.** Rows used to be sorted by `case_id` as strings (case_100, case_101, …). The official clarification
+  requires the request file's numeric order, so the writer now follows that file. Row contents are unchanged.
 - **What step 8 changed.** Exactly 2 rows, both from COMPLETE `[]` to INCOMPLETE:
   - case_39: `data_flow_1121` active (REPORT_ACTIVE_DATA_FLOW, DISABLE_DATA_FLOW, VERIFY_DATA_FLOW_DISABLED, citing
     evidence_14);

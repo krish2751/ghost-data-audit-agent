@@ -185,8 +185,8 @@ def main():
         format_problems.append(f"header is {p_header}, expected {HEADER}")
     for cid in p_dups:
         format_problems.append(f"{cid}: duplicate case_id")
-    if list(p_rows) != sorted(p_rows):
-        format_problems.append("rows are not sorted by case_id")
+    if list(p_rows) != sorted(p_rows, key=lambda c: int(c.rsplit("_", 1)[1]) if c.rsplit("_", 1)[-1].isdigit() else c):
+        format_problems.append("rows are not in the request file's numeric case_id order")
     parsed = {}
     for cid, row in p_rows.items():
         steps, err = parse_steps(row.get("steps_json", ""))
