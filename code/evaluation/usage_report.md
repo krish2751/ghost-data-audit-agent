@@ -62,7 +62,14 @@ or writes occurred.
 | final run (API calls made) | 523 | 779,825 (724,440 in / 55,385 out) | 2.0027 | 1,505 tokens, $0.0039 | 1,418 tokens, $0.0036 |
 | final run + reused screenshot extractions | 534 | 830,541 (761,239 in / 69,302 out) | 2.2155 | 1,603 tokens, $0.0043 | 1,510 tokens, $0.0040 |
 
-Per-model totals equal the overall totals because only one model was used.
+Per model and overall (final run, API calls made):
+
+| | calls | input tokens | output tokens | total tokens | avg tokens / request (518) | cost (USD) | avg cost / request (518) |
+|---|---|---|---|---|---|---|---|
+| `claude-sonnet-5-5` (Anthropic) | 523 | 724,440 | 55,385 | 779,825 | 1,505 | 2.0027 | 0.0039 |
+| **overall** | 523 | 724,440 | 55,385 | 779,825 | 1,505 | 2.0027 | 0.0039 |
+
+The two rows are equal because only one model was used.
 
 ## Calls outside the final run
 

@@ -14,7 +14,7 @@ Re-run any number with the command shown.
 | metric | result |
 |---|---|
 | case-level deletion-status accuracy | **100.00%** (32/32) |
-| exact sequence match (status + full `steps_json` in order) | **68.75%** (22/32) |
+| row-level exact match = sequence accuracy (status + full `steps_json` in order) | **68.75%** (22/32) |
 | step precision | 100.00% (183/183) |
 | step recall | 94.82% (183/193) |
 | step F1 | 97.34% |

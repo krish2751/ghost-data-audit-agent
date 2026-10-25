@@ -8,7 +8,8 @@ writes the ordered `steps_json` to `output.csv` at the repository root, one row 
 
 ## Setup and run
 
-Python 3.13 with the packages in `requirements.txt` (`anthropic`, `pypdf`, `python-dotenv`). From the repository root:
+Python 3.13 with the packages in `requirements.txt` (`anthropic`, `pypdf`, `python-dotenv`). The challenge `dataset/`
+folder must sit at the repository root next to `code/`; it is not part of `code.zip`. From the repository root:
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
@@ -40,10 +41,23 @@ checks `output.csv` (or the sample predictions) against the submission contract 
 
 scores a prediction file against `dataset/sample_output.csv`.
 
-Model answers are cached in `code/cache/` (the answers of the final API run, see `code/evaluation/usage_report.md`), so a
-run needs no API key and makes no API calls by default. To call the API
-for requests that are not cached, set `LLM_BACKEND=api` and put `ANTHROPIC_API_KEY` in the environment or in an
-uncommitted `.env` at the repository root.
+Model answers are cached in `code/cache/`: these are the answers of the final API run (see
+`code/evaluation/usage_report.md`). So the commands above need no API key and make no API calls.
+
+| environment variable | values | meaning |
+|---|---|---|
+| `LLM_BACKEND` | `cache` (default) or `api` | `cache`: cached model answers only; an uncached request falls back: regex intent, rule-default conditions, or the screenshot is skipped. `api`: uncached requests call the Claude API and are cached. |
+| `ANTHROPIC_API_KEY` | your key | needed only with `LLM_BACKEND=api`; read from the environment or an uncommitted `.env` at the repository root, never logged |
+
+The final API run that produced `output.csv` was:
+
+```bash
+LLM_BACKEND=api .venv/bin/python code/main.py
+```
+
+It ran with an empty cache except the 11 screenshot extractions, so every intent and rule-condition read was a fresh API
+call. Then `.venv/bin/python code/evaluation/usage_summary.py --log code/evaluation/final_run_usage_log.jsonl`
+summarizes its usage.
 
 Options: `--cases ID1,ID2` (subset), `--out PATH`, `--intent regex` (no model for intent), `--conditions default`
 (rule defaults instead of the condition reader).
@@ -103,7 +117,7 @@ code/tools/registry.py    time-gated tools for the condition reader
 code/prompts/             reader prompts
 code/planner.py, code/validator.py, code/schema.py, code/intent.py, code/llm_client.py, code/screenshots.py
 code/evaluation/          scorer, intent and condition evaluations, custom intent and end-to-end cases, hardcoding
-                          audit, failure diff, mismatch review, usage summary; evaluation_report.md, usage_report.md
+                          audit, mismatch and extraction reviews, usage summary; evaluation_report.md, usage_report.md
 code/analysis/            measurement scripts; data_findings.md lists the data pattern behind every rule
 code/cache/               cached model answers
 ```
