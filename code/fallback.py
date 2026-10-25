@@ -103,29 +103,9 @@ class Context:
                     if h in hash_user:
                         c.setdefault(o.resource_id, set()).add(hash_user[h])
             for _, rid, email, uid, _ in self.links:
-                if not self.link_contradicted(rid, uid):
-                    c.setdefault(rid, set()).add(uid)
+                c.setdefault(rid, set()).add(uid)
             self._claims = c
         return self._claims
-
-    def link_contradicted(self, rid, uid):
-        """True when a link row's claim that `rid` belongs to `uid` is contradicted by evidence: the record's observed
-        identifiers (emails, user ids, email hashes, phones; any capture date) are non-empty and none was ever the user's.
-        Activity rows are claims; evidence wins (problem statement)."""
-        key = (rid, uid)
-        if key not in self.__dict__.setdefault("_contra", {}):
-            dig = lambda s: re.sub(r"\D", "", s)
-            em = re.compile(r"[\w.+-]+@[\w-]+\.[\w-]+(?:\.[\w-]+)*"); us = re.compile(r"\buser_\d+\b"); hs = re.compile(r"\b[0-9a-f]{64}\b")
-            seen, phones = set(), set()
-            for o in self.ix.by_resource.get(rid, []):
-                seen.update(e.lower() for e in em.findall(o.text))
-                seen.update(us.findall(o.text))
-                seen.update(hs.findall(o.text))
-                phones.update(dig(str(v)) for k, v in o.attrs.items() if "phone" in k and v and len(dig(str(v))) >= 9)
-            toks = self.ids.tokens(uid, "9999")  # every value the user ever held
-            tdig = {dig(t) for t in toks if len(dig(t)) >= 9}
-            self._contra[key] = bool(seen or phones) and not (seen & toks) and not (phones & tdig)
-        return self._contra[key]
 
 
 def _matcher(tokens):
@@ -155,7 +135,7 @@ def solve(ctx, req, heuristics=True):
         if o.resource_id and rx.search(o.text):
             cand.setdefault(o.resource_id, "evidence")
     for _, rid, email, luid, _ in ctx.links:
-        if (luid == uid or email in ctx.ids.tokens(uid, audit_at)) and not ctx.link_contradicted(rid, uid):
+        if luid == uid or email in ctx.ids.tokens(uid, audit_at):
             cand.setdefault(rid, "link_row")
 
     def seen_before(rid):

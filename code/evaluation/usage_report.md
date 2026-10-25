@@ -12,7 +12,6 @@ LLM_BACKEND=api .venv/bin/python code/main.py
 | code | frozen at commit `059a58c` |
 | model cache | emptied before the run, except the 11 screenshot extractions (pinned, see below), so every intent and rule-condition read was a fresh API call |
 | result | 518 rows, 0 validator problems; byte-identical to the previous run from cached answers |
-| afterwards | one evidence rule was added (contradicted link rows; `evaluation_report.md` step 8) and `output.csv` was regenerated from this run's cached answers: 0 new model calls, 1 row changed (case_63) |
 
 The numbers come from the client's per-call usage log, saved as `code/evaluation/final_run_usage_log.jsonl` (key, model,
 reader, tokens; no request content). To recompute them:
