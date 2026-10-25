@@ -1,7 +1,8 @@
 # Evaluation report
 
-All numbers below were produced by running the code at the frozen commit used for the final run (`059a58c` plus this
-report). Model answers come from the final API run (see `usage_report.md`). Re-run any number with the command shown.
+All numbers below were produced by running the code. Model answers come from the final API run (see `usage_report.md`).
+Two evidence fixes were added after it (step 8 in section 5) and re-run from those cached answers with no new model calls.
+Re-run any number with the command shown.
 
 ## 1. Public samples (32 cases)
 
@@ -51,8 +52,16 @@ data basis is documented in `code/analysis/data_findings.md`.
 .venv/bin/python code/main.py        # writes output.csv
 ```
 
-518 rows, 0 validator problems: 356 INCOMPLETE, 152 COMPLETE, 10 NOT_APPLICABLE. The final API run's output is
-byte-identical to the earlier run from cached answers, so the model reads were stable.
+518 rows, 0 validator problems: 358 INCOMPLETE, 150 COMPLETE, 10 NOT_APPLICABLE.
+
+- **Model reads were stable.** The final API run's output was byte-identical to the earlier run from cached answers.
+- **New validator check.** COMPLETE with an empty `steps_json` is now invalid, because COMPLETE requires evidence-backed
+  verification. Before step 8 it failed for exactly 2 cases, case_39 and case_61. It now fails for none.
+- **What step 8 changed.** Exactly 2 rows, both from COMPLETE `[]` to INCOMPLETE:
+  - case_39: `data_flow_1121` active (REPORT_ACTIVE_DATA_FLOW, DISABLE_DATA_FLOW, VERIFY_DATA_FLOW_DISABLED, citing
+    evidence_14);
+  - case_61: `object_19` remaining (REPORT_REMAINING_RECORD, DELETE_RECORD, VERIFY_RECORD_ABSENT on `object_storage`,
+    citing evidence_46).
 
 ## 3. Label-free checks (truth from evidence, no answers needed)
 
@@ -116,6 +125,16 @@ Scores are on the 32 samples, recorded when each change was made (`log.txt`, git
 | 5 | one account per case when several are identifier-linked | 32 of 32 samples have one account; removed case_17's extra account | 32/32 | 21/32 | 100 / 93.26 / 96.51 |
 | 6 | unlinked analytics: window and status/result pairs learned per outcome from all non-account kinds | the analytics-only window was learned from violations only, so it missed every anonymized record | 32/32 | 21/32 | 100 / 93.78 / 96.79 |
 | 7 | COMPLETE-evidence tie-break: an ambiguous COMPLETE case keeps only account candidates it can cite | problem statement: COMPLETE verification must cite the evidence; hold-out 213 -> 224 correct, 0 wrong | 32/32 | **22/32** | **100 / 94.82 / 97.34** |
+| 8 | catalog-link evidence (see the list below this table) | the 2 COMPLETE-with-no-steps rows found by the new validator check | 32/32 | 22/32 | 100 / 94.82 / 97.34 (unchanged) |
+
+Step 8 has four parts:
+- **Attachment-catalog rows** ("confirmed R (file) belongs only to ...") are now parsed as link rows.
+- **Screen records with no id** are matched to a record through the file name its catalog row gives. `object_N` records
+  are tracked as support attachments in `object_storage`.
+- **A data flow's status-type field** sets its reading. Delivery status agrees with `enabled` in 94 of 94 text
+  observations; mode does not, being continuous on 25 disabled flows.
+- **A catalog link counts only for the case whose `[requested_at, audit_at]` window contains it.** 12 of 12 links fall in
+  exactly one of their user's windows, and the 2 sample cases outside a link's window lack the record.
 
 Failures that were found and fixed or rejected along the way:
 - **Regex intent missed negations** ("do not delete my account"). The model intent reader is now primary; the regex is
@@ -128,3 +147,6 @@ Failures that were found and fixed or rejected along the way:
 - **Hard COMPLETE-evidence filter** (the constraint applied in every pass). Rejected: case_01, case_02 and case_31 are
   COMPLETE and verify accounts that appear in no file, so exact sequence fell 21 -> 19. The tie-break form keeps them.
 - **Cross-kind event order** as a tie-breaker. Rejected: order agreement was 49.6%, which is chance.
+- **Dropping a catalog link when the screenshot's identifiers belong to someone else.** Reverted. case_39, case_61 and
+  case_63 share one pattern: a screenshot at :00, a catalog link at :07, and `audit_at` after both. In that pattern the
+  catalog link is what ties the screenshot's record to the user, so case_63 stays INCOMPLETE on `marketing_001`.

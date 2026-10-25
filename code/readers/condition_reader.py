@@ -46,6 +46,9 @@ def build_item(ctx, d, uid, audit_at):
             return None
         item["fields"] = {"message": text, "ticket_id": _latest(obs, "ticket_id"), "channel": _latest(obs, "channel")}
     elif cat == "SUPPORT_ATTACHMENT":
+        if any(a["event_type"] == "LINK_RESOURCE_IDENTITY" and "belongs only to" in a["details"] and uid and uid in a["details"]
+               and a["event_time"] <= audit_at for a in ctx.act_by_res.get(rid, [])):
+            return None  # the attachment catalog states rule_06's condition (belongs only to the subject): default DELETE
         item["fields"] = {k: _latest(obs, k) for k in ("file_name", "uploaded_by", "ticket_id", "storage_class")}
         item["fields"]["deletion_subject_user_id"] = uid
         item["documents"] = [{"evidence_id": o.file_id, "text": o.attrs.get("text", "")[:3000]} for o in obs if o.kind == "pdf"][:1]

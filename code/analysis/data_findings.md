@@ -51,6 +51,30 @@ Survey of the activity stream and evidence formats: `data_overview.md` (`survey_
   ledger `ACTIVE`; clean when it reads disabled/blocked. In every sample case the activity agrees (a `CHECK_*` row for
   risks, a `DISABLE_DATA_FLOW` / `BLOCK_RESTORE` SUCCESS row for clean ones).
 
+### Catalog links and the records they name (`loader.LINK_RX`, `loader.link_aliases`, `fallback.solve`)
+- Two catalog formats exist in `LINK_RESOURCE_IDENTITY` rows: the data catalog ("linked R (R) to EMAIL and user_N", 11
+  rows) and the attachment catalog ("confirmed R (file name) belongs only to EMAIL and user_N", 1 row). Both are
+  parsed.
+- Window: each of the 12 links falls inside the `[requested_at, audit_at]` window of exactly one of its user's cases. The
+  2 sample cases outside a link's window (case_07 for `object_19`, case_17 for `tombstone_17`) do not contain the record
+  in their answers. So a link row links its record only for the case whose window contains the link time. Every link
+  comes 7.0 minutes after the capture of one evidence file (12 of 12: the 11 screenshots and the evidence_18 PDF; 11 on
+  the hour, evidence_60 at :20). The link is what ties that file's record to the user.
+- Name mapping: a screenshot record with no resource id is matched to the record whose catalog row gives that name
+  (evidence_46 shows `delivery_confirmation_19.pdf` in support-attachments, and activity_4007 names it as `object_19`).
+  `object_N` records are support attachments in `object_storage`, the target system of their catalog row. The catalog's
+  "belongs only to the subject" is rule_06's condition, so the default DELETE applies without a reader item.
+- Effect: 2 of 518 rows change (case_61 gains `object_19`; case_39 below); samples unchanged.
+
+### Data-flow state from status fields (`data/states.py`)
+- Text observations with an `enabled` flag: `last_delivery_status` delivered goes with enabled 67 of 67 times, and
+  stopped with disabled 27 of 27. `mode=continuous_sync` appears on 66 enabled and 25 disabled flows, so mode is not
+  evidence.
+- Rule: without `enabled`, a status-type field (`status`, `last_delivery_status`, `state`) reading
+  delivered/healthy/running/active/live/enabled means ACTIVE; stopped/paused/disabled/inactive means DISABLED.
+- Applies to 2 of 3 previously unreadable observations (evidence_14 `data_flow_1121`, "Healthy"); `data_flow_9846`
+  shows only a mode and stays unread. Effect: case_39 COMPLETE `[]` -> INCOMPLETE (active data flow).
+
 ### Category overrides in `data/states.py` (`q18_rule_evidence.py` part 4)
 Observations without a `record_type` field whose category differs from the resource prefix default:
 

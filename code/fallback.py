@@ -28,7 +28,7 @@ class Context:
         self._joint = None
         self.intent_cache = {}
         self.ids = IdentityStore()
-        self.ix = EvidenceIndex(use_png=use_png)
+        self.ix = EvidenceIndex(use_png=use_png, aliases=loader.link_aliases(loader.activity()))
         self.man = self.ix.man
         self.act = loader.activity()
         self.links = loader.activity_links(self.act)
@@ -134,8 +134,9 @@ def solve(ctx, req, heuristics=True):
     for o in ctx.ix.obs:
         if o.resource_id and rx.search(o.text):
             cand.setdefault(o.resource_id, "evidence")
-    for _, rid, email, luid, _ in ctx.links:
-        if luid == uid or email in ctx.ids.tokens(uid, audit_at):
+    for _, rid, email, luid, t in ctx.links:  # a catalog link belongs to the request it was made for: 12 of 12 links fall in
+        # exactly one of their user's [requested_at, audit_at] windows; the 2 sample cases outside a link's window lack it
+        if (luid == uid or email in ctx.ids.tokens(uid, audit_at)) and req["requested_at"] <= t <= audit_at:
             cand.setdefault(rid, "link_row")
 
     def seen_before(rid):

@@ -39,6 +39,7 @@ PREFIX_INFO = {
     "marketing": ("marketing_platform", "MARKETING_PROFILE"),
     "cache": ("cache_service", "CACHE_ENTRY"),
     "email_delivery": ("email_delivery_service", "EMAIL_DELIVERY_LOG"),
+    "object": ("object_storage", "SUPPORT_ATTACHMENT"),  # attachment-catalog objects in object storage (support-attachments)
 }
 
 # category -> policy treatment (mirrors deletion_rules.csv)

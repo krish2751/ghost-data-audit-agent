@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 
 from .loader import DS, manifest
 
-RES_RX = re.compile(r"\b(account|search|support|analytics|export|backup|data_flow|audit_record|tombstone|legal_hold|marketing|cache|email_delivery)_\d+\b")
+RES_RX = re.compile(r"\b(account|search|support|analytics|export|backup|data_flow|audit_record|tombstone|legal_hold|marketing|cache|email_delivery|object)_\d+\b")
 KV_RX = re.compile(r'(\w+)=("(?:[^"\\]|\\.)*"|[^\s"]+)')
 TS_RX = re.compile(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ")
 TRACE_RX = re.compile(r"\b(?:tr|rb)-[\w-]+")
@@ -164,7 +164,7 @@ def _pdf(fid, cap, path):
     return out
 
 
-def _png(fid, cap, path):
+def _png(fid, cap, path, aliases=None):
     try:
         import screenshots
         data, _ = screenshots.extract({"file_id": fid, "file_path": path})
@@ -173,6 +173,9 @@ def _png(fid, cap, path):
     out = []
     for rec in (data or {}).get("records", []):
         rid = rec.get("resource_id")
+        if not rid and aliases:  # a screen that shows only a name (e.g. a file name) the catalog gives a record
+            names = [v for part in ("identifiers", "other_fields") for v in (rec.get(part) or {}).values() if isinstance(v, str)]
+            rid = next((aliases[n] for n in names if n in aliases), None)
         attrs = {}
         for k in ("identifiers", "status_fields", "timestamps", "other_fields"):
             attrs.update({kk.lower().replace(" ", "_"): vv for kk, vv in (rec.get(k) or {}).items()})
@@ -183,7 +186,7 @@ def _png(fid, cap, path):
 
 
 class EvidenceIndex:
-    def __init__(self, use_png=True):
+    def __init__(self, use_png=True, aliases=None):
         self.man = manifest()
         self.obs = []
         for fid, m in self.man.items():
@@ -199,7 +202,7 @@ class EvidenceIndex:
             elif p.endswith(".pdf"):
                 self.obs += _pdf(fid, cap, p)
             elif p.endswith(".png") and use_png:
-                self.obs += _png(fid, cap, p)
+                self.obs += _png(fid, cap, p, aliases)
         self.by_resource = {}
         for o in self.obs:
             if o.resource_id:

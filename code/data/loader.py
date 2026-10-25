@@ -28,7 +28,8 @@ def activity():
     return read_csv("system_activity.csv")
 
 
-LINK_RX = re.compile(r"linked (\S+) \((\S+)\) to (\S+@\S+) and (user_\d+)")
+# data catalog: "linked R (alias) to EMAIL and user_N"; attachment catalog: "confirmed R (alias) belongs only to EMAIL and user_N"
+LINK_RX = re.compile(r"(?:linked|confirmed) (\S+) \((\S+)\) (?:to|belongs only to) (\S+@\S+) and (user_\d+)")
 
 
 def activity_links(rows):
@@ -39,4 +40,15 @@ def activity_links(rows):
             m = LINK_RX.search(a["details"])
             if m:
                 out.append((a["activity_id"], m.group(1), m.group(3).lower(), m.group(4), a["event_time"]))
+    return out
+
+
+def link_aliases(rows):
+    """Names a catalog row gives a record besides its id (e.g. object_19 -> delivery_confirmation_19.pdf): {alias: resource_id}."""
+    out = {}
+    for a in rows:
+        if a["event_type"] == "LINK_RESOURCE_IDENTITY":
+            m = LINK_RX.search(a["details"])
+            if m and m.group(2) != m.group(1):
+                out[m.group(2)] = m.group(1)
     return out

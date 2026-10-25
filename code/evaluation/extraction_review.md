@@ -164,7 +164,7 @@ captured_at 2026-08-07T08:00:00Z, origin `integration_admin`; screen "Connection
 
 Query/filter shown: `Selected tab: Topology; search box empty (placeholder 'Search connectors...'); environment: PRODUCTION · eu-west`
 
-**Record `data_flow_1121`** — pipeline reading: `UNKNOWN`
+**Record `data_flow_1121`** — pipeline reading: `ACTIVE`
 
 | field | value | elsewhere in the dataset | flag |
 |---|---|---|---|
@@ -174,9 +174,9 @@ Query/filter shown: `Selected tab: Topology; search box empty (placeholder 'Sear
 | status.Status | `Healthy` |  |  |
 | time.Last contact | `07:59:42` |  |  |
 
-Used by: identifier link to case_39 (`user_14`) via jain.aditi@gmail.com
+Used by: case_39 step 1 REPORT_ACTIVE_DATA_FLOW; identifier link to case_39 (`user_14`) via jain.aditi@gmail.com
 
-**Record `data_flow_1121`** — pipeline reading: `UNKNOWN`
+**Record `data_flow_1121`** — pipeline reading: `ACTIVE`
 
 | field | value | elsewhere in the dataset | flag |
 |---|---|---|---|
@@ -190,7 +190,7 @@ Used by: identifier link to case_39 (`user_14`) via jain.aditi@gmail.com
 | time.Activity 07:56:44 | `18 events retried` |  |  |
 | time.Activity 07:55:02 | `destination acknowledged batch` |  |  |
 
-Used by: identifier link to case_39 (`user_14`) via jain.aditi@gmail.com
+Used by: case_39 step 1 REPORT_ACTIVE_DATA_FLOW; identifier link to case_39 (`user_14`) via jain.aditi@gmail.com
 
 **Record `data_flow_9846`** — pipeline reading: `UNKNOWN`
 
@@ -558,16 +558,17 @@ captured_at 2026-02-13T08:00:00Z, origin `object_storage`; screen "northstar-cus
 
 Query/filter shown: `Tab selected: Objects; search box empty (placeholder 'Search objects by name or prefix...'); Storage class: All; Account: Northstar Production; Region: eu-west-1`
 
-**Record `None`** — pipeline reading: `not indexed`
+**Record `object_19`** (no id on screen; mapped by the catalog name `delivery_confirmation_19.pdf`) — pipeline reading: `FOUND`
 
 | field | value | elsewhere in the dataset | flag |
 |---|---|---|---|
+| resource_id | `object_19` | 1 file(s): dataset/system_activity.csv |  |
 | identifiers.name | `delivery_confirmation_19.pdf` |  |  |
 | status.Storage class | `Standard` |  |  |
 | status.Version | `v3` |  |  |
 | time.Modified (UTC) | `12 Feb 18:42` |  |  |
 
-Used by: not a record kind the pipeline tracks (ignored)
+Used by: case_61 step 1 REPORT_REMAINING_RECORD
 
 **Record `None`** — pipeline reading: `not indexed`
 
@@ -646,10 +647,11 @@ Used by: not a record kind the pipeline tracks (ignored)
 
 Used by: not a record kind the pipeline tracks (ignored)
 
-**Record `None`** — pipeline reading: `not indexed`
+**Record `object_19`** (no id on screen; mapped by the catalog name `delivery_confirmation_19.pdf`) — pipeline reading: `FOUND`
 
 | field | value | elsewhere in the dataset | flag |
 |---|---|---|---|
+| resource_id | `object_19` | 1 file(s): dataset/system_activity.csv |  |
 | identifiers.name | `delivery_confirmation_19.pdf` |  |  |
 | status.Version | `v3` |  |  |
 | time.Modified | `12 Feb 2026 18:42 UTC` |  |  |
@@ -657,7 +659,7 @@ Used by: not a record kind the pipeline tracks (ignored)
 | time.Activity v2 | `12 Feb 18:39 · upload complete` |  |  |
 | time.Activity v1 | `12 Feb 18:38 · object created` |  |  |
 
-Used by: not a record kind the pipeline tracks (ignored)
+Used by: case_61 step 1 REPORT_REMAINING_RECORD
 
 ### evidence_60 `marketing_profile_console.png`
 

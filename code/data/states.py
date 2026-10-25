@@ -59,6 +59,12 @@ def reading(o):
             return res
         if "enabled" in a:
             return "ACTIVE" if truthy(a["enabled"]) else "DISABLED"
+        # a status-type field (delivery status agrees with `enabled` in 94 of 94 text observations; mode does not)
+        st = " ".join(str(v).lower() for k, v in a.items() if k in ("status", "last_delivery_status", "state") and v)
+        if re.search(r"\b(delivered|healthy|running|active|live|enabled)\b", st):
+            return "ACTIVE"
+        if re.search(r"\b(stopped|paused|disabled|inactive)\b", st):
+            return "DISABLED"
         return "UNKNOWN"
     if res in ("FOUND", "NOT_FOUND", "IDENTIFIABLE", "REDACTED", "ANONYMIZED"):
         return res

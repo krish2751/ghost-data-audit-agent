@@ -19,6 +19,8 @@ def validate(status, steps, manifest=None, audit_at=None, activity_times=None, a
         probs.append("NOT_APPLICABLE must have no steps")
     if status == "COMPLETE" and any(s["phase"] != "VERIFICATION" for s in steps):
         probs.append("COMPLETE may only contain VERIFICATION steps")
+    if status == "COMPLETE" and not steps:
+        probs.append("COMPLETE with no steps: COMPLETE requires evidence-backed verification")
     for i, s in enumerate(steps, 1):
         if set(s) != set(STEP_FIELDS):
             probs.append(f"step {i}: wrong fields")

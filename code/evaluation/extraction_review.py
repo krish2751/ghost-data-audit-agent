@@ -107,6 +107,7 @@ def main():
     prefetch_intents(ctx, reqs)
     solved = solve_all(ctx, reqs)
     corpus = Corpus(ctx)
+    aliases = loader.link_aliases(ctx.act)
     label = lambda c: f"{c} (sample)" if c in sample_ids else c
     fid_label = lambda k: k if k.startswith("dataset/") else f"{k} `{Path(ctx.man[k]['file_path']).name}`"
 
@@ -157,8 +158,13 @@ def main():
             body.append(f"Empty-state text: \"{cell(data['empty_state_text'])}\"")
         for rec in data.get("records", []):
             rid = rec.get("resource_id")
+            via = ""
+            if not rid:  # same name -> record mapping as the evidence index (catalog aliases)
+                names = [v for part in ("identifiers", "other_fields") for v in (rec.get(part) or {}).values() if isinstance(v, str)]
+                rid = next((aliases[n] for n in names if n in aliases), None)
+                via = f" (no id on screen; mapped by the catalog name `{next(n for n in names if n in aliases)}`)" if rid else ""
             o = obs_by[fid].get(rid)
-            body += ["", f"**Record `{rid}`** — pipeline reading: `{reading(o) if o else 'not indexed'}`", "",
+            body += ["", f"**Record `{rid}`**{via} — pipeline reading: `{reading(o) if o else 'not indexed'}`", "",
                      "| field | value | elsewhere in the dataset | flag |", "|---|---|---|---|"]
             vals = [("resource_id", rid)] if rid else []
             vals += [(f"identifiers.{k}", v) for k, v in (rec.get("identifiers") or {}).items() if v]
