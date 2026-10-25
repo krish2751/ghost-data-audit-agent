@@ -174,6 +174,9 @@ These rest on 1-2 sample resources each, so they are the weakest measured rules.
 
 ## 5. Known unrecoverable sample misses
 
-- `account_004`, `audit_record_5569`, `audit_record_6645` appear in no participant file or activity row.
+- `account_004`, `audit_record_5569`, `audit_record_6645` appear in no participant file or activity row. Checked: exact ids
+  and bare numbers in all 99 sources (every evidence file incl. PDF text, the 11 cached screenshot extractions, activity,
+  identities, audit log, requests); the only exact hits are in `sample_output.csv`; number hits are other records
+  (`support_5569`, ticket `CS-5569`, `account_6645`) and pod names (`account-4`).
 - Ties: accounts `account_410` (case_23, 3 FAILED deletes for 3 open NOT_STARTED cases), `account_5482` / `account_7012`
   (cases 28/29, both NOT_STARTED, both FAILED); analytics records of cases 3, 21, 25-28 (each event fits two open cases).
