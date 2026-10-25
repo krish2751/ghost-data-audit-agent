@@ -7,7 +7,13 @@ writes the ordered `steps_json` to `output.csv` at the repository root.
 
 ## Setup and run
 
-Python 3 with the packages already installed in `.venv` (`anthropic`, `python-dotenv`, `pypdf`). From the repository root:
+Python 3.13 with the packages in `requirements.txt` (`anthropic`, `pypdf`, `python-dotenv`). From the repository root:
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+```
+
+Then:
 
 ```bash
 .venv/bin/python code/main.py
@@ -83,7 +89,11 @@ code/cache/               cached model answers
 ## Packaging
 
 ```bash
-zip -r code.zip README.md code -x "*/__pycache__/*" "*/.venv/*" "*/runs/*" "*/.DS_Store"
+zip -r code.zip README.md requirements.txt code -x "*/__pycache__/*" "*/.venv/*" "*/runs/*" "*.DS_Store"
 ```
+
+`code.zip` holds the solution, prompts, cached model answers and `code/evaluation/` (including `evaluation_report.md` and
+`usage_report.md`); `output.csv` and `log.txt` are submitted separately. `dataset/`, `.env` and virtual environments
+are not included.
 
 Submission link: https://wwww.hackerrank.com/contests/hackerrank-orchestrate-october26/challenges/ghost-data-still-exists

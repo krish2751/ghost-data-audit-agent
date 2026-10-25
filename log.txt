@@ -607,3 +607,34 @@ branch=main
 repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-25T10:30:00Z] Revert link-contradiction rule; fix case_39/case_61 generally; validator; package
+
+User Prompt (verbatim, secrets redacted):
+Revert this version 7a42fdf (the link-contradiction rule). Evidence shows it was wrong: case_39, case_61 and case_63 form one pattern (one screenshot at :00, a catalog link at :07, audit_at after both), and the catalog link is what ties the screenshot's record to the user. Restore case_63 to its earlier INCOMPLETE output.
+Then fix the other two using the same general logic, not per-case patches:
+
+case_39: evidence_14 shows data_flow_1121 continuous/healthy with selector [jain.aditi@gmail.com](mailto:jain.aditi@gmail.com) (user_14's email) before audit_at, so it's an active data flow.
+
+case_61: parse the attachment-catalog row format (activity_4007, object_19 → [priya.raman@gmail.com](mailto:priya.raman@gmail.com) / user_07), and use evidence_46, which shows delivery_confirmation_19.pdf in support-attachments, so it's a remaining record.
+
+Apply deletion_rules.csv to get the correct operations and states.
+Add a validator check: COMPLETE with an empty steps_json is invalid (COMPLETE requires evidence-backed verification). Report every case that fails it.
+Re-run the samples to confirm 32/32 status and 22/32 exact still hold, report which of the 518 change, regenerate output.csv from the cache, update the evaluation report, and commit. Then go straight to packaging.
+
+Agent Response Summary:
+Reverted 7a42fdf (log history kept; case_63 back to INCOMPLETE on marketing_001). Added the validator check: before the fixes it failed for exactly case_39 and case_61. General fixes: data-flow reading from status-type fields (delivery status agrees with enabled 94/94, mode does not); attachment-catalog link format parsed; screen records with no id mapped to the record their catalog row names; object_N tracked as SUPPORT_ATTACHMENT in object_storage (rule_06, catalog states "belongs only to" -> DELETE without a reader item); catalog links count only for the case whose [requested_at, audit_at] contains them (12/12 links fall in exactly one window; the 2 sample cases outside one lack the record, which keeps object_19 out of case_07). Result: 2 of 518 rows change (case_39 -> INCOMPLETE active data_flow_1121; case_61 -> INCOMPLETE remaining object_19), validator 0 problems, samples unchanged (32/32, 22/32, F1 97.34), 0 new model calls. Updated reports and docs; added requirements.txt; built code.zip (622 files) and verified a clean unzip plus dataset reproduces output.csv offline.
+
+Actions:
+* git revert of 7a42fdf (commit 355b369)
+* Edited code/validator.py, code/data/loader.py, code/data/evidence_index.py, code/data/states.py, code/schema.py, code/fallback.py, code/readers/condition_reader.py, code/evaluation/extraction_review.py (commit 5ace497)
+* Regenerated output.csv, code/runs/sample_pred.csv, code/evaluation/extraction_review.md; updated evaluation_report.md, usage_report.md, data_findings.md, CLAUDE.md
+* Added requirements.txt, README setup/packaging, .gitignore code.zip; built code.zip; clean-run check in the scratchpad
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=main
+repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
