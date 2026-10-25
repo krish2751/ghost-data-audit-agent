@@ -457,3 +457,23 @@ branch=main
 repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-25T02:05:00Z] Fix 1: one account per case
+
+User Prompt (verbatim, secrets redacted):
+(same turn as the cleanup entry above: "Cleanup and fresh push on exact sequence ... Part 2: Fresh look at the failing cases ...")
+
+Agent Response Summary:
+Part 2 analysis: all 32 sample answers follow the canonical order, and all 12 failures are missing or extra steps (no order or field errors). Fix 1 enforces one account per case (32 of 32 samples have exactly one; joint.py already assumes it): when several accounts are identifier-linked, keep those deleted inside the learned window. Affects 1 of 550 cases (case_17). Samples: exact 20 -> 21/32, precision 99.45 -> 100%, recall 93.26%, F1 96.26 -> 96.51%, field accuracy 93.26%; 518 output unchanged.
+
+Actions:
+* Edited code/fallback.py (account_bounds, one-account filter); wrote code/evaluation/failure_diff.py, analysis/q19_offsets_by_result.py, analysis/q20_cross_kind_order.py (cross-kind order = chance, rejected)
+* Updated analysis/data_findings.md
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=main
+repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

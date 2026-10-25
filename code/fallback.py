@@ -47,6 +47,11 @@ class Context:
                     self._joint, self._joint_info = joint.compute(self)
         return self._joint["account"].get(case_id)
 
+    def account_bounds(self):
+        """(lo, hi) minutes of an account DELETE event relative to reported_at, learned from identifier-linked pairs."""
+        self.joint_account(None)
+        return self._joint_info["bounds"]["account"]
+
     def joint_analytics(self, case_id):
         self.joint_account(case_id)
         return self._joint["analytics"].get(case_id)
@@ -141,6 +146,16 @@ def solve(ctx, req, heuristics=True):
 
     cand = {r: w for r, w in cand.items() if prefix_of(r) in PREFIX_INFO and seen_before(r)}
 
+    if heuristics:  # one account per case (32 of 32 samples): keep identifier-linked accounts deleted inside the learned window
+        accs = [r for r in cand if prefix_of(r) == "account"]
+        if len(accs) > 1:
+            lo, hi = ctx.account_bounds()
+            rep = P(req["reported_at"])
+            inside = [r for r in accs if any(a["event_type"] == "DELETE_RECORD" and lo <= (P(a["event_time"]) - rep).total_seconds() / 60 <= hi
+                                             for a in ctx.act_by_res.get(r, []))]
+            if inside:
+                for r in set(accs) - set(inside):
+                    del cand[r]
     if heuristics:  # records with no identifier: joint assignment over all requests (code/joint.py)
         acc = ctx.joint_account(req["case_id"])
         if acc and not any(prefix_of(r) == "account" for r in cand):

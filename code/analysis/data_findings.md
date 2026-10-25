@@ -97,6 +97,12 @@ These rest on 1-2 sample resources each, so they are the weakest measured rules.
 - Result on all 550: 164 of 285 cases lacking an account get one (162 strict, 2 relaxed); 121 stay ambiguous, mostly ties
   between same-status cases that share `reported_at`. 6 analytics records are assigned by mutual uniqueness.
 
+### One account per case (`fallback.solve`)
+- Every sample case has exactly one account (32 of 32), and the joint assignment already assumes it. When identifier
+  linking finds several accounts, only those whose DELETE event lies inside the learned account window are kept (all are
+  kept if none is). This applies to 1 of 550 cases (case_17: `account_4092` deleted at -46 min is kept; `account_6523`,
+  linked by a March lookup and deleted 24 days after the report, is dropped). Samples: exact 20 -> 21, precision 99.45 -> 100.
+
 ### Retained records seen only in a later export (`LATE_OK`, `q18_rule_evidence.py` part 3)
 - The problem statement requires every policy-required retained record to remain available. 5 sample audit records that
   the answers verify PRESENT have no pre-audit file, only a later-captured export whose own record time is <= `audit_at`;
