@@ -27,7 +27,8 @@ runs the 32 public samples to `code/runs/sample_pred.csv`.
 
 scores a prediction file against `dataset/sample_output.csv`.
 
-Model answers are cached in `code/cache/`, so a run needs no API key and makes no API calls by default. To call the API
+Model answers are cached in `code/cache/` (the answers of the final API run, see `code/evaluation/usage_report.md`), so a
+run needs no API key and makes no API calls by default. To call the API
 for requests that are not cached, set `LLM_BACKEND=api` and put `ANTHROPIC_API_KEY` in the environment or in an
 uncommitted `.env` at the repository root.
 
@@ -73,8 +74,8 @@ code/readers/             intent and rule-condition readers, reader loop
 code/tools/registry.py    time-gated tools for the condition reader
 code/prompts/             reader prompts
 code/planner.py, code/validator.py, code/schema.py, code/intent.py, code/llm_client.py, code/screenshots.py
-code/evaluation/          scorer, intent and condition evaluations, custom intent cases, hardcoding audit,
-                          failure diff and the generated mismatch review (mismatch_review.py -> mismatch_review.md)
+code/evaluation/          scorer, intent and condition evaluations, custom intent and end-to-end cases, hardcoding
+                          audit, failure diff, mismatch review, usage summary; evaluation_report.md, usage_report.md
 code/analysis/            measurement scripts; data_findings.md lists the data pattern behind every rule
 code/cache/               cached model answers
 ```

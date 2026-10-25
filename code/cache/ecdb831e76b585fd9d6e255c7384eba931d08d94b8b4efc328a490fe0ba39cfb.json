@@ -9,13 +9,13 @@
   "cache_read_input_tokens": 0,
   "cache_creation_input_tokens": 0
  },
- "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks the company to verify their profile is gone and remaining records cannot identify them, a follow-up to deletion, which counts as deletion.\"}",
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks the company to verify the profile is gone and remaining records are non-identifying, a follow-up to deletion, which counts as deletion.\"}",
  "content": [
   {
-   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks the company to verify their profile is gone and remaining records cannot identify them, a follow-up to deletion, which counts as deletion.\"}",
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks the company to verify the profile is gone and remaining records are non-identifying, a follow-up to deletion, which counts as deletion.\"}",
    "type": "text"
   }
  ],
  "request_tools": [],
- "created": "2026-10-24T18:47:10Z"
+ "created": "2026-10-25T08:03:32Z"
 }

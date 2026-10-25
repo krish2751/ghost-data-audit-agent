@@ -1,0 +1,25 @@
+{
+ "key": "c344f4ff7b91cd4bcfb588e9324ab2a7b0e909435847b8ce5cb110a7c8bce9f4",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 3524,
+  "output_tokens": 116,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_2055\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_43\", \"reason\": \"The uploader aoi-mori@proton.me matches the search record for user_453 (Aoi Mori). The attachment is a delivery confirmation and shows no sign of other people's data.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_2055\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_43\", \"reason\": \"The uploader aoi-mori@proton.me matches the search record for user_453 (Aoi Mori). The attachment is a delivery confirmation and shows no sign of other people's data.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-25T08:03:58Z"
+}

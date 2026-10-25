@@ -1,0 +1,25 @@
+{
+ "key": "b6ee9d848b7cd7bb341c05a8138aca562be1be95e431e81febe863be84436ac8",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 3568,
+  "output_tokens": 100,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_2295\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"evidence_47\", \"reason\": \"The uploader's email isn't linked to user_501. The attachment's contents aren't available, so I can't tell whether it involves other people.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_2295\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"evidence_47\", \"reason\": \"The uploader's email isn't linked to user_501. The attachment's contents aren't available, so I can't tell whether it involves other people.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-25T08:04:02Z"
+}

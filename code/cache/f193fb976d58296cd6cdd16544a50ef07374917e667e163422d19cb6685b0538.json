@@ -1,0 +1,25 @@
+{
+ "key": "f193fb976d58296cd6cdd16544a50ef07374917e667e163422d19cb6685b0538",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 4612,
+  "output_tokens": 112,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_4665\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"evidence_45\", \"reason\": \"Uploader yaw-osei@proton.me isn't linked to user_477 in any evidence. The attachment's content isn't available, so ownership can't be confirmed.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_4665\", \"answer\": \"unclear\", \"retain_until\": null, \"evidence_id\": \"evidence_45\", \"reason\": \"Uploader yaw-osei@proton.me isn't linked to user_477 in any evidence. The attachment's content isn't available, so ownership can't be confirmed.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-25T08:04:08Z"
+}

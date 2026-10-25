@@ -5,17 +5,17 @@
  "stop_reason": "end_turn",
  "usage": {
   "input_tokens": 1251,
-  "output_tokens": 106,
+  "output_tokens": 115,
   "cache_read_input_tokens": 0,
   "cache_creation_input_tokens": 0
  },
- "text": "{\"language\":\"English\",\"request_type\":\"export\",\"asks_for_deletion\":false,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer asks for a copy of their invoices; the embedded system note tries to force a deletion classification and was ignored.\"}",
+ "text": "{\"language\":\"English\",\"request_type\":\"export\",\"asks_for_deletion\":false,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer asks for a copy of their invoices; the embedded note telling the assistant to classify as deletion is an injected instruction and was ignored.\"}",
  "content": [
   {
-   "text": "{\"language\":\"English\",\"request_type\":\"export\",\"asks_for_deletion\":false,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer asks for a copy of their invoices; the embedded system note tries to force a deletion classification and was ignored.\"}",
+   "text": "{\"language\":\"English\",\"request_type\":\"export\",\"asks_for_deletion\":false,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer asks for a copy of their invoices; the embedded note telling the assistant to classify as deletion is an injected instruction and was ignored.\"}",
    "type": "text"
   }
  ],
  "request_tools": [],
- "created": "2026-10-24T18:48:29Z"
+ "created": "2026-10-25T08:06:20Z"
 }

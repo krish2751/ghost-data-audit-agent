@@ -9,10 +9,10 @@
   "cache_read_input_tokens": 0,
   "cache_creation_input_tokens": 0
  },
- "text": "{\"results\": [{\"item_id\": \"support_9474\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message is a one-line summary of a customer contacting support about account access. That is customer-support exchange context.\"}]}",
+ "text": "{\"results\": [{\"item_id\": \"support_9474\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The record is a one-line summary of a customer contacting support about account access. That is a customer-support exchange.\"}]}",
  "content": [
   {
-   "text": "{\"results\": [{\"item_id\": \"support_9474\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message is a one-line summary of a customer contacting support about account access. That is customer-support exchange context.\"}]}",
+   "text": "{\"results\": [{\"item_id\": \"support_9474\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The record is a one-line summary of a customer contacting support about account access. That is a customer-support exchange.\"}]}",
    "type": "text"
   }
  ],
@@ -21,5 +21,5 @@
   "get_resource",
   "read_evidence"
  ],
- "created": "2026-10-24T19:02:10Z"
+ "created": "2026-10-25T08:03:52Z"
 }

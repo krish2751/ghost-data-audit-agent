@@ -1,0 +1,21 @@
+{
+ "key": "6c425d649c0f705f93a1c01979b1150740f5cf5a4d221d1028cce7f2a4fa672e",
+ "model": "claude-sonnet-5-5",
+ "tag": "intent",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 1242,
+  "output_tokens": 112,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"language\":\"English\",\"request_type\":\"access\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks for a copy of all personal data held, including order history, and explicitly states they want to keep the account and this is not a deletion request.\"}",
+ "content": [
+  {
+   "text": "{\"language\":\"English\",\"request_type\":\"access\",\"asks_for_deletion\":false,\"negation_or_exclusion\":true,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer asks for a copy of all personal data held, including order history, and explicitly states they want to keep the account and this is not a deletion request.\"}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [],
+ "created": "2026-10-25T08:08:15Z"
+}

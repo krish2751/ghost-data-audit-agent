@@ -5,17 +5,17 @@
  "stop_reason": "end_turn",
  "usage": {
   "input_tokens": 1248,
-  "output_tokens": 109,
+  "output_tokens": 112,
   "cache_read_input_tokens": 0,
   "cache_creation_input_tokens": 0
  },
- "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer requests permanent account deletion, including data linked to current or earlier identifiers, and asks to be notified after review.\"}",
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly requests permanent account deletion, including data linked to current or earlier identifiers, and asks for notification after review.\"}",
  "content": [
   {
-   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer requests permanent account deletion, including data linked to current or earlier identifiers, and asks to be notified after review.\"}",
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":false,\"reason\":\"Customer explicitly requests permanent account deletion, including data linked to current or earlier identifiers, and asks for notification after review.\"}",
    "type": "text"
   }
  ],
  "request_tools": [],
- "created": "2026-10-24T18:48:04Z"
+ "created": "2026-10-25T08:03:18Z"
 }

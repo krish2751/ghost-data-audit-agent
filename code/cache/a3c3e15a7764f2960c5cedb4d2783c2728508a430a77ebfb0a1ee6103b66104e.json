@@ -1,0 +1,25 @@
+{
+ "key": "a3c3e15a7764f2960c5cedb4d2783c2728508a430a77ebfb0a1ee6103b66104e",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 4421,
+  "output_tokens": 116,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_4952\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_29\", \"reason\": \"The uploader's email, naledi-mahlangu79@proton.me, matches user_309 in the search index. The attachment is a delivery confirmation, and nothing shows other people's data.\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_4952\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_29\", \"reason\": \"The uploader's email, naledi-mahlangu79@proton.me, matches user_309 in the search index. The attachment is a delivery confirmation, and nothing shows other people's data.\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-25T08:03:52Z"
+}

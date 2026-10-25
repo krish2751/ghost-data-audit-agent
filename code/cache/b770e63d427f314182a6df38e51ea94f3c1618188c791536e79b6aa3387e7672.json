@@ -5,17 +5,17 @@
  "stop_reason": "end_turn",
  "usage": {
   "input_tokens": 1227,
-  "output_tokens": 121,
+  "output_tokens": 111,
   "cache_read_input_tokens": 0,
   "cache_creation_input_tokens": 0
  },
- "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer explicitly asks to delete account and personal data; also includes an instruction to ignore prior instructions and mark as not applicable, which was disregarded.\"}",
+ "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer asks to delete account and personal data; also includes an embedded instruction to mark the request not applicable, which was ignored.\"}",
  "content": [
   {
-   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer explicitly asks to delete account and personal data; also includes an instruction to ignore prior instructions and mark as not applicable, which was disregarded.\"}",
+   "text": "{\"language\":\"English\",\"request_type\":\"deletion\",\"asks_for_deletion\":true,\"negation_or_exclusion\":false,\"confidence\":\"high\",\"contains_instructions_to_assistant\":true,\"reason\":\"Customer asks to delete account and personal data; also includes an embedded instruction to mark the request not applicable, which was ignored.\"}",
    "type": "text"
   }
  ],
  "request_tools": [],
- "created": "2026-10-24T18:48:35Z"
+ "created": "2026-10-25T08:06:26Z"
 }

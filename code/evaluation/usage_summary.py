@@ -1,8 +1,10 @@
 """Token and cost summary of the model calls behind a run, from the client's usage log and cache entries.
 
-Usage: .venv/bin/python code/evaluation/usage_summary.py [--requests N]
+Usage: .venv/bin/python code/evaluation/usage_summary.py [--requests N] [--log PATH]
 Every API call appends {key, model, tag, tokens} to code/cache/usage_log.jsonl (llm_client). Cache entries that are used
-by the run but were not called in it (none, or reused screenshot extractions) are listed separately from their entry.
+by the run but were not called in it (reused screenshot extractions: entries not in the log and created before its
+first call) are listed separately from their entry. --log selects a saved log (code/evaluation/final_run_usage_log.jsonl
+is the final run's).
 Prices are USD per million tokens (Claude API list prices for the models used).
 """
 import argparse
@@ -25,15 +27,18 @@ def cost(model, t):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--requests", type=int, default=518, help="requests the run answered (for per-request averages)")
+    ap.add_argument("--log", default=str(llm_client.USAGE_LOG))
     args = ap.parse_args()
+    log = Path(args.log)
     logged = []
-    if llm_client.USAGE_LOG.exists():
-        logged = [json.loads(l) for l in llm_client.USAGE_LOG.read_text(encoding="utf-8").splitlines() if l.strip()]
+    if log.exists():
+        logged = [json.loads(l) for l in log.read_text(encoding="utf-8").splitlines() if l.strip()]
     called = {e["key"] for e in logged}
+    entries = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in sorted(llm_client.CACHE_DIR.glob("*.json"))}
+    start = min((entries[k]["created"] for k in called if k in entries), default="9999")
     reused = []
-    for p in sorted(llm_client.CACHE_DIR.glob("*.json")):
-        d = json.loads(p.read_text(encoding="utf-8"))
-        if d["key"] not in called:
+    for d in entries.values():
+        if d["key"] not in called and d.get("created", "") < start:
             reused.append({"key": d["key"], "model": d["model"], "tag": d.get("tag", ""), **d["usage"],
                            "created": d.get("created")})
 
@@ -62,7 +67,7 @@ def main():
                 tot["cost"] += c
         return tot
 
-    t1 = table(logged, f"API calls made by the run ({llm_client.USAGE_LOG.relative_to(llm_client.ROOT)})")
+    t1 = table(logged, f"API calls made by the run ({log.resolve().relative_to(llm_client.ROOT)})")
     t2 = table(reused, "Cached answers used but not called in this run") if reused else None
     n = args.requests
     print("\n## Totals\n")

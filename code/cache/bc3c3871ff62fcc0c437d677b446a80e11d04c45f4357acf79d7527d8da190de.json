@@ -1,0 +1,25 @@
+{
+ "key": "bc3c3871ff62fcc0c437d677b446a80e11d04c45f4357acf79d7527d8da190de",
+ "model": "claude-sonnet-5-5",
+ "tag": "conditions",
+ "stop_reason": "end_turn",
+ "usage": {
+  "input_tokens": 6537,
+  "output_tokens": 185,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ },
+ "text": "{\"results\": [{\"item_id\": \"support_3802\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_38\", \"reason\": \"The attachment was uploaded by lucia-garcia@proton.me, who is user_405's email address. It is a delivery confirmation, and nothing in the record points to other people.\"}, {\"item_id\": \"support_6569\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_38\", \"reason\": \"The message is a support email about a delivery update for an affected order (running shoes).\"}]}",
+ "content": [
+  {
+   "text": "{\"results\": [{\"item_id\": \"support_3802\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_38\", \"reason\": \"The attachment was uploaded by lucia-garcia@proton.me, who is user_405's email address. It is a delivery confirmation, and nothing in the record points to other people.\"}, {\"item_id\": \"support_6569\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"evidence_38\", \"reason\": \"The message is a support email about a delivery update for an affected order (running shoes).\"}]}",
+   "type": "text"
+  }
+ ],
+ "request_tools": [
+  "search_evidence",
+  "get_resource",
+  "read_evidence"
+ ],
+ "created": "2026-10-25T08:03:56Z"
+}

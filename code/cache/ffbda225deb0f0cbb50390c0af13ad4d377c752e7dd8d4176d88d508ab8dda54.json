@@ -5,14 +5,14 @@
  "stop_reason": "end_turn",
  "usage": {
   "input_tokens": 1750,
-  "output_tokens": 150,
+  "output_tokens": 132,
   "cache_read_input_tokens": 0,
   "cache_creation_input_tokens": 0
  },
- "text": "{\"results\": [{\"item_id\": \"support_2315\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message describes contact details supplied for a delivery query, which is customer-support and order context.\"}, {\"item_id\": \"support_7208\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message describes contact details supplied for a delivery query, which is customer-support and order context.\"}]}",
+ "text": "{\"results\": [{\"item_id\": \"support_2315\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message describes a delivery query, so it has support and order context.\"}, {\"item_id\": \"support_7208\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message describes a delivery query, so it has support and order context.\"}]}",
  "content": [
   {
-   "text": "{\"results\": [{\"item_id\": \"support_2315\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message describes contact details supplied for a delivery query, which is customer-support and order context.\"}, {\"item_id\": \"support_7208\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message describes contact details supplied for a delivery query, which is customer-support and order context.\"}]}",
+   "text": "{\"results\": [{\"item_id\": \"support_2315\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message describes a delivery query, so it has support and order context.\"}, {\"item_id\": \"support_7208\", \"answer\": \"yes\", \"retain_until\": null, \"evidence_id\": \"\", \"reason\": \"The message describes a delivery query, so it has support and order context.\"}]}",
    "type": "text"
   }
  ],
@@ -21,5 +21,5 @@
   "get_resource",
   "read_evidence"
  ],
- "created": "2026-10-24T19:02:00Z"
+ "created": "2026-10-25T08:03:42Z"
 }
