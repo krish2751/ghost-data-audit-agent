@@ -477,3 +477,23 @@ branch=main
 repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-25T02:40:00Z] Fix 2: outcome-based window for unlinked analytics
+
+User Prompt (verbatim, secrets redacted):
+(same turn as the cleanup entry above: "Cleanup and fresh push on exact sequence ... Part 2: Fresh look at the failing cases ...")
+
+Agent Response Summary:
+Measured that remediation-event timing follows the record's outcome, not its kind: clean records' events precede the report (backup 35/35, data_flow 36/36, support 36/39, tombstone 5/5), violations follow it (0 of 545 before). The analytics window was learned only from identifier-linked analytics, which are all violations, so the 7 anonymized sample analytics (-29..-6 min) fell outside it. joint.py now learns window and status/result pairs per outcome from all non-account kinds and fits an unlinked analytics event by its record's own reading. Leave-one-kind-out hold-out: 41 recovered, 0 wrong. Samples: recall 93.26 -> 93.78, F1 96.51 -> 96.79, field 93.78, exact 21/32 unchanged, precision 100%; 20 of 518 rows gain steps, no status change.
+
+Actions:
+* Edited code/joint.py (robust_bounds, outcome_model, outcome_of, assign_unlinked replace the per-kind analytics window); wrote analysis/q21_leave_kind_out.py, extended q19_offsets_by_result.py
+* Regenerated output.csv; updated analysis/data_findings.md, CLAUDE.md
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=main
+repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none

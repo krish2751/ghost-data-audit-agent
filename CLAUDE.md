@@ -16,7 +16,7 @@ Keep the Decisions and Open questions lists current whenever something is settle
 - **Complete only when:** every relevant copy got its `deletion_rules.csv` treatment, no active sync/import/restore path can recreate the data, retained records keep only permitted identifiers, and required retained records still exist.
 - **Architecture:** code makes every decision; the model only reads. `code/main.py` -> `fallback.py` (decision engine) using `data/` (loader, identity, evidence index, readings), `joint.py` (records with no identifier), `planner.py`, `validator.py`. Readers in `code/readers/` (intent; rule conditions with the time-gated tools in `tools/registry.py`) return facts only, through the cached client `llm_client.py`; screenshots are extracted once (`screenshots.py`). Prompts in `code/prompts/`. README.md describes setup and run.
 - **Rule sources:** every rule comes from `problem_statement.md` or a measured pattern documented with numbers in `code/analysis/data_findings.md`; unmeasured items are listed there under "Flagged".
-- **Status (code-produced numbers only):** samples status 32/32, exact sequence 20/32, step P/R/F1 99.45/93.26/96.26, field accuracy 93.26. Root `output.csv` 518 rows (356 INCOMPLETE, 152 COMPLETE, 10 NOT_APPLICABLE). Hardcoding audit (`code/evaluation/hardcoding_audit.py`): solver 0 hits. Not done: evaluation_report.md, usage_report.md (needs the final API run), code.zip.
+- **Status (code-produced numbers only):** samples status 32/32, exact sequence 21/32, step P/R/F1 100/93.78/96.79, field accuracy 93.78. Root `output.csv` 518 rows (356 INCOMPLETE, 152 COMPLETE, 10 NOT_APPLICABLE). Hardcoding audit (`code/evaluation/hardcoding_audit.py`): solver 0 hits. Not done: evaluation_report.md, usage_report.md (needs the final API run), code.zip.
 - **Model calls:** default backend is cache only (no API spending); `LLM_BACKEND=api` enables API calls. Do NOT set it until the owner says so. Results judged inside the coding session are never evidence and are not stored.
 - **Decisions so far:**
   - State and cited evidence come only from files captured <= `audit_at` (equality included). Identity links may come from any file; a resource counts only if seen in a file/activity row <= `audit_at`; audit-log identity changes apply only up to `audit_at`.
@@ -25,7 +25,8 @@ Keep the Decisions and Open questions lists current whenever something is settle
   - Flow/backup is a risk when evidence reads enabled/restorable; activity `reported_result` values are claims.
   - Link by current/historical emails, `user_id`/`customer_reference`/`subject_reference`, SHA-256 of the lowercase email, phones; not by names.
   - Intent: the reader decides; `CLASSIFY_REQUEST` intake rows only break ties when the reader is not high-confidence. Verifying a deletion counts as a deletion request.
-  - Records with no identifier: joint assignment (one account per case, other users' claims excluded, status/result agreement, window learned from identifier-linked pairs). Ties stay unresolved.
+  - Records with no identifier: joint assignment (one account per case, other users' claims excluded, status/result agreement, window learned from identifier-linked pairs; analytics use a window and pairs learned per outcome from all non-account kinds). Ties stay unresolved.
+  - One account per case: when several accounts are identifier-linked, keep those deleted inside the learned window.
   - Verification lists the full end state; INCOMPLETE remediation/verification use empty `evidence_id`. Rows sorted by `case_id` as strings.
   - Link reader and session backend removed (no code-produced evidence of value).
 - **Open questions:**

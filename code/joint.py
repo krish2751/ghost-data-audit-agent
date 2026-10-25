@@ -1,4 +1,4 @@
-"""Joint assignment of unlinked account DELETE events to cases.
+"""Joint assignment of records that carry no identifier (account DELETE events, analytics ANONYMIZE events) to cases.
 
 Relations used (all derived from the data, none from labels):
   * exclusivity: each case has one account and each account belongs to one case (propagated like sudoku);
@@ -9,10 +9,27 @@ Relations used (all derived from the data, none from labels):
 from collections import Counter
 
 from data import loader
+from data.evidence_index import prefix_of
 
 
 MAD_K = 10      # offsets further than MAD_K median-absolute-deviations from the median are unrelated events (see data_findings.md)
 PAD_SHARE = 0.1  # learned range padded by this share of its width on each side (see data_findings.md)
+
+
+REMEDIATION_EVENTS = ("DELETE_RECORD", "ANONYMIZE_RECORD", "REDACT_RECORD", "DISABLE_DATA_FLOW", "BLOCK_RESTORE")
+
+
+def robust_bounds(xs):
+    """(lo, hi) of offsets after dropping values more than MAD_K median absolute deviations from the median; None if empty."""
+    if not xs:
+        return None
+    xs = sorted(xs)
+    med = xs[len(xs) // 2]
+    mad = sorted(abs(x - med) for x in xs)[len(xs) // 2] or 1.0
+    inl = [x for x in xs if abs(x - med) <= MAD_K * mad]
+    lo, hi = min(inl), max(inl)
+    pad = PAD_SHARE * (hi - lo)
+    return (lo - pad, hi + pad)
 
 
 def learn_bounds(ctx, by_case, pairs, event_type):
@@ -23,41 +40,62 @@ def learn_bounds(ctx, by_case, pairs, event_type):
         for a in ctx.act_by_res.get(rid, []):
             if a["event_type"] == event_type:
                 xs.append((P(a["event_time"]) - P(by_case[cid]["reported_at"])).total_seconds() / 60)
-    if not xs:
-        return None
-    xs.sort()
-    med = xs[len(xs) // 2]
-    mad = sorted(abs(x - med) for x in xs)[len(xs) // 2] or 1.0
-    inl = [x for x in xs if abs(x - med) <= MAD_K * mad]
-    lo, hi = min(inl), max(inl)
-    pad = PAD_SHARE * (hi - lo)
-    return (lo - pad, hi + pad)
+    return robust_bounds(xs)
 
 
-def _mutual_unique(ctx, base, reqs, uid_of, assigned_any, kind_prefix, event_type, target, bounds, min_share, claims):
-    """Assign events of one kind (e.g. analytics ANONYMIZE) to cases when event and case pick each other uniquely.
-
-    Candidates for a case: events in its window, unclaimed, not taken, with a learned-compatible (status, result).
-    Only cases without such a resource yet take part."""
+def outcome_model(ctx, base, by_case, min_share, skip_kind=None):
+    """Per outcome ('clean' / 'violation' at audit_at): offset bounds and compatible (reported_status, result) pairs of
+    remediation events, learned from identifier-linked non-account records. Timing follows the outcome, not the kind
+    (data_findings.md), so records that can never carry an identifier (anonymized analytics) borrow it from other kinds."""
     from fallback import P
-    if not bounds:
-        return {}
-    by_case = {r["case_id"]: r for r in reqs}
-    evs = [a for a in ctx.act if a["event_type"] == event_type and a["target_system"] == target]
-    pair, tot = Counter(), Counter()
-    for cid, rid in assigned_any:
-        if rid.startswith(kind_prefix):
-            for a in ctx.act_by_res.get(rid, []):
-                if a["event_type"] == event_type:
-                    pair[(by_case[cid]["reported_status"], a["reported_result"])] += 1; tot[by_case[cid]["reported_status"]] += 1
-    compat = {k for k, n in pair.items() if n / tot[k[0]] >= min_share}
-    have = {cid for cid, rid in assigned_any if rid.startswith(kind_prefix)}
-    taken = {rid for _, rid in assigned_any}
+    xs, pair, tot = {"clean": [], "violation": []}, Counter(), Counter()
+    for c, (res, _) in base.items():
+        for d in res["resources"]:
+            kind = prefix_of(d["resource_id"])
+            if kind == "account" or kind == skip_kind:
+                continue
+            o = "violation" if d["violation"] else "clean"
+            st = by_case[c]["reported_status"]
+            for a in ctx.act_by_res.get(d["resource_id"], []):
+                if a["event_type"] in REMEDIATION_EVENTS:
+                    xs[o].append((P(a["event_time"]) - P(by_case[c]["reported_at"])).total_seconds() / 60)
+                    pair[(o, st, a["reported_result"])] += 1
+                    tot[(o, st)] += 1
+    return {o: {"bounds": robust_bounds(xs[o]),
+                "compat": {(st, rs) for (oo, st, rs), n in pair.items() if oo == o and n / tot[(o, st)] >= min_share}} for o in xs}
+
+
+def outcome_of(ctx, rid, audit_at):
+    """'clean' or 'violation' from the record's own observations captured by audit_at; None without one."""
+    from fallback import _decide
+    d = _decide(ctx, rid, "", audit_at)
+    return None if not d else ("violation" if d["violation"] else "clean")
+
+
+def assign_unlinked(ctx, reqs, uid_of, known, kind, event_type, model, claims):
+    """Assign unlinked `kind` records to cases when record and case pick each other uniquely.
+
+    A record's event fits a case when the record's own outcome at the case's audit_at selects a learned window and
+    status/result set that the event satisfies, the record is not taken and no other user claims it. Only cases without a
+    `kind` record yet take part."""
+    from fallback import P
+    evs = [a for a in ctx.act if a["event_type"] == event_type and prefix_of(a["resource_id"]) == kind]
+    have = {cid for cid, rid in known if prefix_of(rid) == kind}
+    taken = {rid for _, rid in known}
     open_cases = [r for r in reqs if r["case_id"] in uid_of and r["case_id"] not in have]
+    outcome = {}
+
     def fits(r, a):
-        return (a["event_time"] <= r["audit_at"] and bounds[0] <= (P(a["event_time"]) - P(r["reported_at"])).total_seconds() / 60 <= bounds[1]
-                and (r["reported_status"], a["reported_result"]) in compat and a["resource_id"] not in taken
-                and not (claims.get(a["resource_id"], set()) - {uid_of[r["case_id"]]}))
+        if a["event_time"] > r["audit_at"] or a["resource_id"] in taken or (claims.get(a["resource_id"], set()) - {uid_of[r["case_id"]]}):
+            return False
+        key = (a["resource_id"], r["audit_at"])
+        if key not in outcome:
+            outcome[key] = outcome_of(ctx, a["resource_id"], r["audit_at"])
+        m = model.get(outcome[key])
+        if not m or not m["bounds"]:
+            return False
+        off = (P(a["event_time"]) - P(r["reported_at"])).total_seconds() / 60
+        return m["bounds"][0] <= off <= m["bounds"][1] and (r["reported_status"], a["reported_result"]) in m["compat"]
     out = {}
     for r in open_cases:
         cs = sorted({a["resource_id"] for a in evs if fits(r, a)})
@@ -133,14 +171,13 @@ def compute(ctx, window_min=None, min_share=0.05, hide=frozenset(), base=None, a
                 if len(c) == 1:
                     out[cid] = (c[0], "joint_strict" if strict else "joint_relaxed")
                     taken.add(c[0]); del need[cid]; changed = True
-    extra = {}
+    extra, model = {}, None
     if analytics:
         known = [(c, a) for c, a in assigned.items()] + [(c, a) for c, (a, _) in out.items()]
         for c, d in base.items():
             for x in d[0]["resources"]:
                 known.append((c, x["resource_id"]))
-        a_pairs = sorted({(c, r) for c, r in known if r.startswith("analytics")})
-        a_bounds = (-float(window_min), float(window_min)) if window_min else learn_bounds(ctx, by_case, a_pairs, "ANONYMIZE_RECORD")
-        extra = _mutual_unique(ctx, base, reqs, uid_of, known, "analytics", "ANONYMIZE_RECORD", "analytics_platform", a_bounds, min_share, claims)
+        model = outcome_model(ctx, base, by_case, min_share)
+        extra = assign_unlinked(ctx, reqs, uid_of, known, "analytics", "ANONYMIZE_RECORD", model, claims)
     return {"account": out, "analytics": extra}, {"ambiguous": len(need), "assigned": len(out), "analytics": len(extra),
-                                                 "bounds": {"account": bounds, "analytics": a_bounds if analytics else None}}
+                                                 "bounds": {"account": bounds, "outcome_model": model}}

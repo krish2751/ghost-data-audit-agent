@@ -79,8 +79,7 @@ These rest on 1-2 sample resources each, so they are the weakest measured rules.
 - Time window: the problem statement gives none. Account DELETE minus `reported_at` lies in -75..+8 min for 252 of 262
   identifier-linked pairs (median -59, 5th percentile -74); the other 10 are days to months away (`q14_window_evidence.py`).
   The window is learned at run time from those pairs: drop offsets more than `MAD_K=10` median absolute deviations from the
-  median, take min..max, pad each side by `PAD_SHARE=0.1` of the width. Learned now: accounts -83..+16 min, analytics
-  ANONYMIZE events +29..+142 min.
+  median, take min..max, pad each side by `PAD_SHARE=0.1` of the width. Learned now for accounts: -83..+16 min.
 - Label-free hold-out (`q16_holdout_accounts.py`, `q18_rule_evidence.py` part 2): the 254 identifier-linked accounts with
   a DELETE event are hidden in 5 folds grouped by user and must be recovered from activity alone.
 
@@ -95,7 +94,39 @@ These rest on 1-2 sample resources each, so they are the weakest measured rules.
 
   The constants are not sensitive within these ranges; outlier removal itself is what matters.
 - Result on all 550: 164 of 285 cases lacking an account get one (162 strict, 2 relaxed); 121 stay ambiguous, mostly ties
-  between same-status cases that share `reported_at`. 6 analytics records are assigned by mutual uniqueness.
+  between same-status cases that share `reported_at`.
+- Cross-kind order is not a relation: within a `reported_at` group, two cases keep the same relative order in two event
+  blocks in 68 of 137 comparisons (49.6%, chance) (`q20_cross_kind_order.py`), so these ties are genuine.
+
+### Unlinked analytics: timing follows the outcome, not the kind (`q19_offsets_by_result.py`, `q21_leave_kind_out.py`)
+- Remediation events of identifier-linked non-account records, minutes from `reported_at`, by the record's outcome at `audit_at`:
+
+  | kind | clean: n, range, before report | violation: n, range, before report |
+  |---|---|---|
+  | backup | 35, -8..-3, 35/35 | 1, -8, 1/1 |
+  | data_flow | 36, -15..-7, 36/36 | none |
+  | support | 39, -22..+83, 36/39 | 151, +1..+113, 0/151 |
+  | tombstone | 5, -29..-28, 5/5 | 5, +42..+60, 0/5 |
+  | search | none | 281, +10..+98, 0/281 |
+  | export | none | 31, +5..+65, 0/31 |
+  | analytics | 1, +49, 0/1 | 77, +38..+133, 0/77 |
+  | account (separate block) | 194, -75..-44 | 58, -75..+8 |
+
+- So a window learned from identifier-linked analytics alone is biased: anonymized analytics never carry an identifier, and
+  the linkable ones are violations after the report. All 7 analytics records the sample answers verify ANONYMIZED have
+  SUCCESS events 6-29 min before the report, outside that window (+29..+142).
+- Rule (`joint.outcome_model`, `joint.assign_unlinked`): learn per outcome, from all identifier-linked non-account records,
+  the offset window (same MAD_K / PAD_SHARE rule) and the compatible (reported_status, result) pairs; an unlinked analytics
+  event fits a case when the record's own pre-audit reading gives its outcome and the event satisfies that outcome's window
+  and pairs; assign on mutual uniqueness. Learned now: clean -37..+59 min with SUCCESS for every status; violation
+  -22..+147 min.
+- Leave-one-kind-out hold-out (each kind's identifier links hidden, model learned from the other kinds): 41 hidden records
+  recovered, 0 wrong, 597 unresolved (competing events); 23 assignments went to cases that had no identifier-linked record of
+  that kind and cannot be checked without labels.
+- Effect: analytics assignments over 550 requests 6 -> 21. Samples: recall 93.26 -> 93.78, F1 96.51 -> 96.79, exact 21/32
+  unchanged (the new record, case_04 `analytics_901`, sits in a case that also misses `account_004`); 20 of 518 outputs gain
+  steps, no status changes. The other 6 sample analytics records are ties (cases 25/26 and 27/28 share `reported_at`;
+  case_03 and case_21 each compete with another open case).
 
 ### One account per case (`fallback.solve`)
 - Every sample case has exactly one account (32 of 32), and the joint assignment already assumes it. When identifier
@@ -144,4 +175,5 @@ These rest on 1-2 sample resources each, so they are the weakest measured rules.
 ## 5. Known unrecoverable sample misses
 
 - `account_004`, `audit_record_5569`, `audit_record_6645` appear in no participant file or activity row.
-- Ties: accounts and analytics records of same-status cases sharing `reported_at` (cases 3, 23, 25-28).
+- Ties: accounts `account_410` (case_23, 3 FAILED deletes for 3 open NOT_STARTED cases), `account_5482` / `account_7012`
+  (cases 28/29, both NOT_STARTED, both FAILED); analytics records of cases 3, 21, 25-28 (each event fits two open cases).
