@@ -1,5 +1,5 @@
 """Turn per-resource decisions into the ordered findings / remediation / verification steps."""
-from schema import PREFIX_INFO, TREATMENT
+from schema import TREATMENT
 from validator import sort_steps
 
 FINDING_OP = {"REMAINING": "REPORT_REMAINING_RECORD", "EXPOSED": "REPORT_EXPOSED_PII",
@@ -13,10 +13,6 @@ VERIFY_OP = {"DELETE": ("VERIFY_RECORD_ABSENT", "ABSENT"), "REDACT": ("VERIFY_RE
              "ANONYMIZE": ("VERIFY_RECORD_ANONYMIZED", "ANONYMIZED"), "RETAIN": ("VERIFY_RECORD_PRESENT", "PRESENT"),
              "DISABLE": ("VERIFY_DATA_FLOW_DISABLED", "DISABLED"), "BLOCK_RESTORE": ("VERIFY_RESTORE_BLOCKED", "BLOCKED")}
 
-
-def system_of(resource_id):
-    from data.evidence_index import prefix_of
-    return PREFIX_INFO[prefix_of(resource_id)][0]
 
 
 def _step(phase, r, op, state, ev):

@@ -11,25 +11,26 @@ from collections import Counter
 from data import loader
 
 
-def learn_bounds(ctx, by_case, pairs, event_type, fallback_min=120, margin=0.1):
-    """(lo, hi) minutes of event_time - reported_at, learned from identifier-linked (case, resource) pairs.
+MAD_K = 10      # offsets further than MAD_K median-absolute-deviations from the median are unrelated events (see data_findings.md)
+PAD_SHARE = 0.1  # learned range padded by this share of its width on each side (see data_findings.md)
 
-    Offsets far from the median (more than 10 median-absolute-deviations) are treated as unrelated events and dropped, then the
-    range is padded by `margin` of its width (at least 5 minutes). With too few pairs, falls back to +-fallback_min."""
+
+def learn_bounds(ctx, by_case, pairs, event_type):
+    """(lo, hi) minutes of event_time - reported_at, learned from identifier-linked (case, resource) pairs; None without pairs."""
     from fallback import P
     xs = []
     for cid, rid in pairs:
         for a in ctx.act_by_res.get(rid, []):
             if a["event_type"] == event_type:
                 xs.append((P(a["event_time"]) - P(by_case[cid]["reported_at"])).total_seconds() / 60)
-    if len(xs) < 10:
-        return (-float(fallback_min), float(fallback_min))
+    if not xs:
+        return None
     xs.sort()
     med = xs[len(xs) // 2]
     mad = sorted(abs(x - med) for x in xs)[len(xs) // 2] or 1.0
-    inl = [x for x in xs if abs(x - med) <= 10 * mad]
+    inl = [x for x in xs if abs(x - med) <= MAD_K * mad]
     lo, hi = min(inl), max(inl)
-    pad = max(5.0, margin * (hi - lo))
+    pad = PAD_SHARE * (hi - lo)
     return (lo - pad, hi + pad)
 
 
@@ -39,6 +40,8 @@ def _mutual_unique(ctx, base, reqs, uid_of, assigned_any, kind_prefix, event_typ
     Candidates for a case: events in its window, unclaimed, not taken, with a learned-compatible (status, result).
     Only cases without such a resource yet take part."""
     from fallback import P
+    if not bounds:
+        return {}
     by_case = {r["case_id"]: r for r in reqs}
     evs = [a for a in ctx.act if a["event_type"] == event_type and a["target_system"] == target]
     pair, tot = Counter(), Counter()
@@ -94,12 +97,7 @@ def compute(ctx, window_min=None, min_share=0.05, hide=frozenset(), base=None, a
         else:
             need[r["case_id"]] = r
     bounds = (-float(window_min), float(window_min)) if window_min else learn_bounds(ctx, by_case, assigned.items(), "DELETE_RECORD")
-    user_acc = {uid_of[c]: a for c, a in assigned.items()}
     out = {}
-    for cid in list(need):  # same user in several requests: reuse the account already tied to them
-        if uid_of[cid] in user_acc:
-            out[cid] = (user_acc[uid_of[cid]], "same_user")
-            del need[cid]
     pair = Counter()
     for cid, acc in assigned.items():
         ev = [a for a in ctx.act_by_res.get(acc, []) if a["event_type"] == "DELETE_RECORD"]
@@ -114,6 +112,8 @@ def compute(ctx, window_min=None, min_share=0.05, hide=frozenset(), base=None, a
     def cands(r, strict):
         rep = P(r["reported_at"]); uid = uid_of[r["case_id"]]
         found = set()
+        if not bounds:
+            return []
         for a in dels:
             if a["event_time"] > r["audit_at"] or not bounds[0] <= (P(a["event_time"]) - rep).total_seconds() / 60 <= bounds[1]:
                 continue

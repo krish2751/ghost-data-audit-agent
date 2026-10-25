@@ -1,11 +1,11 @@
 """Deterministic case solver: identity -> linked resources -> state at audit_at -> policy verdicts -> steps.
 
-Also the source of the dossier the agent receives. Every decision is derived from files captured at or
-before audit_at; identity links may come from any file (see CLAUDE.md decisions).
+Every decision is made here in code; model readers only supply facts (intent, rule conditions). State and
+citations come from files captured at or before audit_at; identity links may come from any file.
 """
 import re
 from collections import Counter
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from data import loader
 from data.evidence_index import EvidenceIndex, prefix_of
@@ -18,16 +18,12 @@ from schema import PREFIX_INFO, TREATMENT
 
 P = lambda s: datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ")
 LATE_OK = {"audit_record", "legal_hold"}  # retained-record kinds whose existence may come from a later export snapshot
-CONF = {"low": 0, "medium": 1, "high": 2}
 
 
 class Context:
-    def __init__(self, use_png=True, intent_mode="model", conditions_mode="model", link_mode="off", min_link_conf="high", joint_mode=True):
+    def __init__(self, use_png=True, intent_mode="model", conditions_mode="model"):
         self.intent_mode = intent_mode
         self.conditions_mode = conditions_mode
-        self.link_mode = link_mode
-        self.joint_mode = joint_mode
-        self.min_link_conf = min_link_conf
         self._pdf = {}
         self._joint = None
         self.intent_cache = {}
@@ -50,11 +46,6 @@ class Context:
                     import joint
                     self._joint, self._joint_info = joint.compute(self)
         return self._joint["account"].get(case_id)
-
-    def account_bounds(self):
-        """(lo, hi) minutes of an account DELETE event relative to reported_at, learned from identifier-linked pairs."""
-        self.joint_account(None)
-        return self._joint_info["bounds"]["account"]
 
     def joint_analytics(self, case_id):
         self.joint_account(case_id)
@@ -150,28 +141,13 @@ def solve(ctx, req, heuristics=True):
 
     cand = {r: w for r, w in cand.items() if prefix_of(r) in PREFIX_INFO and seen_before(r)}
 
-    if heuristics and not any(prefix_of(r) == "account" for r in cand):
-        acc = ctx.joint_account(req["case_id"]) if ctx.joint_mode else None
-        if acc:
+    if heuristics:  # records with no identifier: joint assignment over all requests (code/joint.py)
+        acc = ctx.joint_account(req["case_id"])
+        if acc and not any(prefix_of(r) == "account" for r in cand):
             cand[acc[0]] = "activity:" + acc[1]
-        else:
-            acc = _discover_account(ctx, req, uid, audit_at)
-            if acc:
-                cand[acc[0]] = acc[1]
-
-    if heuristics and ctx.joint_mode:
         an = ctx.joint_analytics(req["case_id"])
         if an and not any(prefix_of(r) == "analytics" for r in cand):
             cand[an[0]] = "activity:" + an[1]
-
-    if heuristics and ctx.link_mode == "model":
-        from readers.link_reader import read_links
-        res, run, pool = read_links(ctx, req, uid, cand)
-        out["links"] = {"pool": len(pool), "rounds": run["rounds"], "tool_calls": run["tool_calls"], "error": run["error"], "accepted": []}
-        for rid, x in res.items():
-            if x.get("belongs") == "yes" and CONF.get(x.get("confidence"), 0) >= CONF[ctx.min_link_conf] and seen_before(rid):
-                cand[rid] = "link_reader:" + str(x.get("basis"))
-                out["links"]["accepted"].append((rid, x.get("confidence"), x.get("basis")))
 
     decisions = []
     for rid, why in sorted(cand.items()):
@@ -187,21 +163,6 @@ def solve(ctx, req, heuristics=True):
     out["status"] = "INCOMPLETE" if any(d["violation"] for d in decisions) else "COMPLETE"
     return out
 
-
-def _discover_account(ctx, req, uid, audit_at):
-    """Accounts are often tied to a user only through activity. Generic, unit-free signals."""
-    rep = P(req["reported_at"])
-    lo, hi = ctx.account_bounds()
-    claims = ctx.claims()
-    cands = []
-    for a in ctx.act:
-        if a["event_type"] == "DELETE_RECORD" and a["target_system"] == "account_service" and a["event_time"] <= audit_at:
-            if lo <= (P(a["event_time"]) - rep).total_seconds() / 60 <= hi:
-                others = claims.get(a["resource_id"], set()) - {uid}
-                if not others:
-                    cands.append(a["resource_id"])
-    cands = sorted(set(cands))
-    return (cands[0], "activity:time_window") if len(cands) == 1 else None
 
 
 def _decide(ctx, rid, why, audit_at):
@@ -237,11 +198,6 @@ def _anchor(ctx, decisions, audit_at):
     pre = [f for f, m in ctx.man.items() if m["captured_at"] <= audit_at]
     return max(pre, key=lambda f: ctx.man[f]["captured_at"]) if pre else None
 
-
-def build_row(ctx, req, heuristics=True):
-    res = solve(ctx, req, heuristics)
-    steps = plan(res["status"], res["resources"])
-    return res, steps
 
 
 def _apply_conditions(ctx, uid, decisions, audit_at):

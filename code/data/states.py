@@ -65,13 +65,9 @@ def reading(o):
     if cat == "USER_PROFILE":
         if "rows" in a and a["rows"] is not None:
             return "FOUND" if str(a["rows"]) not in ("0", "") else "NOT_FOUND"
-        if a.get("http_status"):
-            return "NOT_FOUND" if str(a["http_status"]) == "404" else "FOUND"
         if "profile" in a and "status_code" in a:
             return "NOT_FOUND" if a.get("profile") is None else "FOUND"
-        if has_identifiers(a):
-            return "FOUND"
-        return "NOT_FOUND" if str(a.get("account_status") or "").upper() == "DELETED" else "FOUND"
+        return "FOUND"  # a profile row with no explicit miss marker is present
     if cat == "SUPPORT_MESSAGE":
         ev = str(a.get("event") or "")
         if ev == "message_pii_scan" or a.get("matched_value"):

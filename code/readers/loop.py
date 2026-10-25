@@ -27,8 +27,8 @@ def run_reader(model, system, user_text, schema, tools=None, case_tools=None, ef
         try:
             r = llm_client.chat(model, system, messages, tools=tools or None, max_tokens=max_tokens,
                                 effort=effort, schema=schema if not tools else None, tag=tag)
-        except llm_client.PendingAnswer as e:
-            return {"facts": None, "rounds": rnd, "calls": calls, "tool_calls": tool_calls, "error": f"pending:{e}"}
+        except llm_client.CacheMiss as e:
+            return {"facts": None, "rounds": rnd, "calls": calls, "tool_calls": tool_calls, "error": f"cache_miss:{e}"}
         calls.append({"usage": r["usage"], "cached": r["cached"]})
         uses = [b for b in r["content"] if b.get("type") == "tool_use"]
         if r["stop_reason"] == "tool_use" and uses and not last:

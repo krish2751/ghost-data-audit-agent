@@ -8,7 +8,6 @@ import re
 import sqlite3
 from dataclasses import dataclass, field
 
-from schema import PREFIX_INFO
 from .loader import DS, manifest
 
 RES_RX = re.compile(r"\b(account|search|support|analytics|export|backup|data_flow|audit_record|tombstone|legal_hold|marketing|cache|email_delivery)_\d+\b")
@@ -46,11 +45,6 @@ class Obs:
     resource_id: str
     attrs: dict
     text: str = field(default="", repr=False)
-
-    @property
-    def system_id(self):
-        info = PREFIX_INFO.get(prefix_of(self.resource_id))
-        return info[0] if info else None
 
 
 def _mk(fid, cap, snap, kind, source, rid, attrs):

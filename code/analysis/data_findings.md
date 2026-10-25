@@ -1,91 +1,141 @@
-# Data findings (index)
+# Data findings: what each rule in the solver rests on
 
-Detailed notes: `data_overview.md` (activity and evidence survey), `findings_time_conflicts_risks_identity.md`, `findings_account_link.md`, `rule_condition_heuristics.md`. Exploration scripts are `q*.py` in this folder; none is imported by the solver.
+Every rule in the solver either comes from `problem_statement.md` or from a pattern measured in the data, listed here with
+its numbers and the script that prints them (`.venv/bin/python code/analysis/<script>.py`). The solver imports nothing from
+this folder. Scripts that read `sample_output.csv` do so only to measure a pattern; the solver never reads it.
 
-## No hardcoding
+Survey of the activity stream and evidence formats: `data_overview.md` (`survey_activity.py`, `survey_evidence.py`).
 
-Check: `.venv/bin/python code/evaluation/hardcoding_audit.py` scans every `.py`/`.md` under `code/` (not `cache/`, `runs/`) for case ids, resource ids with numbers, evidence ids, activity/audit ids, user ids, emails, evidence file names and sample-answer reads, grouped by solver / prompts / analysis / evaluation.
+## 1. Rules taken from the problem statement
 
-Result (after cleanup):
-- **Solver: 0 hits.** Four early hits were harmless and removed: a `--cases case_01,case_02` usage example, a `handover` source label, a "handover TXT" tool description and example ids in the screenshot prompt format line.
-- **Prompts: 1 hit**, `screenshot_extract.md` shows format examples (`account_1234`, `search_12`, ...). Kept deliberately: editing the prompt invalidates the cached screenshot extractions, and a re-extraction changed one case's status (case_63), so the prompt text is pinned.
-- **Analysis: 62 hits in 18 files** and **evaluation: 3 hits** (docstrings, intent_eval, scorer). Exploration and scoring code only; the solver imports nothing from `analysis/` or `evaluation/`.
-- **Sample answers:** only `code/evaluation/` and `code/analysis/` read `sample_output.csv`. The solver reads `sample_deletion_requests.csv` (inputs only, for `--sample`) and no answers.
-- **Intent regex:** the earlier patch copied phrasing from specific requests. It was replaced by a generic fallback (deletion stems in several languages, a negation window before each cue, verification wording). The model reader is the primary path; the fallback disagrees with it on 1 of 550 requests (a "marketing lists only" request). Re-running the 518 after the change: 0 status changes, 0 step changes.
+- Statuses, phases, the 15 operations and their states, phase order FINDING -> REMEDIATION -> VERIFICATION, within a
+  phase the problem-statement operation order then `system_id` then `resource_id`, step numbers from 1 (`schema.py`,
+  `validator.py`).
+- NOT_APPLICABLE when the request does not authorize deletion, with `[]` (`intent.py`, intent reader).
+- COMPLETE only verification steps, citing evidence; INCOMPLETE findings cite evidence, remediation and verification use
+  `""` (`planner.py`).
+- Category -> treatment from `deletion_rules.csv` (`schema.TREATMENT`); rule conditions for rule_05, rule_06, rule_12
+  and rule_13 are read by the rule-condition reader and mapped in code (`fallback._apply_conditions`).
+- Only evidence captured at or before `audit_at` decides state or is cited; reported statuses and activity results are
+  claims (`fallback._decide`, `validator.validate`).
+- Identity: current and historical identifiers (`data/identity.py`).
 
-Remaining sample-derived heuristics (generic rules inferred from the samples, not case-specific; listed in `rule_condition_heuristics.md`): resource-prefix to system/category mapping, `contact_lookup`/legacy-contact-index category overrides, the activity time-window account discovery (`WINDOW_MIN`), and the reading rules in `data/states.py`. These can still overfit the 32 samples, so a holdout split is planned.
+## 2. Rules measured in the data
 
-## Rule-condition reader result
+### Time and citations (`q1_time_ids.py`, `q1b_inner_times_drift.py`)
+- Every file cited by the 32 sample answers has `captured_at` <= `audit_at`; 6 cases cite a file captured exactly at
+  `audit_at` (cases 11, 13, 14, 16, 31, 32), so equality counts as "before".
+- Files captured after `audit_at` that mention the subject are never cited (evidence_02 and evidence_06 hold resources of
+  10 sample cases and are never cited).
+- Owner decision (not a measurement): identity links may come from any file regardless of capture date; a resource counts
+  only if it also appears in a file or activity row at or before `audit_at`.
 
-`code/evaluation/conditions_eval.py`: 123 reader items in 114 of 550 cases (101 support-message context, 13 attachment ownership, 9 retention window), average 1.09 rounds per run, 16 tool calls, 0 errors. Answers: support context yes 101/101; attachment yes 5, unclear 8; retention yes 4, unclear 5. No treatment, status or step changed versus the rule defaults. The first prompt version flipped three sample cases (it treated an attachment with the subject's own order as "shared", and one-line support summaries as "no context"); the prompt was corrected on that evidence, so these samples are no longer an independent test of it.
+### Identity (`q_hash_prefix_lowid.py`, `q11_multi_email.py`, `q12_email_ablation.py`, `q13_name_only.py`, `q4_identifier_links.py`)
+- `email_hash` = SHA-256 of the lowercased email: 850 of 850 current identities and 107 of 107 audit-log hash changes.
+- 105 of 850 users have more than one email over time; no email belongs to two users. 103 of 550 requests use a
+  historical email (100 of the 518).
+- Matching on all historical identifiers links extra resources for 84 of 550 requests (169 links). With current-only
+  identifiers the samples drop to status 30/32, exact 17/32, F1 91.16% (case_10 and case_12 wrongly COMPLETE).
+- Names are not link tokens: the 5 records that carry a subject's name and no other identifier all belong to other people
+  with similar names.
+- In the sample answers' own records the subject appears as: current email 24, user id only 17, historical email 9,
+  richer combinations 7; 18 records carry no subject identifier (absent accounts, anonymized analytics).
 
-## Link reader (model-assisted evidence linking) result
+### Replicas and conflicting observations (`q1b_inner_times_drift.py`, `q18_rule_evidence.py` part 5)
+- A copy in any replica table counts as remaining: case_16 `account_994` exists only in the read replica and is a finding.
+- The latest pre-audit observation wins; within the latest file the worst reading. Across the 550 outputs older
+  observations disagree with the latest one for 7 of 1,361 resource decisions.
 
-Goal: tie records that carry no identifier (absent accounts, anonymized analytics, retained audit records) to the subject. `readers/link_reader.py` gets a pool of unlinked, unclaimed resources with activity within +-180 min of `reported_at` and returns yes/no/unclear + confidence + basis; code accepts only pool members, `yes` at or above a confidence floor, passing the existence safeguard. Scored by `code/evaluation/link_eval.py`.
+### Flows and backups (`q3_flows_backups.py`)
+- Risk when the evidence reads `enabled=true`, `restore_allowed=1`, `eligible=true` with `deletion_block=false`, or a
+  ledger `ACTIVE`; clean when it reads disabled/blocked. In every sample case the activity agrees (a `CHECK_*` row for
+  risks, a `DISABLE_DATA_FLOW` / `BLOCK_RESTORE` SUCCESS row for clean ones).
 
-- Sample pools: 110 candidates; 18 of the 21 still-unlinked gold resources were in a pool (3 were not: `account_004`, `audit_record_5569`, `audit_record_6645` appear nowhere in participant data).
-- Reader answers: 78 `unclear`, 14 `no`, 17 `yes` (5 high, 12 medium). Real hits: 2 of 5 at high, 4 of 12 at medium (precision 40% / 33%). Average 1.53 rounds.
-- Sample step F1: no reader 94.0%, accept high 93.8%, accept medium+ 93.4%; status 32/32 in every variant. The reader finds no more than timing already gave and adds false steps, so it is off by default (`--links model` to enable).
-- A deterministic change helped more: an audit/legal record may count as existing when its own snapshot time (inside a later-captured export) is at or before `audit_at`; such records are verified with an empty evidence_id and never cited (F1 92.5 -> 94.0, exact sequence 13 -> 16). This relaxes "state only from files captured <= audit_at" for retained records only; needs the owner's approval.
+### Category overrides in `data/states.py` (`q18_rule_evidence.py` part 4)
+Observations without a `record_type` field whose category differs from the resource prefix default:
 
-## Relations between a request and its records (exact-sequence work)
+| override | observations | sample resources: override agrees with answer | default would agree |
+|---|---|---|---|
+| analytics `contact_lookup` / `email_opt_in` -> MARKETING_PROFILE (DELETE) | 1 | 1 of 1 | 0 |
+| support `contact_query` / `deletion_marker` / legacy contact index -> SECONDARY_IDENTIFIER (DELETE) | 3 | 1 of 1 | 0 |
+| support attachment source / PDF / `storage_class` -> SUPPORT_ATTACHMENT (DELETE) | 30 | 2 of 2 | 0 |
 
-Scripts: `q9_relation_signals.py`, `q10_joint_accounts.py`; engine: `code/joint.py`.
+These rest on 1-2 sample resources each, so they are the weakest measured rules.
 
-- Remaining misses before this work (21 steps, 15 cases): 12 absent accounts, 7 anonymized analytics, 2 audit records, all clean records with no identifier.
-- **Weak pairwise relations**: among 111 sample resources (176 same-case pairs, 5,929 cross-case pairs) activity time gap, activity-id gap and co-observation in a file separate same-case pairs poorly (best precision 0.44; co-file 0.14 at recall 0.78). Order inside a group of cases sharing `reported_at` follows no case key (case number, requested_at, user id, email: at most 23 of 70 groups).
-- **Strong relations**: (1) each case has one account and each account one case (propagation across all 550 requests); (2) accounts tied to another user by an identifier are removed; (3) the account's DELETE time lies within +-120 min of `reported_at`; (4) claim consistency: `reported_status` and the account DELETE result agree almost always (COMPLETE/SUCCESS 146, PARTIALLY_COMPLETE/PARTIAL 71, NOT_STARTED/FAILED 57 of ~290 identifier-linked pairs; 3 exceptions), learned from identifier-linked cases at run time.
-- Joint assignment uniquely resolves 148 of 285 cases lacking an account (was 42 with timing alone); 11 of the 18 sample cases that needed one, 0 wrong. Sample exact sequence 16 -> 19 of 32, F1 94.0 -> 96.0. The rest are ties between cases that share `reported_at` and status (e.g. two NOT_STARTED cases with two FAILED deletes).
-- Three sample resources appear nowhere in participant data (`account_004`, `audit_record_5569`, `audit_record_6645`), so they cannot be found.
-- Analytics ANONYMIZE events: mutual-uniqueness assignment (event and case pick each other) added 14 assignments overall but none for the sample cases, which compete in pairs.
+### Records with no identifier: joint assignment (`code/joint.py`)
+- One account per case and one case per account, propagated over all 550 requests; accounts claimed by another user's
+  identifier are excluded.
+- Status/result agreement among identifier-linked cases (`q18_rule_evidence.py` part 1):
 
-## Session backend (no API credits)
+  | reported_status | account DELETE result | pairs | share |
+  |---|---|---|---|
+  | COMPLETE | SUCCESS | 134 | 99.3% |
+  | COMPLETE | FAILED | 1 | 0.7% |
+  | PARTIALLY_COMPLETE | PARTIAL | 69 | 100% |
+  | NOT_STARTED | FAILED | 50 | 96.2% |
+  | NOT_STARTED | PARTIAL / SUCCESS | 1 / 1 | 1.9% each |
 
-`LLM_BACKEND` defaults to `session`: only cached answers are used; an uncached request is queued under `code/cache_session/pending/` and answered by the Claude Code session through `code/session_answers.py` (stored in `code/cache_session/`, usage 0). Real API calls need `LLM_BACKEND=api`. `LLM_SESSION_TAGS=links` makes a reader ignore its API-cache entries so session answers can be tested alone.
+  `min_share=0.05` keeps the three majority pairs; any value in (1.9%, 96.2%] gives the same set.
+- Time window: the problem statement gives none. Account DELETE minus `reported_at` lies in -75..+8 min for 252 of 262
+  identifier-linked pairs (median -59, 5th percentile -74); the other 10 are days to months away (`q14_window_evidence.py`).
+  The window is learned at run time from those pairs: drop offsets more than `MAD_K=10` median absolute deviations from the
+  median, take min..max, pad each side by `PAD_SHARE=0.1` of the width. Learned now: accounts -83..+16 min, analytics
+  ANONYMIZE events +29..+142 min.
+- Label-free hold-out (`q16_holdout_accounts.py`, `q18_rule_evidence.py` part 2): the 254 identifier-linked accounts with
+  a DELETE event are hidden in 5 folds grouped by user and must be recovered from activity alone.
 
-Link reader answered in-session (30 dossiers, tools unused): 3 "yes", all correct (1 account, 2 analytics); every other candidate no/unclear. Sample exact sequence 19 -> 21 of 32, F1 96.0 -> 96.8, status 32/32. Caveat: the session model had seen the sample answers during development, so this is likely optimistic; the API reader on the same dossiers earlier had 33-40% precision on its "yes" answers.
+  | window | correct | wrong | unresolved |
+  |---|---|---|---|
+  | fixed +-90 | 211 | 0 | 43 |
+  | fixed +-120 | 177 | 0 | 77 |
+  | learned (MAD_K 10, PAD_SHARE 0.1) | 213 | 0 | 41 |
+  | learned, PAD_SHARE 0 / 0.05 / 0.25 | 212 / 213 / 213 | 0 | 42 / 41 / 41 |
+  | learned, MAD_K 5 / 20 | 217 / 213 | 0 | 37 / 41 |
+  | learned, no outlier removal | 1 | 0 | 253 |
 
+  The constants are not sensitive within these ranges; outlier removal itself is what matters.
+- Result on all 550: 164 of 285 cases lacking an account get one (162 strict, 2 relaxed); 121 stay ambiguous, mostly ties
+  between same-status cases that share `reported_at`. 6 analytics records are assigned by mutual uniqueness.
 
-## Label-free hold-out for account discovery (answers "is the +-120 window grounded?")
+### Retained records seen only in a later export (`LATE_OK`, `q18_rule_evidence.py` part 3)
+- The problem statement requires every policy-required retained record to remain available. 5 sample audit records that
+  the answers verify PRESENT have no pre-audit file, only a later-captured export whose own record time is <= `audit_at`;
+  17 others have a pre-audit file; 2 have no observation at all. The code accepts the 5 (verified with `""`, never cited);
+  in the samples every record accepted this way is in the answers (5 of 5, 0 extra). Across the 550 outputs 123 records
+  rely on this rule. Limited to audit and legal-hold records.
 
-The problem statement gives no time window. The window is an empirical regularity, so it is now learned (`joint.learn_bounds`) and
-validated without using `sample_output.csv`:
+### Intent (`code/evaluation/intent_eval.py`)
+- The 10 `CLASSIFY_REQUEST` intake rows join to cases 533-542 through ledger evidence_50; all 10 are non-deletion
+  requests and the reader already says so, so the intake tie-break never changes an output.
 
-- **Ground truth without labels:** 254 requests have an account that an identifier (email, hash, user id inside the account record) ties
-  to the user and that has an account DELETE event. Their accounts are hidden fold by fold (5 folds grouped by user, so a user's other
-  requests cannot leak the answer), and the joint rules must recover them from activity alone.
-- **Offsets (`q14_window_evidence.py`):** account DELETE minus `reported_at` is -75..+8 min in 252 of 262 identifier-linked pairs (median
-  -59, 5th percentile -74); the other 10 are days or months away (unrelated events on the same account).
-- **Hold-out (`q16_holdout_accounts.py`):**
+## 3. Flagged: kept, but not backed by a measurement
 
-  | window | correct | wrong | unresolved | precision | recall |
-  |---|---|---|---|---|---|
-  | +-30 | 1 | 33 | 220 | 3% | 0% |
-  | +-60 | 105 | 17 | 132 | 86% | 41% |
-  | +-90 | 211 | 1 | 42 | 99.5% | 83.1% |
-  | +-120 (old constant) | 177 | 1 | 76 | 99.4% | 69.7% |
-  | +-180 | 144 | 1 | 109 | 99.3% | 56.7% |
-  | learned from the non-hidden pairs (about -83..+16) | 213 | 1 | 40 | 99.5% | 83.9% |
+- **Verify-evidence anchor fallback** (`fallback._anchor`): a record with no observation of its own (an absent account)
+  cites the case's most-cited file; when the case cites nothing, the latest pre-audit manifest file. The second branch is
+  a guess, used 3 times in 550 cases (case_01, case_02 match the answers by coincidence of capture times).
+- **Rule-condition reader prompt** was corrected after its first version flipped 3 sample cases, so the samples are not an
+  independent test of it. On all 550 requests its answers agree with the rule defaults (0 treatment changes); kept
+  because it is the only code that checks rule_05/06/12/13 conditions at all.
+- **Screenshot prompt** shows example ids in its output format line; pinned because editing it invalidates the cached
+  extractions (a re-extraction once changed a case's status).
+- **Regex intent fallback** (`intent.py`): used only when the reader has no cached answer and no API key; disagrees with
+  the reader on 1 of 550 requests.
+- **Input-size limits** (not decisions): reader loop 4 rounds (owner's cap), 40 rows and 12,000 characters per tool
+  result, 3,000 characters per document in condition items.
 
-  Too narrow a window loses the true event; too wide a window adds same-status neighbours and creates ties. Learning the bounds removes the
-  magic constant and beats +-120. Samples: exact sequence 19/32 -> 20/32, F1 96.0 -> 96.3, 27 of 518 outputs gained steps, no status changed.
-- **Caveat:** the upper bound is learned from very few events above -45 min, so it is the weakest part of the window.
+## 4. Removed in the cleanup
 
-## Multi-email users (case_10 and the 100 evaluation requests with a historical email)
+- Link reader (`readers/link_reader.py`, its prompt, `evaluation/link_eval.py`): no code-produced evidence that it adds
+  anything beyond the timing rules; its API run on the samples lowered F1.
+- Session backend and the 30 in-session answers (`session_answers.py`, `cache_session/`): results judged in the session
+  are not evidence. The client now has two modes: cache only (default) and `LLM_BACKEND=api`.
+- `_discover_account` fallback and the joint `same_user` shortcut (never changed an output), the fixed `WINDOW_MIN=120`,
+  the `+-120` fallback window, `PAD_MIN`, unused tools (6 of 9), dead reading branches (`http_status`,
+  `account_status=DELETED`), `build_row`, `planner.system_of`, `Obs.system_id`, `identity.hash_email`.
+- 614 stale cache entries (superseded prompts and the link reader), old prediction files, and 15 exploration scripts and
+  notes for rejected hypotheses (activity blocks, PNG links, pairwise relation signals, fixed-window sweeps).
 
-- 105 of 850 users have more than one email over time; no email belongs to two users. 103 of 550 requests use a historical email
-  (case_10 has three: ionescu -> petrescu -> n.petrescu). `IdentityStore` resolves the request email through current and audit-log emails and matches evidence on all of them,
-  their hashes, phone and user id (`q11_multi_email.py`).
-- Ablation (`q12_email_ablation.py`): current-only identifiers link fewer resources for 84 of 550 requests (169 links) and drop the samples
-  to status 30/32, exact 17/32 (case_10 and case_12 wrongly COMPLETE). Full identifiers: status 32/32, exact 19/32.
-- Records that carry only a name: 5 matches, all decoys (similar names of other people), so names are not link tokens (`q13_name_only.py`).
-- No request's user changed email after `audit_at`.
+## 5. Known unrecoverable sample misses
 
-## Link reader: what it does and what the evidence says
-
-- It receives a dossier (subject timeline, records already linked with activity times, candidate unlinked records with their events as
-  minutes from `reported_at`) and returns per-candidate yes/no/unclear with a basis. Code accepts only high/medium "yes" and a record that exists by `audit_at`.
-- Blind hold-out (`q17_link_holdout.py`): the 40 hidden cases the deterministic rules could not resolve (2-5 candidates each), with opaque labels,
-  shuffled, evidence lists removed. Answers: 28 picks, 19 correct (68%); high confidence 4 of 6; abstained on 12. Random pick: 40%. A deterministic rule
-  "result-compatible candidate closest to the learned median offset" gets 25 of 38 (66%). The reader's signal is the same offset statistic, so it is not an independent source.
-- The 21/32 earlier measured with the same reader is not evidence: the answerer had seen the sample answers.
+- `account_004`, `audit_record_5569`, `audit_record_6645` appear in no participant file or activity row.
+- Ties: accounts and analytics records of same-status cases sharing `reported_at` (cases 3, 23, 25-28).

@@ -16,7 +16,7 @@ PATTERNS = {
     "user id": r"\buser_\d+\b",
     "email": r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}",
     "evidence file name": r"\b(?:service_events|resource_lookup_trace|support_replica|customer_data_\w+|snapshot_bundle|service_resource_export|handover|syslog_archive|operations_stream)\w*",
-    "sample answer read": r"sample_output|sample_cases|sample=True",
+    "sample answer read": r"sample_output|sample_cases",  # loader.requests(sample=True) reads sample *inputs*, which is allowed
 }
 SKIP_DIRS = {"cache", "runs", "__pycache__"}
 

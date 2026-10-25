@@ -1,6 +1,4 @@
 """Identity resolution: email/user_id -> subject identifiers as of audit_at."""
-import hashlib
-
 from .loader import read_csv
 
 
@@ -50,7 +48,3 @@ class IdentityStore:
             if f != "name":
                 t.update(v.lower() for v in vs if v)
         return t
-
-
-def hash_email(email):
-    return hashlib.sha256(email.strip().lower().encode("utf-8")).hexdigest()

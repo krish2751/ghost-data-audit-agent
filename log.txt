@@ -418,3 +418,42 @@ branch=main
 repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
+
+## [2026-10-25T01:20:00Z] Cleanup: remove dead code, unmeasured rules, in-session results
+
+User Prompt (verbatim, secrets redacted):
+Cleanup and fresh push on exact sequence.
+
+Part 1: Clean up.
+
+Remove anything that isn't part of the working solution: dead code, abandoned experiments, scratch scripts, unused readers, stale caches, and old prediction files. If something is kept but switched off (like the link reader), say why in one line.
+Every rule left in the code must come from the problem statement, or from a pattern measured in the data that's documented in data_findings.md with its numbers. Remove or flag any hardcoded value, per-case patch, or threshold that was picked by eye or chosen because it made the samples score better. Then list what you removed or changed.
+Results that came from in-session judgment, like the 21/32, must not appear anywhere as evidence. Only report numbers produced by running the code.
+Make sure README, CLAUDE.md, and data_findings.md describe what the code does now, with nothing claimed that isn't implemented.
+Re-run the 32 samples after cleanup and confirm the scores didn't change. If they dropped, tell me which removal caused it.
+
+Part 2: Fresh look at the failing cases.
+
+Re-read the problem statement from start to finish, especially the rules for steps_json, step order, and what counts as a step. Quote every rule that affects order.
+For each sample that isn't an exact match, show predicted vs expected steps_json side by side. Label each one: wrong order, missing step, extra step, wrong field value, or unrecoverable (data absent or a genuine tie). For each unrecoverable case, say what you checked.
+Look for patterns across the failures rather than fixing cases one by one. Is the same rule being broken? Is there a source file or field we haven't used?
+Implement only general fixes backed by the problem statement or measured data. Before each fix, tell me which rule or data pattern justifies it.
+After each fix, show a before/after table on the 32 samples: status accuracy, exact sequence (X/32), step precision, recall, F1, and field accuracy.
+
+Commit after cleanup and after each accepted fix. Log every change in log.txt.
+
+Agent Response Summary:
+Part 1 done. Removed the link reader, the session backend with its 30 in-session answers, 6 unused tools, the never-firing _discover_account fallback and same_user shortcut, dead reading branches, unused helpers, the fixed 120-minute window and its fallback, PAD_MIN, 614 stale cache entries, old prediction files and 15 exploration scripts/notes. Measured the evidence for every remaining tunable rule (analysis/q18_rule_evidence.py) and rewrote data_findings.md, README.md and the CLAUDE.md status around what the code does now; unmeasured items are flagged. Samples unchanged (32/32, exact 20/32, F1 96.26, field 93.26); the 518 output is byte-identical.
+
+Actions:
+* git rm: readers/link_reader.py, prompts/link_reader.md, evaluation/link_eval.py, session_answers.py, cache_session/, 15 analysis scripts/notes, 614 cache entries
+* Edited llm_client.py (cache-only default, CacheMiss), readers/loop.py, tools/registry.py, fallback.py, joint.py (MAD_K, PAD_SHARE constants), data/states.py, data/identity.py, data/evidence_index.py, planner.py, main.py, evaluation/hardcoding_audit.py
+* Wrote analysis/q18_rule_evidence.py; rewrote analysis/data_findings.md, README.md, CLAUDE.md status
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=main
+repo_root=/Users/krish/Downloads/HackerRank_Orchestrate/hackerrank-orchestrate-october26
+worktree=main
+parent_agent=none
