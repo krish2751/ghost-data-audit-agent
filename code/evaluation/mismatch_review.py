@@ -148,7 +148,7 @@ class JointState:
         assert rebuilt == {c: v[0] for c, v in ctx._joint["analytics"].items()}, "analytics state rebuild differs from joint.compute"
 
     # accounts
-    def acc_reasons(self, r, a, strict):
+    def acc_reasons(self, r, a, strict, need_ev=False):
         """Reasons the account DELETE event `a` cannot fill case r's account slot (empty list: it fits)."""
         why = []
         off = mins(a["event_time"], r["reported_at"])
@@ -164,15 +164,20 @@ class JointState:
             why.append("claimed by " + ", ".join(sorted(other)) + " through an identifier")
         if strict and (r["reported_status"], a["reported_result"]) not in self.compat:
             why.append(f"({r['reported_status']}, {a['reported_result']}) not a compatible status/result pair (strict pass only)")
+        if need_ev and self.base[r["case_id"]][0]["status"] == "COMPLETE" and not joint.evidenced(self.ctx, a["resource_id"], r["audit_at"]):
+            why.append("case is COMPLETE and the record has no pre-audit observation it could cite")
         return why
 
-    def acc_competitors(self, a, cid):
+    def acc_competitors(self, a, cid, need_ev=False):
         out = []
         for c in self.unresolved:
             if c == cid:
                 continue
             r = self.by_case[c]
-            if not self.acc_reasons(r, a, False):
+            if need_ev:
+                if not self.acc_reasons(r, a, True, True):
+                    out.append(c)
+            elif not self.acc_reasons(r, a, False):
                 out.append(c + ("" if not self.acc_reasons(r, a, True) else " (relaxed pass only)"))
         return out
 
@@ -312,31 +317,38 @@ def account_slot(js, req, rid, pred_res):
     L.append(f"Listed: every account DELETE_RECORD event inside the window, the {NEAREST} nearest outside it, and any "
              "event on the expected record.")
     exp_has_event = any(a["resource_id"] == rid for a in evs)
-    L += ["", "| activity | resource | min from reported_at | result | strict pass | relaxed pass | competing open cases |",
-          "|---|---|---|---|---|---|---|"]
-    fit_strict, fit_relaxed = [], []
+    L += ["", "| activity | resource | min from reported_at | result | strict pass | relaxed pass | evidence pass (strict) | competing open cases |",
+          "|---|---|---|---|---|---|---|---|"]
+    fit_strict, fit_relaxed, fit_ev = [], [], []
     for a in evs:
-        rs, rr = js.acc_reasons(req, a, True), js.acc_reasons(req, a, False)
+        rs, rr, re_ = js.acc_reasons(req, a, True), js.acc_reasons(req, a, False), js.acc_reasons(req, a, True, True)
         if not rs:
             fit_strict.append(a["resource_id"])
         if not rr:
             fit_relaxed.append(a["resource_id"])
+        if not re_:
+            fit_ev.append(a["resource_id"])
         comp = js.acc_competitors(a, cid) if not rr else []
         name = f"**{a['resource_id']}** (expected)" if a["resource_id"] == rid else a["resource_id"]
+        ev_cell = "fits" if not re_ else ("-" if rs else cell(re_[-1]))
         L.append(f"| {a['activity_id']} | {name} | {mins(a['event_time'], rep):+.0f} | {a['reported_result']} | "
-                 f"{'fits' if not rs else cell('; '.join(rs))} | {'fits' if not rr else cell('; '.join(rr))} | "
+                 f"{'fits' if not rs else cell('; '.join(rs))} | {'fits' if not rr else cell('; '.join(rr))} | {ev_cell} | "
                  f"{', '.join(comp) if comp else '-'} |")
     if not any(inside(a) for a in evs):
-        L.append("| - | no account DELETE_RECORD event inside the window | | | | | |")
+        L.append("| - | no account DELETE_RECORD event inside the window | | | | | | |")
     if not exp_has_event:
         L.append(f"\n`{rid}` has no DELETE_RECORD event in system_activity.csv, so it is not a candidate.")
     elif rid in fit_relaxed:
         comp = sorted({c for a in evs if a["resource_id"] == rid for c in js.acc_competitors(a, cid)})
         fs, fr = sorted(set(fit_strict)), sorted(set(fit_relaxed))
+        fe = sorted(set(fit_ev))
+        comp_ev = sorted({c for a in evs if a["resource_id"] == rid for c in js.acc_competitors(a, cid, True)})
         parts = [f"strict pass: {cid} fits {len(fs)} accounts ({', '.join(fs) or 'none'})",
-                 f"relaxed pass: {len(fr)} ({', '.join(fr)})"]
+                 f"relaxed pass: {len(fr)} ({', '.join(fr)})",
+                 f"evidence pass: {len(fe)} ({', '.join(fe) or 'none'})"]
         if comp:
-            parts.append(f"{rid} also fits open cases {', '.join(comp)}")
+            parts.append(f"{rid} also fits open cases {', '.join(comp)}"
+                         + (f" (evidence pass: {', '.join(comp_ev)})" if comp_ev != [c.split(' ')[0] for c in comp] else ""))
         if len(fr) > 1 or comp:
             diag = ("tie", "; ".join(parts))
     else:

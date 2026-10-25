@@ -81,7 +81,8 @@ These rest on 1-2 sample resources each, so they are the weakest measured rules.
   The window is learned at run time from those pairs: drop offsets more than `MAD_K=10` median absolute deviations from the
   median, take min..max, pad each side by `PAD_SHARE=0.1` of the width. Learned now for accounts: -83..+16 min.
 - Label-free hold-out (`q16_holdout_accounts.py`, `q18_rule_evidence.py` part 2): the 254 identifier-linked accounts with
-  a DELETE event are hidden in 5 folds grouped by user and must be recovered from activity alone.
+  a DELETE event are hidden in 5 folds grouped by user and must be recovered from activity alone. Window table measured
+  with the evidence pass (below) off:
 
   | window | correct | wrong | unresolved |
   |---|---|---|---|
@@ -93,8 +94,23 @@ These rest on 1-2 sample resources each, so they are the weakest measured rules.
   | learned, no outlier removal | 1 | 0 | 253 |
 
   The constants are not sensitive within these ranges; outlier removal itself is what matters.
-- Result on all 550: 164 of 285 cases lacking an account get one (162 strict, 2 relaxed); 121 stay ambiguous, mostly ties
-  between same-status cases that share `reported_at`.
+- Evidence pass for COMPLETE cases (`joint.evidenced`, `q22_complete_evidence.py`): the problem statement says a
+  verification step for a COMPLETE case must cite the evidence that proves the compliant state. After the strict and
+  relaxed passes, a still-ambiguous case that is COMPLETE without the account only keeps candidates whose own observation
+  captured by `audit_at` reads compliant; then propagation runs again (strict, then relaxed).
+  - It is a tie-break, not a filter on every pass: 3 sample COMPLETE cases (case_01, case_02, case_31) verify an account
+    that appears in no file at all, citing a snapshot that lacks it, and so do 15 identifier-linked accounts of
+    identifier-only COMPLETE cases over 550 (63 have their own observation). Applied in every pass ("hard") it drops those
+    3 sample accounts: exact 21 -> 19.
+  - Hold-out (same folds, learned window): off 213 / 0 / 41, tie-break 224 / 0 / 30, hard 207 / 0 / 47
+    (correct / wrong / unresolved). Caveat: hidden accounts are identifier-linked, so they are observed more often than the
+    unlinked accounts the rule is used for.
+  - Effect: 7 more accounts assigned over 550 (case_28 `account_5482`, seen in evidence_92; case_29 `account_7012`, seen
+    in no file; 5 in the 518). Samples: exact 21 -> 22, recall 93.78 -> 94.82, F1 96.79 -> 97.34, precision 100. 5 of 518
+    rows change, no status changes. case_23 stays tied: it is INCOMPLETE, so its 3 candidates (all unobserved FAILED
+    deletes) are not narrowed, and case_548 still competes for them.
+- Result on all 550: 171 of 285 cases lacking an account get one (162 strict, 2 relaxed, 7 evidence pass); 114 stay
+  ambiguous, mostly ties between same-status cases that share `reported_at`.
 - Cross-kind order is not a relation: within a `reported_at` group, two cases keep the same relative order in two event
   blocks in 68 of 137 comparisons (49.6%, chance) (`q20_cross_kind_order.py`), so these ties are genuine.
 
@@ -178,5 +194,5 @@ These rest on 1-2 sample resources each, so they are the weakest measured rules.
   and bare numbers in all 99 sources (every evidence file incl. PDF text, the 11 cached screenshot extractions, activity,
   identities, audit log, requests); the only exact hits are in `sample_output.csv`; number hits are other records
   (`support_5569`, ticket `CS-5569`, `account_6645`) and pod names (`account-4`).
-- Ties: accounts `account_410` (case_23, 3 FAILED deletes for 3 open NOT_STARTED cases), `account_5482` / `account_7012`
-  (cases 28/29, both NOT_STARTED, both FAILED); analytics records of cases 3, 21, 25-28 (each event fits two open cases).
+- Ties: account `account_410` (case_23, 3 unobserved FAILED deletes, case_548 also open); analytics records of cases 3,
+  21, 25-28 (each event fits two open cases). Per-case detail: `code/evaluation/mismatch_review.md`.

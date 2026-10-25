@@ -33,11 +33,11 @@ print(f"hold-out set: {len(truth)} cases with an identifier-linked account that 
 
 bounds_seen = []
 
-def evaluate(window_min):
+def evaluate(window_min, mode="tiebreak"):
     res = Counter(); res_s = Counter()
     for k in range(K):
         hide = frozenset(c for c in truth if fold_of[uid_of[c]] == k)
-        got_all, info = joint.compute(ctx, window_min=window_min, hide=hide, base=base, analytics=False)
+        got_all, info = joint.compute(ctx, window_min=window_min, hide=hide, base=base, analytics=False, complete_evidence=mode)
         out = got_all["account"]
         bounds_seen.append(info["bounds"]["account"])
         for c in hide:
@@ -56,3 +56,8 @@ for w in (None, 90, 120):
     print(f"{'learned' if w is None else w:>10} | {r['correct']:7d} | {r['wrong']:5d} | {r['unresolved']:10d} | {p:8.1%} | {r['correct']/n:6.1%} || {s['correct']}/{s['wrong']}/{s['unresolved']}")
     if w is None:
         print("           learned bounds per fold (min, relative to reported_at):", sorted({(round(a, 1), round(b, 1)) for a, b in bounds_seen}))
+
+print("\nCOMPLETE-evidence constraint (learned window): mode | correct | wrong | unresolved || samples")
+for mode in (None, "tiebreak", "hard"):
+    r, s_ = evaluate(None, mode)
+    print(f"{str(mode):>10} | {r['correct']:7d} | {r['wrong']:5d} | {r['unresolved']:10d} || {s_['correct']}/{s_['wrong']}/{s_['unresolved']}")

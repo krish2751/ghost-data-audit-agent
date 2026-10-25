@@ -107,9 +107,19 @@ def assign_unlinked(ctx, reqs, uid_of, known, kind, event_type, model, claims):
     return out
 
 
-def compute(ctx, window_min=None, min_share=0.05, hide=frozenset(), base=None, analytics=True):
+def evidenced(ctx, rid, audit_at):
+    """True when the record's own observation captured by audit_at shows a compliant state, so a COMPLETE case can cite it
+    (problem statement: a COMPLETE case's verification must cite the evidence proving the compliant state)."""
+    from fallback import _decide
+    d = _decide(ctx, rid, "", audit_at)
+    return bool(d and d["verify_evidence"] and not d["violation"])
+
+
+def compute(ctx, window_min=None, min_share=0.05, hide=frozenset(), base=None, analytics=True, complete_evidence="tiebreak"):
     """`hide`: case ids whose identifier-linked account is treated as unknown (hold-out testing against evidence-derived
-    truth, no labels needed). `base`: precomputed identifier-only solve_all result, to avoid recomputing it."""
+    truth, no labels needed). `base`: precomputed identifier-only solve_all result, to avoid recomputing it.
+    `complete_evidence`: 'tiebreak' (after the plain passes, a case that is COMPLETE without the account only keeps
+    candidates it can cite, see `evidenced`), 'hard' (that filter in every pass) or None (off)."""
     from fallback import P, solve_all
     reqs = loader.requests(sample=True) + loader.requests()
     base = base or solve_all(ctx, reqs, heuristics=False)
@@ -147,7 +157,7 @@ def compute(ctx, window_min=None, min_share=0.05, hide=frozenset(), base=None, a
     compat = {k for k, n in pair.items() if n / tot[k[0]] >= min_share}
     taken = set(assigned.values()) | {a for a, _ in out.values()}
 
-    def cands(r, strict):
+    def cands(r, strict, need_ev=False):
         rep = P(r["reported_at"]); uid = uid_of[r["case_id"]]
         found = set()
         if not bounds:
@@ -159,17 +169,21 @@ def compute(ctx, window_min=None, min_share=0.05, hide=frozenset(), base=None, a
                 continue
             if strict and (r["reported_status"], a["reported_result"]) not in compat:
                 continue
+            if need_ev and base[r["case_id"]][0]["status"] == "COMPLETE" and not evidenced(ctx, a["resource_id"], r["audit_at"]):
+                continue
             found.add(a["resource_id"])
         return sorted(found)
 
-    for strict in (True, False):
+    passes = {"hard": [(True, True), (False, True)], "tiebreak": [(True, False), (False, False), (True, True), (False, True)],
+              None: [(True, False), (False, False)]}[complete_evidence]
+    for strict, need_ev in passes:
         changed = True
         while changed:
             changed = False
             for cid, r in list(need.items()):
-                c = cands(r, strict)
+                c = cands(r, strict, need_ev)
                 if len(c) == 1:
-                    out[cid] = (c[0], "joint_strict" if strict else "joint_relaxed")
+                    out[cid] = (c[0], ("joint_strict" if strict else "joint_relaxed") + ("_evidence" if need_ev else ""))
                     taken.add(c[0]); del need[cid]; changed = True
     extra, model = {}, None
     if analytics:
