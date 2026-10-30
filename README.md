@@ -291,8 +291,8 @@ Run everything from the repository root:
 # Check output.csv (or --sample) against the submission contract
 .venv/bin/python code/validator.py
 
-# Fresh model calls instead of the cache
-LLM_BACKEND=api ANTHROPIC_API_KEY=<your-key> .venv/bin/python code/main.py
+# Call Claude for any model reads that aren't already cached (replace your-key with your API key)
+LLM_BACKEND=api ANTHROPIC_API_KEY="your-key" .venv/bin/python code/main.py
 ```
 
 | Environment variable | Values | Meaning |
