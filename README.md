@@ -3,7 +3,7 @@
 An AI agent that audits whether a user's personal data was **actually** deleted. When it wasn't, it produces the ordered
 remediation and verification steps needed to finish the deletion safely.
 
-Built solo in 24 hours for **HackerRank Orchestrate (October 2026)**, a global AI agent hackathon. It placed
+Built solo in 24 hours for **HackerRank Orchestrate (October 2026)**, a global AI agent hackathon. I placed
 **#195 of 4,090 (top 5%)**.
 
 ![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)
