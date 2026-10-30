@@ -378,11 +378,3 @@ problem_statement.md         challenge contract
 Challenge, dataset and evaluation by [HackerRank Orchestrate](https://www.hackerrank.com/orchestrate). Starter repository:
 [interviewstreet/hackerrank-orchestrate-october26](https://github.com/interviewstreet/hackerrank-orchestrate-october26).
 All people, companies and records in the dataset are fictional.
-
-## Author
-
-**Krish Patel** · Honours B.Sc. Computer Science, York University (Lassonde School of Engineering)
-
-[GitHub @krish2751](https://github.com/krish2751) · [LinkedIn](https://www.linkedin.com/in/krish2751/)
-
-I'm looking for **AI Engineer** roles building reliable LLM and agent systems. Feel free to reach out.
